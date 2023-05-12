@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config()
-import config from "config";
 import cors from "cors";
 import morgan from "morgan";
 // Swagger
@@ -64,7 +63,7 @@ app.use((_req, res, next) => {
 
 
 
-const port = process.env.port || 3000;
+const port = process.env.PORT;
 app.set("port", port);
 
 export default app;

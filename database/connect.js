@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
-import config from "config";
 
 async function connect() {
-  const DB_URI = config.get<string>("DB_URI");
-
+  const db_uri =process.env.DB_URI
   try {
-    await mongoose.connect(DB_URI);
+    await mongoose.connect(db_uri);
     console.log("DB connected successfully");
   } catch (error) {
     console.log("Could not connect to db \n" + error);
