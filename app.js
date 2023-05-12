@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config()
-import config from "config";
+
 import cors from "cors";
 import morgan from "morgan";
 // Swagger
