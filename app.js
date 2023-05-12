@@ -5,8 +5,8 @@ import config from "config";
 import cors from "cors";
 import morgan from "morgan";
 // Swagger
-import swaggerUI from "swagger-ui-express";
-import { specs } from "./swaggerDocs";
+// import swaggerUI from "swagger-ui-express";
+// import { specs } from "./swaggerDocs";
 import fileUpload from "express-fileupload";
 
 //init app. define and set port
@@ -44,7 +44,6 @@ app.use(fileUpload({
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use((_req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*') // update to match the domain you will make the request from
