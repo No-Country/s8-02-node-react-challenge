@@ -1,13 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config()
-
 import cors from "cors";
 import morgan from "morgan";
 // Swagger
 // import swaggerUI from "swagger-ui-express";
 // import { specs } from "./swaggerDocs";
 import fileUpload from "express-fileupload";
+
+//import routes
+import generalRoutes from './src/routes/index.js'
 
 //init app. define and set port
 const app = express();
@@ -61,10 +63,10 @@ app.use((_req, res, next) => {
 
 
 //routes
+app.use(generalRoutes)
 
 
-
-const port = process.env.port || 3000;
+const port = process.env.PORT;
 app.set("port", port);
 
 export default app;
