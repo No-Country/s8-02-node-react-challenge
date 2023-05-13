@@ -8,9 +8,9 @@ const userSchema = new Schema(
       unique: true,
     },
     cvu: {
-        type: String,
-        unique: true,
-      },
+      type: String,
+      unique: true,
+    },
     email: {
       type: String,
       unique: true,
@@ -32,10 +32,10 @@ const userSchema = new Schema(
       type: Number
     },
     address: {
-      type: [String],
+      type: String,
     },
     balance: {
-      type: [String],
+      type: Number,
     }
     },
   { timestamps: true, versionKey: false }
