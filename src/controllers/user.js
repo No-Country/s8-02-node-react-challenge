@@ -1,6 +1,14 @@
+import userSchema from '../database/models/user.js';
+import {generateToken} from '../utils/generateToken.js';
+import bcrypt from 'bcrypt';
 
-const getUser = (req,res) =>{
-    console.log('hola 22')
-    res.send('Hola 22')
+const get = async (req,res) =>{
+
 }
-export {getUser};
+const getAll = async (req,res) =>{
+
+}
+const update = async (req,res) =>{
+
+}
+export {update,getAll,get};

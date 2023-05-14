@@ -5,10 +5,13 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true,
+      unique:false
+    },
+    alias:{
+      type:String
     },
     cvu: {
-      type: String,
+      type: Number,
       unique: true,
     },
     email: {
@@ -16,26 +19,26 @@ const userSchema = new Schema(
       unique: true,
     },
     password: {
-      type: String,
-      unique: false,
+      type: String
     },
     urlProfile: {
-      type: String,
+      type: String
     },
     dni: {
-      type: Number,
+      type: Number
     },
     fullname: {
-      type: String,
+      type: String
     },
     phone: {
       type: Number
     },
     address: {
-      type: String,
+      type: String
     },
     balance: {
       type: Number,
+      float:true
     }
     },
   { timestamps: true, versionKey: false }
