@@ -8,6 +8,9 @@ import morgan from "morgan";
 // import { specs } from "./swaggerDocs";
 import fileUpload from "express-fileupload";
 
+//import routes
+import generalRoutes from './src/routes/index.js'
+
 //init app. define and set port
 const app = express();
 
@@ -33,6 +36,7 @@ app.use(cors({
 )
 
 //middlewares
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 // File Upload
 app.use(fileUpload({
@@ -60,7 +64,7 @@ app.use((_req, res, next) => {
 
 
 //routes
-
+app.use(generalRoutes)
 
 
 const port = process.env.PORT;
