@@ -12,7 +12,7 @@ const userSchema = new Schema(
     },
     cvu: {
       type: Number,
-      unique: true,
+      unique: false,
     },
     email: {
       type: String,
