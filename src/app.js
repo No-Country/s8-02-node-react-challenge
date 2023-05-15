@@ -4,12 +4,12 @@ dotenv.config()
 import cors from "cors";
 import morgan from "morgan";
 // Swagger
-// import swaggerUI from "swagger-ui-express";
-// import { specs } from "./swaggerDocs";
+import swaggerUI from "swagger-ui-express";
+import { specs } from "./swaggerDocs.js";
+// Import for the file
 import fileUpload from "express-fileupload";
-
 //import routes
-import generalRoutes from './src/routes/index.js'
+import generalRoutes from './routes/index.js'
 
 //init app. define and set port
 const app = express();
@@ -36,8 +36,8 @@ app.use(cors({
 )
 
 //middlewares
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 // File Upload
 app.use(fileUpload({
     useTempFiles: true,
@@ -48,8 +48,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use((_req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*') // update to match the domain you will make the request from
+/* app.use((_req, res, next) => {
+    res.header('Access-Control-Allow-Origin', "*") // update to match the domain you will make the request from
     res.header('Access-Control-Allow-Credentials', 'true')
     res.header(
         'Access-Control-Allow-Headers',
@@ -60,11 +60,12 @@ app.use((_req, res, next) => {
         'GET, POST, OPTIONS, PUT, DELETE'
     )
     next()
-})
+}); */
 
 
 //routes
-app.use(generalRoutes)
+app.use("/docs/api/v1", swaggerUI.serve, swaggerUI.setup(specs));
+app.use("/auth", generalRoutes)
 
 
 const port = process.env.PORT;

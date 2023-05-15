@@ -1,5 +1,5 @@
 import app from "./app.js";
-import connect from "./src/database/connect.js";
+import connect from "./database/connect.js";
 
 
 const bootstrap = () => {

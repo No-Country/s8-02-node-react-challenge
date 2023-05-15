@@ -25,7 +25,7 @@ const updateUser = async (req, res) => {
     let {body}=req
     try {
         const user = await userSchema.findByIdAndUpdate({_id:id}, body, { new: true });
-        res.status(200).send({ user,valid:true });
+        res.status(200).send({ user });
         
     } catch (error) {
         console.log(error);
