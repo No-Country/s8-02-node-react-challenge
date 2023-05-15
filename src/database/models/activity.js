@@ -9,9 +9,6 @@ const activitySchema = new Schema(
     id_receiver: {
         type: String,
     },
-    id_transmitter: {
-      type: String,
-    },
     amount: {
       type: Number,
     },

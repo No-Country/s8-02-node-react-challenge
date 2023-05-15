@@ -1,22 +1,21 @@
 import { Schema, model } from "mongoose";
 
-
 const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique:false
+     
     },
-    alias:{
-      type:String
+    alias: {
+      type: String
     },
     cvu: {
       type: Number,
-      unique: false,
+      
     },
     email: {
       type: String,
-      unique: true,
+      unique: true
     },
     password: {
       type: String
@@ -38,9 +37,15 @@ const userSchema = new Schema(
     },
     balance: {
       type: Number,
-      float:true
-    }
+      float: true
     },
+    cards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "CardModel"
+      }
+    ]
+  },
   { timestamps: true, versionKey: false }
 );
 

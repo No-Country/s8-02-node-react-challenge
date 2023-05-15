@@ -1,7 +1,9 @@
 import userSchema from "../database/models/user.js";
+import cardSchema from "../database/models/card.js"
 import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
-
+import user from "../database/models/user.js";
+import { faker } from '@faker-js/faker';
 const getAllUser = async (req, res) => {
   try {
     const user = await userSchema.find({});
@@ -11,15 +13,23 @@ const getAllUser = async (req, res) => {
   }
 };
 
+
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await userSchema.findById({ _id: id });
+    const user = await userSchema.findOne({_id:id}).populate({
+      path: 'cards',
+      match: { id_user: id },
+      options: { strictPopulate: false }
+    });
     res.status(200).send({ user });
   } catch (error) {
     console.log(error.message);
   }
 };
+
+
+
 const updateUser = async (req, res) => {
     let {id}=req.params
     let {body}=req

@@ -1,11 +1,11 @@
 import userSchema from "../database/models/user.js";
 import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
-
+import { faker } from '@faker-js/faker';
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
-  let { file } = req.files;
+  
   let { email, password, phone, cvu, dni, fullname, address, balance } =
     req.body;
   try {
@@ -16,14 +16,26 @@ const register = async (req, res) => {
         .status(409)
         .json({ error: "El correo electrónico ya está en uso" });
     }
+    let cv = "";
+    //generacion de cvu
+    for (let i = 0; i < 16; i++) {
+      const digito = Math.floor(Math.random() * 10);
+      cv += digito;
+    }
+    //Generacion de alias
+    const animal = faker.color.human();
+    const color = faker.color.human();
+    const company = faker.color.human();
 
+    const ali= `${animal}.${color}.${company}`
     let passwordHash = await bcrypt.hash(password, 8);
     let createUser = new userSchema({
       email,
       password: passwordHash,
       phone,
       dni,
-      cvu,
+      cvu:cv,
+      alias:ali,
       fullname,
       address,
       balance,
