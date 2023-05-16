@@ -36,6 +36,7 @@ app.use(cors({
 )
 
 //middlewares
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 // File Upload
 app.use(fileUpload({

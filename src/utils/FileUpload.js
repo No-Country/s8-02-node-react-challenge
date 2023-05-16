@@ -1,8 +1,8 @@
 import { v2 as cloudinary } from 'cloudinary';
 
 
-const fileUpload=(file)=>{
-  console.log(file)
+const fileUpload=async(file)=>{
+ 
 // Configura la biblioteca de Cloudinary con tu información de autenticación
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -10,19 +10,16 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
-// Ruta para subir la imagen directamente a Cloudinary
-
+try {
+  //toque esto tambien
   // Utiliza el método "uploader.upload" de Cloudinary para cargar la imagen
-  cloudinary.uploader.upload(file.tempFilePath, (error, result) => {
-    if (error) {
-      // Manejo del error
-      console.error(error.message);
-      
-    }
+  let url= await cloudinary.uploader.upload(file.tempFilePath);
+  return url.url
 
-    // Si la carga es exitosa, puedes acceder a la URL de la imagen en result.secure_url
-   return {imageUrl: result.secure_url} 
-  });
+} catch (error) {
+  console.log(error);
+}
+
 
 }
 export default fileUpload;

@@ -5,29 +5,36 @@ const cardSchema = new Schema(
   {
     type: {
       type: String,
-      unique: true,
+    
     },
+    
     bank_emisor: {
         type: String,
-        unique: true,
+      
     },
     bank: {
       type: String,
-      unique: true,
+      enum:["mastercard","visa","unknown"],
+      require:true,
+      default:"unknown"
     },
     expiration_date: {
       type: String,
-      unique: false,
+    
     },
-    user_name: {
+    user_card: {
       type: String,
+    },
+    user_number:{
+        type:Number,
+      
     },
     cvv: {
       type: Number,
     },
     id_user: {
-      type: String,
-    }
+      type: Schema.Types.ObjectId,
+    },
     },
   { timestamps: true, versionKey: false }
 );
