@@ -18,7 +18,7 @@ const activitySchema = new Schema(
     id_user: {
       type: String,
     }
-    },
+  },
   { timestamps: true, versionKey: false }
 );
 
