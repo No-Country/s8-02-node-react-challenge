@@ -2,6 +2,7 @@ import {Router} from 'express'
 import { register,login } from '../controllers/auth.js';
 import {  deleteUser, getAllUser,getUser, updateUser } from '../controllers/user.js';
 
+
 const router = Router();
 
 router.post("/register",register)
