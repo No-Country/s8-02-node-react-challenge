@@ -46,6 +46,11 @@ const register = async (req, res) => {
       .findOne({ email: createUser.email })
       .select("-password");
 
+    enviar({ 
+      username:createUser.fullname,
+      email:createUser.email
+    },'bienvenida')
+    
     return res.status(200).json({ update });
   } catch (error) {
     console.log(error.message);
