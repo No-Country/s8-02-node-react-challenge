@@ -1,9 +1,7 @@
+import Login from "../../components/login";
+
 const LandingPage = () => {
-  return (
-    <div>
-      <p>Esto es una landing Page</p>
-    </div>
-  );
+  return <Login />;
 };
 
 export default LandingPage;
