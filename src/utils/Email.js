@@ -2,20 +2,20 @@ import * as nodemailer from 'nodemailer';
 
 
 
-const enviar = (user, template,token) => {
+const sendMail = (user, template,token) => {
 
     let templates = [
       {
-        id: "bienvenida",
+        id: "welcome",
         subject: "WalletPay - Bienvenido a WalletPay",
         text: "Bienvenido a WalletPay",
-        html: template1(user),
+        html: welcomeTemplate(user),
       },
       {
-        id: "transferencia",
+        id: "transfer",
         subject: "WalletPay - Tienes un nuevo deposito en tu cuenta",
         text: "Tienes un nuevo deposito en tu cuenta",
-        html: template2(user),
+        html: transferTemplate(user),
       },
     ];
   
@@ -63,10 +63,10 @@ const enviar = (user, template,token) => {
     });
   };
   
-  export { enviar };
+  export { SendMail };
 
   
-export const template2 = (user) =>{
+export const transferTemplate = (user) =>{
   return (
       `<table width="100%" cellpadding="0" cellspacing="0">
       <tr bgcolor="#10224D">
@@ -92,7 +92,7 @@ export const template2 = (user) =>{
   )
 }
 
-export const template1 = (user) =>{
+export const welcomeTemplate = (user) =>{
   return (
       `<table width="100%" cellpadding="0" cellspacing="0">
       <tr bgcolor="#10224D">

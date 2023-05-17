@@ -2,6 +2,7 @@ import userSchema from "../database/models/user.js";
 import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
+import { SendMail } from "../utils/Email.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
@@ -46,11 +47,11 @@ const register = async (req, res) => {
       .findOne({ email: createUser.email })
       .select("-password");
 
-    enviar({ 
+    SendMail({ 
       username:createUser.fullname,
       email:createUser.email
-    },'bienvenida')
-    
+    },'welcome')
+
     return res.status(200).json({ update });
   } catch (error) {
     console.log(error.message);
