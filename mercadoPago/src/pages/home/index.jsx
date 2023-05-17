@@ -5,8 +5,8 @@ const Home = () => {
   return (
     <>
       {/* Agregar componente Menu o NavBar */}
-      <div className='flex-col justify-center font-Montserrat bg-[#ECEBF6] pl-4 pr-4'>
-        <div className='rounded-lg bg-white shadow-cardShadow h-[140px] mb-5'>
+      <div className='flex-col justify-center font-Montserrat bg-[#ECEBF6] pl-4 pr-4 pt-[16px]'>
+        <div className='rounded-lg bg-white shadow-cardShadow h-[140px] mb-[20px] '>
           <div className='flex justify-between items-center text-sm pt-[21px] pl-[21px] pr-[21px]'>
             <p>Dinero disponible</p>
             <Link href='#' className='bg-bgButton text-colorButton rounded-md p-1 text-[12px] font-semibold'> Tu CVU </Link>
@@ -26,6 +26,70 @@ const Home = () => {
           <div className='flex gap-2 items-center justify-between font-semibold border-t-2 border-borderHome text-colorButton text-[12px] pl-[21px] pr-[21px]'>
             <button className='bg-bgButton p-1 rounded-[4px] mt-[10px]'>Ingresar dinero</button>
             <button className='bg-bgButton p-1 rounded-[4px] mt-[10px]'>Transferir dinero</button>
+          </div>
+        </div>
+
+        <div className='flex-col bg-[#D9D9D9] rounded-t-[10px] pb-[50px] rounded-b-[10px]'>
+          <div className='bg-white w-full rounded-t-[10px]'>
+            <h2 className='pt-[22px] pl-[24px] pb-[5px]'>TU ACTIVIDAD</h2>
+          </div>
+          <div className='bg-white mt-2 pl-[22px] pr-[22px] font-[500]'>
+            <ul className='mt-2 text-[#39528D]'>
+              <li className='flex justify-between pt-[36px]'>
+                <div className='flex gap-2 items-center'>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                  </svg>
+                  <p>Label</p>
+                </div>
+                <p>100+</p>
+              </li>
+              <li className='flex justify-between pt-[58px]'>
+                <div className='flex gap-2 items-center'>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                  </svg>
+                  <p>Label</p>
+                </div>
+                <p>100+</p>
+              </li>
+              <li className='flex justify-between pt-[58px]'>
+                <div className='flex gap-2 items-center'>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                  </svg>
+                  <p>label</p>
+                </div>
+                <p>100+</p>
+              </li>
+              <li className='flex justify-between pt-[58px]'>
+                <div className='flex gap-2 items-center'>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                  </svg>
+                  <p>Label</p>
+                </div>
+                <p>100+</p>
+              </li>
+              <li className='flex justify-between pt-[58px]'>
+                <div className='flex gap-2 items-center'>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                  </svg>
+                  <p>Label</p>
+                </div>
+                <p>100+</p>
+              </li>
+              <li className='flex justify-between pt-[58px] pb-[41px]'>
+                <div className='flex gap-2 items-center'>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                  </svg>
+                  <p>Label</p>
+                </div>
+                <p>100+</p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
