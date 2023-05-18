@@ -443,6 +443,291 @@ const options = {
                     }
                 }
             },
+            "/auth/card/{id}": {
+                get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Cards"
+                    ],
+                    summary: "Get User cards by ID",
+                    parameters: [
+                        {
+                            in: "path",
+                            name: "id",
+                            description: "The name that needs to be fetched. Use user for testing.",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        }
+                        // {
+                        //     // name: "Authorization",
+                        //     // in: "header",
+                        //     // description: "Token",
+                        //     // required: true,
+                        //     // example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        //     in: "path",
+                        //     name: "id",
+                        //     description: "The name that needs to be fetched. Use card for testing.",
+                        //     required: true,
+                        //     schema: {
+                        //         type: String
+                        //     }
+                        // }
+                    ],
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        },
+                        400: {
+                            description: "Invalid card supplied"
+                        },
+                        404: {
+                            description: "card not found"
+                        }
+                    }
+                },
+                post: {
+                    tags: [
+                        "Cards"
+                    ],
+                    summary: "Create card for the user",
+                    description: "Created user card object",
+                    operationId: "createCard",
+                    requestBody: {
+                        required: true,
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "multipart/form-data": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                },
+                                "multipart/form-data": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        },
+                        400: {
+                            description: "Invalid username supplied"
+                        },
+                        404: {
+                            description: "user not found"
+                        }
+                    }
+                },
+                patch: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Cards"
+                    ],
+                    summary: "Update  cards of user",
+                    description: "This can only be done by the logged in user.",
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "The id that needs to be update",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        }
+                    ],
+                    requestBody: {
+                        required: true,
+                        description: "Update an existent user in the store",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "multipart/form-data": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/josn": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                },
+                                "multipart/form-data": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                },
+                                "application/x-www-form-urlencoded": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        },
+                        404: {
+                            description: "user not found",
+                            content: {
+                                "application/josn": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                delete: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Cards"
+                    ],
+                    summary: "Delete card of the user",
+                    description: "This can only be done by the deletedd in cards of the users user.",
+                    operationId: "deleteCard",
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "The id that needs to be deleted",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        }
+                    ],
+                    requestBody: {
+                        description: "Delete an existent user in the store",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/card"
+                                }
+                            }
+                        },
+                        required: true
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/josn": {
+                                    schema: {
+                                        $ref: "#/components/schemas/ucard"
+                                    }
+                                }
+                            }
+                        },
+                        400: {
+                            description: "Invalid username supplied",
+                            content: {
+                                "application/josn": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        },
+                        404: {
+                            description: "user not found",
+                            content: {
+                                "application/josn": {
+                                    schema: {
+                                        $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         },
         components: {
             schemas: {
@@ -555,7 +840,7 @@ const options = {
                     type: "object",
                     required: [
                         "bank_emisor",
-                        "banl",
+                        "bank",
                         "expiration_date",
                         "user_name",
                         "cvv",

@@ -2,13 +2,12 @@ import userSchema from "../database/models/user.js";
 import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
-import { SendMail } from "../utils/Email.js";
+import { sendMail } from "../utils/Email.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, phone, cvu, dni, fullname, address, balance } =
-    req.body;
+  let { email, password/*, phone, cvu, dni, fullname, address, balance*/ } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -19,7 +18,7 @@ const register = async (req, res) => {
     }
     let cv = "";
     //generacion de cvu
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 22; i++) {
       const digito = Math.floor(Math.random() * 10);
       cv += digito;
     }
@@ -33,13 +32,13 @@ const register = async (req, res) => {
     let createUser = new userSchema({
       email,
       password: passwordHash,
-      phone,
-      dni,
-      cvu:cv,
+      /*phone,
+      dni,*/
+      cvu: cv,
       alias:ali,
-      fullname,
+      /*fullname,
       address,
-      balance,
+      balance,*/
     });
     createUser.save();
 
@@ -47,8 +46,8 @@ const register = async (req, res) => {
       .findOne({ email: createUser.email })
       .select("-password");
 
-    SendMail({ 
-      username:createUser.fullname,
+    sendMail({ 
+      username:createUser.email.trim('@gmail.com', ''),
       email:createUser.email
     },'welcome')
 
@@ -57,6 +56,7 @@ const register = async (req, res) => {
     console.log(error.message);
   }
 };
+
 const login = async (req, res) => {
   let { email, password } = req.body;
   try {
@@ -86,3 +86,15 @@ const login = async (req, res) => {
   }
 };
 export { register, login };
+
+
+/*
+  646563920eac090ef212299c
+
+  {
+ "fullname": "elidavidgaleano@gmail.com",
+ "email": "elidavidgaleano@gmail.com",
+ "password": "12345aB!"
+  }
+
+*/

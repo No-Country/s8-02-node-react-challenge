@@ -63,7 +63,7 @@ const sendMail = (user, template,token) => {
     });
   };
   
-  export { SendMail };
+  export { sendMail };
 
   
 export const transferTemplate = (user) =>{
