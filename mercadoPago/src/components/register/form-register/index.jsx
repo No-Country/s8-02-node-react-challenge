@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import { useState } from "react";
 
-const FormRegister = ({ handlePopupCorreo, handlePopupDni }) => {
+const FormRegister = ({ handleClick }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -20,7 +20,7 @@ const FormRegister = ({ handlePopupCorreo, handlePopupDni }) => {
         <form className="space-y-6 p-2">
           <div className="group flex justify-center items-center">
             <AiOutlineInfoCircle
-              onClick={handlePopupCorreo}
+              onClick={handleClick}
               className="w-8 h-8 text-[#6F0B19]"
             />
             <div className="relative">
@@ -40,7 +40,7 @@ const FormRegister = ({ handlePopupCorreo, handlePopupDni }) => {
           </div>
           <div className="group flex justify-center items-center">
             <AiOutlineInfoCircle
-            onClick={handlePopupDni}
+            
               className="w-6 h-6  text-[#6F0B19]"
             />
             <div className="relative">

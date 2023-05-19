@@ -8,7 +8,7 @@ import { useState } from "react";
 const RegisterPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handlePopupCorreo = () => {
+  const handleClick = () => {
     setIsOpen(true);
   };
 
@@ -23,7 +23,7 @@ const RegisterPage = () => {
         {isOpen && <PopupCorreo handleClose={handleClose} />}
 
         <TitleRegister />
-        <FormRegister handlePopupCorreo={handleClick} />
+        <FormRegister handleClick={handleClick} />
       </div>
     </section>
   );
