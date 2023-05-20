@@ -1,21 +1,25 @@
-import { Link } from "react-router-dom";
-import { AiOutlineEye } from "react-icons/ai";
+import { Link } from 'react-router-dom'
+import { AiOutlineEye, AiOutlineMenu, AiOutlineQuestionCircle } from 'react-icons/ai'
 
 const Home = () => {
   return (
     <>
-      {/* Agregar componente Menu o NavBar */}
-      <div className='flex-col justify-center font-Montserrat bg-[#ECEBF6] pl-4 pr-4 pt-[16px]'>
+      <div className='bg-[#10224D] h-16 flex items-center text-white justify-between pl-6 pr-[26px]'>
+        <AiOutlineMenu className='text-2xl'/>
+        <p className='font-semibold'>Inicio</p>
+        <div className='flex gap-[26px]'>
+          <AiOutlineQuestionCircle className='w-6 h-6' />
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.99999 20.4C0.71667 20.4 0.47917 20.3039 0.28749 20.1115C0.0958298 19.9192 0 19.6808 0 19.3965C0 19.1122 0.0958298 18.875 0.28749 18.685C0.47917 18.4951 0.71667 18.4 0.99999 18.4H2.48001V9.48003C2.48001 7.83337 2.97667 6.3517 3.96999 5.03502C4.96333 3.71836 6.26667 2.88003 7.88001 2.52003V1.66002C7.88001 1.1867 8.04677 0.7917 8.38029 0.47502C8.71383 0.15836 9.11883 3.05176e-05 9.59529 3.05176e-05C10.0718 3.05176e-05 10.4783 0.15836 10.815 0.47502C11.1517 0.7917 11.32 1.1867 11.32 1.66002V2.52003C12.9333 2.88003 14.24 3.71836 15.24 5.03502C16.24 6.3517 16.74 7.83337 16.74 9.48003V18.4H18.2C18.4833 18.4 18.7208 18.4962 18.9125 18.6886C19.1042 18.8809 19.2 19.1192 19.2 19.4035C19.2 19.6879 19.1042 19.925 18.9125 20.115C18.7208 20.305 18.4833 20.4 18.2 20.4H0.99999ZM9.6 24C8.95334 24 8.39167 23.765 7.91499 23.295C7.43833 22.825 7.2 22.26 7.2 21.6H12C12 22.26 11.765 22.825 11.295 23.295C10.825 23.765 10.26 24 9.6 24ZM4.47999 18.4H14.74V9.48003C14.74 8.04003 14.2467 6.82003 13.26 5.82003C12.2733 4.82003 11.0633 4.32003 9.63 4.32003C8.19666 4.32003 6.97999 4.82003 5.97999 5.82003C4.97999 6.82003 4.47999 8.04003 4.47999 9.48003V18.4Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+
+      <div className='flex-col justify-center font-Montserrat bg-[#ECEBF6] pl-[16px] pr-[16px] pt-[16px]'>
         <div className='rounded-lg bg-white shadow-cardShadow h-[140px] mb-[20px] '>
           <div className='flex justify-between items-center text-sm pt-[21px] pl-[21px] pr-[21px]'>
             <p>Dinero disponible</p>
-            <Link
-              href="#"
-              className="bg-bgButton text-colorButton rounded-md p-1 text-[12px] font-semibold"
-            >
-              {" "}
-              Tu CVU{" "}
-            </Link>
+            <Link href='#' className='bg-bgButton text-colorButton rounded-md pl-[7px] pr-[7px] text-center text-[12px] font-semibold'> Tu CVU </Link>
           </div>
           <div className="font-semibold flex justify-between -mt-2 pr-[21px] pl-[21px]">
             <div>
@@ -37,77 +41,39 @@ const Home = () => {
               />
             </svg>
           </div>
-          <div className="flex gap-2 items-center justify-between font-semibold border-t-2 border-borderHome text-colorButton text-[12px] pl-[21px] pr-[21px]">
-            <button className="bg-bgButton p-1 rounded-[4px] mt-[10px]">
-              Ingresar dinero
-            </button>
-            <button className="bg-bgButton p-1 rounded-[4px] mt-[10px]">
-              Transferir dinero
-            </button>
+          <hr className='w-[90%] m-auto border-[#33333366]'/>
+          <div className='flex gap-2 items-center justify-between font-semibold  text-colorButton text-[12px] pl-[21px] pr-[21px]'> {/*border-t-2 border-borderHome */}
+            <button className='bg-bgButton p-1 rounded-[4px] mt-[10px] w-full'>Ingresar dinero</button>
+            <button className='bg-bgButton p-1 rounded-[4px] mt-[10px] w-full'>Transferir dinero</button>
           </div>
         </div>
 
-        <div className='flex-col bg-[#D9D9D9] rounded-t-[10px] pb-[50px] rounded-b-[10px]'>
+        <div className='flex-col bg-borderHome rounded-t-[10px] rounded-b-[10px] h-[528px]'>
           <div className='bg-white w-full rounded-t-[10px]'>
-            <h2 className='pt-[22px] pl-[24px] pb-[5px]'>TU ACTIVIDAD</h2>
+            <h2 className='p-4 font-semibold'>TU ACTIVIDAD</h2>
           </div>
-          <div className='bg-white mt-2 pl-[22px] pr-[22px] font-[500]'>
-            <ul className='mt-2 text-[#39528D]'>
-              <li className='flex justify-between pt-[36px]'>
-                <div className='flex gap-2 items-center'>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+          <div className='bg-white mt-[1px]  font-[500] h-[424px] flex-col flex items-center justify-center'>
+            <div className=''>
+              <div className='relative flex justify-center pt-2'>
+                <div className='w-[100px] '>
+                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="48" stroke="#333333" strokeOpacity="0.4" strokeWidth="4" />
                   </svg>
-                  <p>Label</p>
                 </div>
-                <p>100+</p>
-              </li>
-              <li className='flex justify-between pt-[58px]'>
-                <div className='flex gap-2 items-center'>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
+                <div className='absolute top-9 left-15'>
+                  <svg width="37" height="40" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 39.9322V-1.52588e-05C0.0226102 -1.52588e-05 0.0819323 0.00279755 0.177966 0.00842467C0.274 0.0140857 0.406763 0.101662 0.576254 0.271154L2.4746 2.16944C2.65538 2.35026 2.84746 2.44066 3.05085 2.44066C3.25424 2.44066 3.44632 2.35026 3.6271 2.16944L5.52545 0.271154C5.70622 0.0903743 5.89831 -1.52588e-05 6.1017 -1.52588e-05C6.30509 -1.52588e-05 6.49717 0.0903743 6.67795 0.271154L8.57629 2.16944C8.75707 2.35026 8.94916 2.44066 9.15255 2.44066C9.35594 2.44066 9.54803 2.35026 9.7288 2.16944L11.6271 0.271154C11.8079 0.0903743 12 -1.52588e-05 12.2034 -1.52588e-05C12.4068 -1.52588e-05 12.5989 0.0903743 12.7797 0.271154L14.678 2.16944C14.8588 2.35026 15.0509 2.44066 15.2542 2.44066C15.4576 2.44066 15.6497 2.35026 15.8305 2.16944L17.7288 0.271154C17.9096 0.0903743 18.1017 -1.52588e-05 18.3051 -1.52588e-05C18.5085 -1.52588e-05 18.7006 0.0903743 18.8814 0.271154L20.7797 2.16944C20.9605 2.35026 21.1526 2.44066 21.3559 2.44066C21.5593 2.44066 21.7514 2.35026 21.9322 2.16944L23.8305 0.271154C24.0113 0.0903743 24.2034 -1.52588e-05 24.4068 -1.52588e-05C24.6102 -1.52588e-05 24.8023 0.0903743 24.9831 0.271154L26.8814 2.16944C27.0622 2.35026 27.2543 2.44066 27.4576 2.44066C27.661 2.44066 27.8531 2.35026 28.0339 2.16944L29.9322 0.271154C30.113 0.0903743 30.3051 -1.52588e-05 30.5085 -1.52588e-05C30.7119 -1.52588e-05 30.904 0.0903743 31.0848 0.271154L32.9831 2.16944C33.1639 2.35026 33.356 2.44066 33.5593 2.44066C33.7627 2.44066 33.9548 2.35026 34.1356 2.16944L36.0339 0.271154C36.2034 0.101662 36.3362 0.0140857 36.4322 0.00842467C36.5283 0.00279755 36.5876 -1.52588e-05 36.6102 -1.52588e-05V39.9322C36.5876 39.9322 36.5283 39.9407 36.4322 39.9576C36.3362 39.9746 36.2034 39.8983 36.0339 39.7288L34.1356 37.8305C33.9548 37.6497 33.7627 37.5593 33.5593 37.5593C33.356 37.5593 33.1639 37.6497 32.9831 37.8305L31.0848 39.7288C30.904 39.9096 30.7119 40 30.5085 40C30.3051 40 30.113 39.9096 29.9322 39.7288L28.0339 37.8305C27.8531 37.6497 27.661 37.5593 27.4576 37.5593C27.2543 37.5593 27.0622 37.6497 26.8814 37.8305L24.9831 39.7288C24.8023 39.9096 24.6102 40 24.4068 40C24.2034 40 24.0113 39.9096 23.8305 39.7288L21.9322 37.8305C21.7514 37.6497 21.5593 37.5593 21.3559 37.5593C21.1526 37.5593 20.9605 37.6497 20.7797 37.8305L18.8814 39.7288C18.7006 39.9096 18.5085 40 18.3051 40C18.1017 40 17.9096 39.9096 17.7288 39.7288L15.8305 37.8305C15.6497 37.6497 15.4576 37.5593 15.2542 37.5593C15.0509 37.5593 14.8588 37.6497 14.678 37.8305L12.7797 39.7288C12.5989 39.9096 12.4068 40 12.2034 40C12 40 11.8079 39.9096 11.6271 39.7288L9.7288 37.8305C9.54803 37.6497 9.35594 37.5593 9.15255 37.5593C8.94916 37.5593 8.75707 37.6497 8.57629 37.8305L6.67795 39.7288C6.49717 39.9096 6.30509 40 6.1017 40C5.89831 40 5.70622 39.9096 5.52545 39.7288L3.6271 37.8305C3.44632 37.6497 3.25424 37.5593 3.05085 37.5593C2.84746 37.5593 2.65538 37.6497 2.4746 37.8305L0.576254 39.7288C0.406763 39.8983 0.274 39.9746 0.177966 39.9576C0.0819323 39.9407 0.0226102 39.9322 0 39.9322ZM7.6949 29.6271H29.0509C29.5368 29.6271 29.9407 29.4661 30.2628 29.144C30.5848 28.822 30.7458 28.4181 30.7458 27.9322C30.7458 27.4463 30.5848 27.0424 30.2628 26.7203C29.9407 26.3983 29.5368 26.2373 29.0509 26.2373H7.6949C7.20904 26.2373 6.80509 26.3983 6.48306 26.7203C6.16102 27.0424 6 27.4463 6 27.9322C6 28.4181 6.16102 28.822 6.48306 29.144C6.80509 29.4661 7.20904 29.6271 7.6949 29.6271ZM7.6949 21.6949H29.0509C29.5368 21.6949 29.9407 21.5339 30.2628 21.2118C30.5848 20.8898 30.7458 20.4858 30.7458 20C30.7458 19.5141 30.5848 19.1102 30.2628 18.7881C29.9407 18.4661 29.5368 18.3051 29.0509 18.3051H7.6949C7.20904 18.3051 6.80509 18.4661 6.48306 18.7881C6.16102 19.1102 6 19.5141 6 20C6 20.4858 6.16102 20.8898 6.48306 21.2118C6.80509 21.5339 7.20904 21.6949 7.6949 21.6949ZM7.6949 13.7288H29.0509C29.5368 13.7288 29.9407 13.5678 30.2628 13.2458C30.5848 12.9237 30.7458 12.5198 30.7458 12.0339C30.7458 11.548 30.5848 11.144 30.2628 10.822C29.9407 10.5 29.5368 10.339 29.0509 10.339H7.6949C7.20904 10.339 6.80509 10.5 6.48306 10.822C6.16102 11.144 6 11.548 6 12.0339C6 12.5198 6.16102 12.9237 6.48306 13.2458C6.80509 13.5678 7.20904 13.7288 7.6949 13.7288ZM3.3898 34.9153H33.2204V5.08468H3.3898V34.9153Z" fill="#333333" fillOpacity="0.4"/>
                   </svg>
-                  <p>Label</p>
                 </div>
-                <p>100+</p>
-              </li>
-              <li className='flex justify-between pt-[58px]'>
-                <div className='flex gap-2 items-center'>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
-                  </svg>
-                  <p>label</p>
-                </div>
-                <p>100+</p>
-              </li>
-              <li className='flex justify-between pt-[58px]'>
-                <div className='flex gap-2 items-center'>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
-                  </svg>
-                  <p>Label</p>
-                </div>
-                <p>100+</p>
-              </li>
-              <li className='flex justify-between pt-[58px]'>
-                <div className='flex gap-2 items-center'>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
-                  </svg>
-                  <p>Label</p>
-                </div>
-                <p>100+</p>
-              </li>
-              <li className='flex justify-between pt-[58px] pb-[41px]'>
-                <div className='flex gap-2 items-center'>
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C9.31371 12 12 9.31371 12 6C12 2.68629 9.31371 0 6 0C2.68629 0 0 2.68629 0 6C0 9.31371 2.68629 12 6 12Z" fill="#39528D"/>
-                  </svg>
-                  <p>Label</p>
-                </div>
-                <p>100+</p>
-              </li>
-            </ul>
+              </div>
+            </div>
+            <p className='text-center leading-[19.5px] pt-[24px] w-full text-[#33333366]'>Acá vas a ver todas tus operaciones para que no se te escape nada.</p>
+          </div>
+          <div className='flex justify-between items-center p-4 bg-white mt-[1px]'>
+            <Link href='#' className='font-[600] text-[#33333366]'>Ver toda tu actividad</Link>
+            <svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.49471 23.5053C0.177078 23.1407 0.0123851 22.7171 0.000632698 22.2348C-0.011155 21.7525 0.153538 21.3408 0.49471 20.9996L9.45903 12.0353L0.4594 3.03569C0.141768 2.71805 -0.011155 2.30042 0.000632698 1.78278C0.0123851 1.26518 0.177078 0.84757 0.49471 0.529937C0.859387 0.16526 1.27702 -0.011202 1.74761 0.000550377C2.21816 0.0123028 2.62403 0.188765 2.9652 0.529937L13.2353 10.8C13.4235 10.9883 13.5559 11.1824 13.6323 11.3824C13.7088 11.5824 13.747 11.8 13.747 12.0353C13.747 12.2706 13.7088 12.4882 13.6323 12.6882C13.5559 12.8882 13.4235 13.0823 13.2353 13.2705L3.00046 23.5053C2.65932 23.8465 2.24758 24.0112 1.76524 23.9994C1.2829 23.9877 0.859387 23.823 0.49471 23.5053Z" fill="#333333" fillOpacity="0.4"/>
+            </svg>
           </div>
         </div>
       </div>
