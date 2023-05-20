@@ -3,6 +3,8 @@ import FormRegister from "../../components/register/form-register";
 import TitleRegister from "../../components/register/Title-register";
 
 const RegisterPage = () => {
+
+
   return (
     <section className="bg-[#ECEBF6] w-full h-screen flex flex-col items-center">
       <TopbarLogin />

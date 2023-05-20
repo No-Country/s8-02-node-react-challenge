@@ -17,6 +17,7 @@ function App() {
         <Route element={<UserRouteProtected />}>
           <Route path="/home" element={<Home />} />
         </Route>
+       
       </Routes>
     </BrowserRouter>
   );
