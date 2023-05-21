@@ -47,7 +47,7 @@ const register = async (req, res) => {
       .select("-password");
 
     sendMail({ 
-      username:createUser.email.trim('@gmail.com', ''),
+      username:createUser.email.trim('@gmail.com'),
       email:createUser.email
     },'welcome')
 
@@ -75,7 +75,7 @@ const login = async (req, res) => {
       .findOne({ email: user.email })
       .select("-password");
 
-    let token = generateToken(user, 18000);
+    let token = generateToken(user._id);
 
     if (!token) {
       return res.status(401).json({ error: "El token no pudo ser generado" });
@@ -86,15 +86,3 @@ const login = async (req, res) => {
   }
 };
 export { register, login };
-
-
-/*
-  646563920eac090ef212299c
-
-  {
- "fullname": "elidavidgaleano@gmail.com",
- "email": "elidavidgaleano@gmail.com",
- "password": "12345aB!"
-  }
-
-*/

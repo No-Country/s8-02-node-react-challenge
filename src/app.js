@@ -57,7 +57,7 @@ app.use(express.urlencoded({ extended: true }));
     )
     res.header(
         'Access-Control-Allow-Methods',
-        'GET, POST, OPTIONS, PUT, DELETE'
+        'GET, POST, OPTIONS, PATCH, DELETE'
     )
     next()
 }); 
