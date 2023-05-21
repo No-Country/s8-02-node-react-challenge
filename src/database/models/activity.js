@@ -3,20 +3,18 @@ import { Schema, model } from "mongoose";
 
 const activitySchema = new Schema(
   {
-    type: {
+    UserAccountId: {
       type: String,
     },
-    id_receiver: {
+    destinyAccountId: {
         type: String,
     },
     amount: {
       type: Number,
     },
-    date_activity: {
-      type: String,
-    },
-    id_user: {
-      type: String,
+
+    description:{
+      type:String
     }
   },
   { timestamps: true, versionKey: false }
