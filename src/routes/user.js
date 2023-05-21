@@ -5,8 +5,8 @@ import { userMiddle } from '../middlewares/auth_user.js';
 import { user_middleRegister } from '../middlewares/authUser.js';
 import { requireToken } from '../middlewares/authToken.js';
 import { check } from 'express-validator';
-import { validateFields } from '../middleware/validateFields.js';
-import { idUserValidator } from '../middleware/idValidators.js';
+import { validateFields } from '../middlewares/validateFields.js';
+import { idUserValidator } from '../middlewares/idValidators.js';
 
 
 const router = Router();
