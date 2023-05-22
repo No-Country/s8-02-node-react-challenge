@@ -13,7 +13,13 @@ cloudinary.config({
 try {
   //toque esto tambien
   // Utiliza el método "uploader.upload" de Cloudinary para cargar la imagen
-  let url= await cloudinary.uploader.upload(file.tempFilePath);
+  let url= await cloudinary.uploader.upload(file.tempFilePath, {
+      folder: 'users',
+      allowed_formats: ["jpg", "jpeg", "png"],
+      filename: `users-${req.params.id}-${Date.now()}`,
+      public_id: `users-${req.params.id}-${Date.now()}`,
+      resource_type: "auto",
+  });
   return url.url
 
 } catch (error) {
