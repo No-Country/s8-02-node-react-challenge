@@ -41,7 +41,7 @@ const register = async (req, res) => {
       address,
       balance,*/
     });
-    createUser.save();
+    await createUser.save();
 
     const update = await userSchema
       .findOne({ email: createUser.email })
