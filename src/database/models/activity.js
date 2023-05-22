@@ -5,11 +5,11 @@ const activitySchema = new Schema(
   {
     UserAccountId: {
       type: Schema.Types.ObjectId,
-      ref:"UserModel"
+      ref: "UserModel"
     },
     destinyAccountId: {
       type: Schema.Types.ObjectId,
-      ref:"UserModel"
+      ref: "UserModel"
     },
     amount: {
       type: Number,

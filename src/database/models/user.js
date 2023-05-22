@@ -24,7 +24,8 @@ const userSchema = new Schema(
       required: true
     },
     urlProfile: {
-      type: String
+      secure_url: String,
+      public_id: String
     },
     dni: {
       type: Number,

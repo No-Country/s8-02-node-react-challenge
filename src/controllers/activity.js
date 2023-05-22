@@ -104,7 +104,7 @@ const transfer = async (req, res) => {
       if (activities.length === 0) {
         return res.status(200).json({ message: "No se encontraron actividades" });
       }
-   
+  
       return res.status(200).json({ activities });
     } catch (error) {
       saveErrorToDatabase(error);
