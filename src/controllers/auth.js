@@ -53,13 +53,6 @@ const register = async (req, res) => {
       await fs.unlink(req.files.urlProfile.tempFilePath)
     }
     const dataUser = await createUser.save()
-      // .findOne({ email: dataUser.email })
-      // .select("-password");
-
-    /* 
-      const savedProduct = await newProduct.save();
-    return res.json(savedProduct);
-    */
 
     // const infoUser = dataUser
     //   .findOne({ email: dataUser.email })
