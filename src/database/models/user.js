@@ -4,27 +4,32 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-     
+      unique: true
     },
     alias: {
-      type: String
-    },
-    cvu: {
-      type: Number,
-      
-    },
-    email: {
       type: String,
       unique: true
     },
+    cvu: {
+      type: Number,
+      unique: true
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true
+    },
     password: {
-      type: String
+      type: String,
+      required: true
     },
     urlProfile: {
-      type: String
+      secure_url: String,
+      public_id: String
     },
     dni: {
-      type: Number
+      type: Number,
+      unique: true
     },
     fullname: {
       type: String
