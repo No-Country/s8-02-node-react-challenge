@@ -4,7 +4,7 @@ const notificationSchema = new Schema(
   {
     destinyAccountId: {
       type: Schema.Types.ObjectId,
-      required: true,
+      ref:'userModel'
     },
     message: {
       type: String,

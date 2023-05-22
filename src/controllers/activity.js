@@ -5,7 +5,8 @@ import saveErrorToDatabase from '../utils/Error.js';
 import { sendMail } from '../utils/Email.js';
 import createNotification from '../utils/Notification.js';
 
-
+//que en vez de usar id receptor que sea cvu o alias
+//
 const transfer = async (req, res) => {
     let { UserAccountId, amount, destinyAccountId, description,  } = req.body;
       
@@ -88,7 +89,7 @@ const transfer = async (req, res) => {
 
   const getActivities = async (req, res) => {
     let { id, amount } = req.body;
-  
+
     try {
       const query = {
         $or: [
@@ -99,11 +100,11 @@ const transfer = async (req, res) => {
       const activities = await activitySchema.find(query)
         .sort({ createdAt: -1 })
         .limit(amount !== 0 ? amount : -1);
-/*   
+
       if (activities.length === 0) {
         return res.status(200).json({ message: "No se encontraron actividades" });
       }
-   */
+   
       return res.status(200).json({ activities });
     } catch (error) {
       saveErrorToDatabase(error);
