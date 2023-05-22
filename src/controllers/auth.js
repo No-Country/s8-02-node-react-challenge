@@ -3,6 +3,8 @@ import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
 import { sendMail } from "../utils/Email.js";
+import fs from 'fs-extra';
+import { uploadImage, deleteImage } from "../utils/FileUpload.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
@@ -41,18 +43,34 @@ const register = async (req, res) => {
       address,
       balance,*/
     });
-    await createUser.save();
 
-    const update = await userSchema
-      .findOne({ email: createUser.email })
-      .select("-password");
+    if (req.files?.urlProfile) {
+      const result = await uploadImage(req.files.urlProfile.tempFilePath)
+      createUser.urlProfile = {
+        public_id: result.public_id,
+        secure_url: result.secure_url
+      }
+      await fs.unlink(req.files.urlProfile.tempFilePath)
+    }
+    const dataUser = await createUser.save()
+      // .findOne({ email: dataUser.email })
+      // .select("-password");
+
+    /* 
+      const savedProduct = await newProduct.save();
+    return res.json(savedProduct);
+    */
+
+    // const infoUser = dataUser
+    //   .findOne({ email: dataUser.email })
+    //   .select("-password");
 
     sendMail({ 
-      username:createUser.email.trim('@gmail.com'),
-      email:createUser.email
+      username:dataUser.email.trim('@gmail.com'),
+      email:dataUser.email
     },'welcome')
 
-    return res.status(200).json({ update });
+    return res.status(200).json({ dataUser });
   } catch (error) {
     console.log(error.message);
   }

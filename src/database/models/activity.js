@@ -4,10 +4,12 @@ import { Schema, model } from "mongoose";
 const activitySchema = new Schema(
   {
     UserAccountId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "user"
     },
     destinyAccountId: {
-        type: String,
+      type: Schema.Types.ObjectId,
+      ref: "user"
     },
     amount: {
       type: Number,
