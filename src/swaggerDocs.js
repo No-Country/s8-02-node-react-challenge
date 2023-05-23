@@ -12,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: "https://s8-02-node-react-challenge-api.onrender.com",
+                url: process.env.URL_SWAGGER,
                 description: 'API Users for the ...'
             }
         ],
