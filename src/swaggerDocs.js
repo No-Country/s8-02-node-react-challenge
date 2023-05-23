@@ -12,14 +12,8 @@ const options = {
         },
         servers: [
             {
-                url: process.env.ORIGIN1,
+                url: "https://s8-02-node-react-challenge-api.onrender.com",
                 description: 'API Users for the ...'
-            }
-        ],
-        contact: [
-            {
-                github: "https://github.com/No-Country/s8-02-node-react-challenge",
-                gmail: "mercacopiapagos@gmail.com"
             }
         ],
         tags: [
@@ -39,6 +33,11 @@ const options = {
         paths: {
             "/auth/user/": {
                 get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
                     tags: [
                         "User"
                     ],
@@ -138,26 +137,12 @@ const options = {
             },
             "/auth/user/login": {
                 post: {
-                    security: [
-                        {
-                            api_key: [""]
-                        }
-                    ],
                     tags: [
                         "User"
                     ],
                     summary: "Login user",
                     description: "user Logued",
                     operationId: "loginUser",
-                    parameters: [
-                        {
-                            name: "Authorization",
-                            in: "header",
-                            description: "Token",
-                            required: true,
-                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
-                        }
-                    ],
                     requestBody: {
                         required: true,
                         content: {
@@ -293,6 +278,13 @@ const options = {
                             schema: {
                                 type: String
                             }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
                         }
                     ],
                     requestBody: {
@@ -325,7 +317,7 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -350,7 +342,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -380,6 +372,13 @@ const options = {
                             schema: {
                                 type: String
                             }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
                         }
                     ],
                     requestBody: {
@@ -413,7 +412,7 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -423,7 +422,7 @@ const options = {
                         400: {
                             description: "Invalid username supplied",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -433,7 +432,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -616,7 +615,7 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -641,7 +640,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -698,9 +697,9 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
-                                        $ref: "#/components/schemas/ucard"
+                                        $ref: "#/components/schemas/card"
                                     }
                                 }
                             }
@@ -708,7 +707,7 @@ const options = {
                         400: {
                             description: "Invalid username supplied",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -718,7 +717,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -770,9 +769,10 @@ const options = {
                 user: {
                     type: "object",
                     required: [
-                        "username",
                         "email",
-                        "password"
+                        "password",
+                        "dni",
+                        "fullname"
                     ],
                     properties: {
                         username: {
@@ -807,7 +807,7 @@ const options = {
                         },
                         dni: {
                             type: "number",
-                            required: false,
+                            required: true,
                             description: "Dni of the user",
                             example: "00.000.000"
                         },
@@ -818,17 +818,17 @@ const options = {
                         },
                         phone: {
                             type: "number",
-                            required: true,
+                            required: false,
                             example: "011-0000-0000"
                         },
-                        addres: {
+                        address: {
                             type: "string",
-                            required: true,
+                            required: false,
                             example: "Av. calle falsa 123"
                         },
                         balance: {
                             type: "number",
-                            required: true,
+                            required: false,
                             example: "23.362,215"
                         }
                     },

@@ -3,11 +3,13 @@ import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
 import { sendMail } from "../utils/Email.js";
+import fs from 'fs-extra';
+import { uploadImage } from "../utils/FileUpload.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password/*, phone, cvu, dni, fullname, address, balance*/ } = req.body;
+  let { email, password, dni /*, phone, cvu, fullname, address*/, balance } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -32,26 +34,36 @@ const register = async (req, res) => {
     let createUser = new userSchema({
       email,
       password: passwordHash,
-      /*phone,
-      dni,*/
+      /*phone,*/
+      dni,
       cvu: cv,
       alias:ali,
+      balance
       /*fullname,
       address,
       balance,*/
     });
-    createUser.save();
 
-    const update = await userSchema
-      .findOne({ email: createUser.email })
-      .select("-password");
+    if (req.files?.urlProfile) {
+      const result = await uploadImage(req.files.urlProfile.tempFilePath)
+      createUser.urlProfile = {
+        public_id: result.public_id,
+        secure_url: result.secure_url
+      }
+      await fs.unlink(req.files.urlProfile.tempFilePath)
+    }
+    const dataUser = await createUser.save()
+
+    // const infoUser = dataUser
+    //   .findOne({ email: dataUser.email })
+    //   .select("-password");
 
     sendMail({ 
-      username:createUser.email.trim('@gmail.com', ''),
-      email:createUser.email
+      username:dataUser.email.trim('@gmail.com'),
+      email:dataUser.email
     },'welcome')
 
-    return res.status(200).json({ update });
+    return res.status(200).json({ dataUser });
   } catch (error) {
     console.log(error.message);
   }
@@ -71,30 +83,18 @@ const login = async (req, res) => {
     if (!valid) {
       return res.status(409).json({ error: "El password es incorrecto" });
     }
-    const update = await userSchema
+    const userLogin = await userSchema
       .findOne({ email: user.email })
       .select("-password");
 
-    let token = generateToken(user, 18000);
+    let token = generateToken(user._id);
 
     if (!token) {
       return res.status(401).json({ error: "El token no pudo ser generado" });
     }
-    return res.status(200).json({ token, update });
+    return res.status(200).json({ token, userLogin });
   } catch (error) {
     console.log(error);
   }
 };
 export { register, login };
-
-
-/*
-  646563920eac090ef212299c
-
-  {
- "fullname": "elidavidgaleano@gmail.com",
- "email": "elidavidgaleano@gmail.com",
- "password": "12345aB!"
-  }
-
-*/

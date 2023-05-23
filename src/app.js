@@ -19,18 +19,9 @@ const whiteList = [process.env.ORIGIN1]
 console.log(whiteList);
 
 // Cors
-app.use(cors({
-    origin: function (origin, callback) {
-        try {
-            if (!origin || whiteList.includes(origin)) {
-                return callback(null, origin);
-            }
-        } catch (error) {
-            return error(
-                `Error de CORS origin: ${origin} No autorizado!`
-            );
-        }
-        },
+app.use(
+    cors({
+        origin: '*',
         credentials: true,
     })
 )
@@ -47,21 +38,6 @@ app.use(fileUpload({
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
- app.use((_req, res, next) => {
-    res.header('Access-Control-Allow-Origin', "*") // update to match the domain you will make the request from
-    res.header('Access-Control-Allow-Credentials', 'true')
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept'
-    )
-    res.header(
-        'Access-Control-Allow-Methods',
-        'GET, POST, OPTIONS, PUT, DELETE'
-    )
-    next()
-}); 
-
 
 //routes
 app.use("/docs/api/v1", swaggerUI.serve, swaggerUI.setup(specs));
