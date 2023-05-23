@@ -12,14 +12,8 @@ const options = {
         },
         servers: [
             {
-                url: process.env.ORIGIN1,
+                url: "http://127.0.0.1:5000",
                 description: 'API Users for the ...'
-            }
-        ],
-        contact: [
-            {
-                github: "https://github.com/No-Country/s8-02-node-react-challenge",
-                gmail: "mercacopiapagos@gmail.com"
             }
         ],
         tags: [
@@ -39,6 +33,11 @@ const options = {
         paths: {
             "/auth/user/": {
                 get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
                     tags: [
                         "User"
                     ],
