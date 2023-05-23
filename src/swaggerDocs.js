@@ -770,9 +770,10 @@ const options = {
                 user: {
                     type: "object",
                     required: [
-                        "username",
                         "email",
-                        "password"
+                        "password",
+                        "dni",
+                        "fullname"
                     ],
                     properties: {
                         username: {
@@ -807,7 +808,7 @@ const options = {
                         },
                         dni: {
                             type: "number",
-                            required: false,
+                            required: true,
                             description: "Dni of the user",
                             example: "00.000.000"
                         },
@@ -818,17 +819,17 @@ const options = {
                         },
                         phone: {
                             type: "number",
-                            required: true,
+                            required: false,
                             example: "011-0000-0000"
                         },
                         address: {
                             type: "string",
-                            required: true,
+                            required: false,
                             example: "Av. calle falsa 123"
                         },
                         balance: {
                             type: "number",
-                            required: true,
+                            required: false,
                             example: "23.362,215"
                         }
                     },
