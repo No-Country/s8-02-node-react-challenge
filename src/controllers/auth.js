@@ -20,10 +20,12 @@ const register = async (req, res) => {
     }
     let cv = "";
     //generacion de cvu
-    for (let i = 0; i < 22; i++) {
-      const digito = Math.floor(Math.random() * 10);
+    for (let i = 0; i < 23; i++) {
+      let digito = Math.floor(Math.random() * 10);
+      digito = digito.replace(/[e+\.]/g, () => Math.floor(Math.random() * 10));
       cv += digito;
     }
+    //cv = cv.replace(/[e+\.]/g, () => Math.floor(Math.random() * 10));
     //Generacion de alias
     const animal = faker.color.human();
     const color = faker.color.human();
@@ -59,7 +61,7 @@ const register = async (req, res) => {
     //   .select("-password");
 
     sendMail({ 
-      username:dataUser.email.trim('@gmail.com'),
+      username:dataUser.email.replace('@gmail.com', ""),
       email:dataUser.email
     },'welcome')
 
