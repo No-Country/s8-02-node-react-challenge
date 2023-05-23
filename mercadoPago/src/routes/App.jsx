@@ -5,6 +5,7 @@ import Home from "../pages/home";
 import { UserRouteProtected } from "./user/userRouteProtected";
 import LoginPage from "../pages/login-page";
 import RegisterPage from "../pages/register-page";
+import YourMoney from "../pages/your-money";
 import Profile from "../pages/profile/Profile";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
+        <Route path="/money" element={<YourMoney />} />
       </Routes>
     </BrowserRouter>
   );
