@@ -19,18 +19,9 @@ const whiteList = [process.env.ORIGIN1]
 console.log(whiteList);
 
 // Cors
-app.use(cors({
-    origin: function (origin, callback) {
-        try {
-            if (!origin || whiteList.includes(origin)) {
-                return callback(null, origin);
-            }
-        } catch (error) {
-            return error(
-                `Error de CORS origin: ${origin} No autorizado!`
-            );
-        }
-        },
+app.use(
+    cors({
+        origin: '*',
         credentials: true,
     })
 )
