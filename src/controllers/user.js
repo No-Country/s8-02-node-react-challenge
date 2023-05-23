@@ -1,11 +1,6 @@
 import userSchema from "../database/models/user.js";
-import UserModel from "../database/models/user.js"
-import cardSchema from "../database/models/card.js"
+import { deleteImage } from "../utils/FileUpload.js";
 import { generateToken } from "../utils/generateToken.js";
-import bcrypt from "bcrypt";
-import user from "../database/models/user.js";
-import { faker } from '@faker-js/faker';
-
 
 
 const getAllUser = async (req, res) => {
@@ -26,7 +21,9 @@ const getUser = async (req, res) => {
       match: { id_user: id },
       options: { strictPopulate: false }
     });
-    res.status(200).send({ user });
+
+    const token = generateToken(user._id);
+    res.status(200).send({ token });
   } catch (error) {
     console.log(error.message);
   }
@@ -38,9 +35,10 @@ const updateUser = async (req, res) => {
     let {id}=req.params
     let {body}=req
     try {
-        const user = await userSchema.findByIdAndUpdate({_id:id}, body, { new: true });
-        res.status(200).send({ user });
-        
+      const user = await userSchema.findByIdAndUpdate({_id:id}, body, { new: true });
+      
+      const token = generateToken(user._id);
+      res.status(200).send({ token }); 
     } catch (error) {
         console.log(error);
         res.status(422).send({message:"failed to update resource", valid:false });       
@@ -51,9 +49,11 @@ const updateUser = async (req, res) => {
 const deleteUser=async(req,res)=>{
     let {id}=req.params
     try {
-        let user= await userSchema.findByIdAndDelete({_id:id})
-        res.status(200).send({message:"User deleted",valid:true});
+      let user= await userSchema.findByIdAndDelete({_id:id})
+
+      await deleteImage(user.urlProfile.public_id)
         
+      res.status(200).send({message:"User deleted",valid:true});
     } catch (error) {
         console.log(error.message);
         res.status(500).send({message:"could not delete the resource",valid:false});

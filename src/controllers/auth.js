@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
 import { sendMail } from "../utils/Email.js";
 import fs from 'fs-extra';
-import { uploadImage, deleteImage } from "../utils/FileUpload.js";
+import { uploadImage } from "../utils/FileUpload.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
@@ -83,7 +83,7 @@ const login = async (req, res) => {
     if (!valid) {
       return res.status(409).json({ error: "El password es incorrecto" });
     }
-    const update = await userSchema
+    const userLogin = await userSchema
       .findOne({ email: user.email })
       .select("-password");
 
@@ -92,7 +92,7 @@ const login = async (req, res) => {
     if (!token) {
       return res.status(401).json({ error: "El token no pudo ser generado" });
     }
-    return res.status(200).json({ token, update });
+    return res.status(200).json({ token, userLogin });
   } catch (error) {
     console.log(error);
   }
