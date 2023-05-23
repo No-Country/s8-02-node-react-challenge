@@ -12,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://127.0.0.1:5000",
+                url: "https://s8-02-node-react-challenge-api.onrender.com",
                 description: 'API Users for the ...'
             }
         ],
