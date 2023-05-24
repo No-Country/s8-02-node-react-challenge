@@ -9,7 +9,7 @@ import { uploadImage, deleteImage } from "../utils/FileUpload.js";
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, dni /*, phone, cvu, fullname, address*/, balance } = req.body;
+  let { email, password, dni, phone, address, balance } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -34,14 +34,13 @@ const register = async (req, res) => {
     let createUser = new userSchema({
       email,
       password: passwordHash,
-      /*phone,*/
+      phone,
       dni,
       cvu: cv,
       alias:ali,
-      balance
-      /*fullname,
+      fullname:email.split('@')[0],
       address,
-      balance,*/
+      balance,
     });
 
     if (req.files?.urlProfile) {

@@ -8,35 +8,48 @@ import createNotification from '../utils/Notification.js';
 //que en vez de usar id receptor que sea cvu o alias
 //
 const transfer = async (req, res) => {
-    let { UserAccountId, amount, destinyAccountId, description,  } = req.body;
-      
+    let { UserAccountId, amount, description, alias,cvu  } = req.body;
+
         const session = await mongoose.startSession();
         session.startTransaction();
          
-
       try {
 
         //NEEDED VALIDATIONS
-        if (
-            !mongoose.isValidObjectId(UserAccountId) ||
-            !mongoose.isValidObjectId(destinyAccountId)
-          )
-            return res
-              .status(400)
-              .json({ error: "Los ids proporcionados no son un ObjectID válido" });
-      
-          if (!(amount > 0))
+        if (!alias || !cvu)
+        return res
+          .status(400)
+          .json({ error: "Necesitamos un alias o cvu para poder transferir" });
+
+        if (!(amount > 0))
             return res
               .status(400)
               .json({ error: "No se pueden transferir valores negativos" });
+        
+        const query = {
+        $or: [
+          { cvu: cvu },
+          { alias: alias }
+        ]
+      };
+        const receptorUser = await userSchema.findOne(query).session(session);
+
+        if (
+          !mongoose.isValidObjectId(UserAccountId) ||
+          !mongoose.isValidObjectId(receptorUser.id)
+        )
+          return res
+            .status(400)
+            .json({ error: "Los ids proporcionados no son un ObjectID válido" });
+    
+        if (!receptorUser)
+        return res.status(400).json({ error: "El usuario receptor no existe" });
 
         const emitterUser = await userSchema.findOne({ _id: UserAccountId }).session(session);
         if (!emitterUser)
           return res.status(400).json({ error: "El usuario emisor no existe" });
   
-        const receptorUser = await userSchema.findOne({ _id: destinyAccountId }).session(session);
-        if (!receptorUser)
-          return res.status(400).json({ error: "El usuario receptor no existe" });
+        /* const receptorUser = await userSchema.findOne({ _id: receptorUser }).session(session); */
   
         if (emitterUser.balance < amount)
           return res.status(400).json({ error: "El usuario no posee suficiente saldo" });
@@ -54,9 +67,12 @@ const transfer = async (req, res) => {
         
         const activity = new activitySchema({
             UserAccountId,
-            destinyAccountId,
+            destinyAccountId:receptorUser.id,
             amount,
-            description
+            type:"transfer",
+            payment:{
+              method:"balance"
+            }
         })
         activity.save()
 
@@ -68,7 +84,7 @@ const transfer = async (req, res) => {
           },'transfer')
 
         await createNotification({
-            destinyAccountId, 
+            destinyAccountId:receptorUser.id, 
             message: `¡Tienes una transferencia de ${receptorUser.email}!`,
             type: "transfer"
         });
