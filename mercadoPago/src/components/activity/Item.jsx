@@ -1,6 +1,6 @@
 
 
-const Item = () => {
+const Item = ({alias}) => {
     return (
         <div className="h-20 bg-white">
             <div className="flex items-center p-4">
@@ -12,7 +12,7 @@ const Item = () => {
                 <div className="flex w-full justify-between">
                     <div className="font-medium text-[12px] pl-2">
                         <h2 className="">Transferencia recibida</h2>
-                        <span className="text-[#33333366]">de Juan Diseños Locos</span>
+                        <span className="text-[#33333366]">de {alias}</span>
                     </div>
                     <div className="flex-col ">
                         <p className="text-[#008744] font-semibold text-xs">+ $ 100</p>
