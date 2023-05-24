@@ -4,32 +4,47 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineInfoCircle,
 } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import useLogin from "../../../hooks/useLogin";
 
 const FormLogin = ({ handleClick }) => {
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const [dataForm, setDataForm] = useState({ email: "", password: "" });
 
+  const { data, error, loading, postData } = useLogin();
+
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  console.log(isLoggedIn);
+  console.log(user);
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setLogin({
-      ...login,
+    setDataForm({
+      ...dataForm,
       [e.target.name]: e.target.value,
     });
   };
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addUser(login));
-    navigate("/home");
+    if (dataForm.email !== "" && dataForm.password !== "") {
+      postData("/auth/user/login", dataForm);
+      if (error !== null) {
+        dispatch(login(data));
+        navigate("/home");
+      } else {
+        console.log("Pass o contraseña incorrecto");
+      }
+    }
+    console.log("Complete todos los campos...");
   };
 
   return (
@@ -99,6 +114,7 @@ const FormLogin = ({ handleClick }) => {
       >
         Iniciar sesión
       </button>
+      {error && <p>Error en la constraseña ...</p>}
       <div className="flex items-center justify-center gap-2 mt-2">
         <p className="text-sm font-semibold leading-[17px]">
           ¿No tienes cuenta?
