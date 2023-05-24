@@ -22,9 +22,9 @@ const register = async (req, res) => {
     //generacion de cvu
     for (let i = 0; i < 23; i++) {
       let digito = Math.floor(Math.random() * 10);
-      digito = digito.replace(/[e+\.]/g, () => Math.floor(Math.random() * 10));
       cv += digito;
     }
+    
     //cv = cv.replace(/[e+\.]/g, () => Math.floor(Math.random() * 10));
     //Generacion de alias
     const animal = faker.color.human();
