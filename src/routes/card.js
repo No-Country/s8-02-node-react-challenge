@@ -3,34 +3,20 @@ import { createCard, deleteCard, getCard, updateCard } from "../controllers/card
 import { check } from "express-validator";
 // import { idCardValidator, idUserValidator, typeOfCardValidator } from "../middleware.js";
 // import { validateFields } from "../middleware/validateFields.js";
-import { idCardValidator, idUserValidator } from "../middlewares/idValidators.js";
+import {  idUserValidator } from "../middlewares/idValidators.js";
 import { validateFields } from "../middlewares/validateFields.js";
+import { validateCardByID, validateCardCreate, validateCardDelete, validateCardUpdate } from "../validators/cardValidators.js";
+import { validationResultExpress } from "../middlewares/authValidation.js";
 
 
 const router=Router()
 
-router.get("/:id", [
-    check('id', 'It is a not Mongo ID valid'),
-    check('id').custom(idCardValidator),
-    validateFields
-], getCard)
+router.get("/:id", [ validateCardByID, validationResultExpress], getCard)
 
 
-router.post("/:id", [
-    check('id', 'It is a not Mongo ID valid'),
-    check('id').custom(idUserValidator),
-    check('type', 'type has invalid characters').not().isEmpty(),
-    check('bank_emisor', 'bank has invalid characters').isString(),
-    check('expiration_date', 'expiration date has invalid characters').isString(),
-    check('user_card', 'user card has invalid characters').isString(),
-    check('user_number', 'user number has invalid characters').isNumeric(),
-    check('cvv', 'cvv has invalid characters').isString(),
-    // check('bank').custom(typeOfCardValidator),
-
-    validateFields
-], createCard)
-router.patch("/:id", updateCard)
-router.delete("/:id",deleteCard)
+router.post("/:id", [ validateCardCreate, validationResultExpress ], createCard)
+router.patch("/:id", [validateCardUpdate], validationResultExpress, updateCard)
+router.delete("/:id", [validateCardDelete], validationResultExpress, deleteCard)
 
 
 export default router
