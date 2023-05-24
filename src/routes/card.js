@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { createCard, deleteCard, getCard, updateCard } from "../controllers/card.js";
 import { check } from "express-validator";
-import { idCardValidator, idUserValidator, typeOfCardValidator } from "../middleware/idValidators.js";
-import { validateFields } from "../middleware/validateFields.js";
+// import { idCardValidator, idUserValidator, typeOfCardValidator } from "../middleware.js";
+// import { validateFields } from "../middleware/validateFields.js";
+import { idCardValidator, idUserValidator } from "../middlewares/idValidators.js";
+import { validateFields } from "../middlewares/validateFields.js";
 
 
 const router=Router()
