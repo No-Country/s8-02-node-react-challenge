@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -11,13 +11,20 @@ import useLogin from "../../../hooks/useLogin";
 
 const FormLogin = ({ handleClick }) => {
   const [dataForm, setDataForm] = useState({ email: "", password: "" });
-
-  const { data, error, loading, postData } = useLogin();
-
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
-  console.log(isLoggedIn);
-  console.log(user);
   const dispatch = useDispatch();
+
+  const { error, isLoading, postData } = useLogin({
+    onSuccess: (data) => {
+      dispatch(login(data));
+      navigate("/home");
+    },
+    onError: (error) => {
+      console.log(error);
+      console.log("Pass o contraseña incorrecto");
+    },
+  });
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -37,15 +44,13 @@ const FormLogin = ({ handleClick }) => {
     e.preventDefault();
     if (dataForm.email !== "" && dataForm.password !== "") {
       postData("/auth/user/login", dataForm);
-      if (error !== null) {
-        dispatch(login(data));
-        navigate("/home");
-      } else {
-        console.log("Pass o contraseña incorrecto");
-      }
     }
     console.log("Complete todos los campos...");
   };
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/home");
+  }, [isLoggedIn]);
 
   return (
     <form
@@ -74,6 +79,7 @@ const FormLogin = ({ handleClick }) => {
               onChange={handleChange}
               placeholder="Correo electrónico"
               name="email"
+              disabled={isLoading}
             />
           </div>
           <div className="relative flex group">
@@ -92,6 +98,7 @@ const FormLogin = ({ handleClick }) => {
                 onChange={handleChange}
                 placeholder="Contraseña"
                 name="password"
+                disabled={isLoading}
               />
               {showPassword ? (
                 <AiOutlineEye
@@ -108,6 +115,7 @@ const FormLogin = ({ handleClick }) => {
           </div>
         </div>
       </div>
+      {isLoading ? <p>Cargando...</p> : null}
       <button
         type="submit"
         className="text-lg font-semibold leading-[22px] text-white w-[328px] h-[48px] bg-[#10224D] rounded-[10px]"
