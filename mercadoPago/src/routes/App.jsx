@@ -19,8 +19,8 @@ function App() {
         <Route element={<UserRouteProtected />}>
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/money" element={<YourMoney />} />
         </Route>
-        <Route path="/money" element={<YourMoney />} />
       </Routes>
     </BrowserRouter>
   );
