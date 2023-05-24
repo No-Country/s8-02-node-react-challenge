@@ -5,8 +5,11 @@ import Dato from '../../assets/svg/Dato.svg'
 import Seguridad from '../../assets/svg/Seguridad.svg'
 import Tarjeta from '../../assets/svg/Tarjeta.svg'
 import Direction from '../../assets/svg/Directions.svg'
+import { useSelector } from "react-redux";
 
 const  Profile = () => {
+    const { user } = useSelector((state) => state.auth);
+
     return (
         <>
             <Header dato={'Tus Datos'}/>
@@ -19,8 +22,8 @@ const  Profile = () => {
                     </svg>
                 </div>
                 <div className=' text-white'>
-                    <h2 className='font-semibold text-lg leading-[21.94px]'>NombreDefault</h2>
-                    <span className='font-medium text-sm leading-[17.07px]'>ejemplogenerico345@correo.com</span>
+                    <h2 className='font-semibold text-lg leading-[21.94px]'>{user.userLogin.alias}</h2>
+                    <span className='font-medium text-sm leading-[17.07px]'>{user.userLogin.email}</span>
                 </div>
             </div>
 
