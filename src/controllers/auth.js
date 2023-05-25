@@ -9,7 +9,7 @@ import { uploadImage } from "../utils/FileUpload.js";
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, dni /*, phone, cvu, fullname, address*/, balance } = req.body;
+  let { email, password, dni, fullname /*, phone, cvu, address*/, balance } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -40,9 +40,9 @@ const register = async (req, res) => {
       dni,
       cvu: cv,
       alias:ali,
-      balance
-      /*fullname,
-      address,
+      balance,
+      fullname
+      /*address,
       balance,*/
     });
 
