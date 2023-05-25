@@ -138,26 +138,12 @@ const options = {
             },
             "/auth/user/login": {
                 post: {
-                    security: [
-                        {
-                            api_key: [""]
-                        }
-                    ],
                     tags: [
                         "User"
                     ],
                     summary: "Login user",
                     description: "user Logued",
                     operationId: "loginUser",
-                    parameters: [
-                        {
-                            name: "Authorization",
-                            in: "header",
-                            description: "Token",
-                            required: true,
-                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
-                        }
-                    ],
                     requestBody: {
                         required: true,
                         content: {
@@ -293,6 +279,13 @@ const options = {
                             schema: {
                                 type: String
                             }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
                         }
                     ],
                     requestBody: {
@@ -325,7 +318,7 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -350,7 +343,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -380,6 +373,13 @@ const options = {
                             schema: {
                                 type: String
                             }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
                         }
                     ],
                     requestBody: {
@@ -413,7 +413,7 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -423,7 +423,7 @@ const options = {
                         400: {
                             description: "Invalid username supplied",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -433,7 +433,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/user"
                                     }
@@ -616,7 +616,7 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -641,7 +641,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -698,9 +698,9 @@ const options = {
                         200: {
                             description: "successful operation",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
-                                        $ref: "#/components/schemas/ucard"
+                                        $ref: "#/components/schemas/card"
                                     }
                                 }
                             }
@@ -708,7 +708,7 @@ const options = {
                         400: {
                             description: "Invalid username supplied",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -718,7 +718,7 @@ const options = {
                         404: {
                             description: "user not found",
                             content: {
-                                "application/josn": {
+                                "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
                                     }
@@ -821,7 +821,7 @@ const options = {
                             required: true,
                             example: "011-0000-0000"
                         },
-                        addres: {
+                        address: {
                             type: "string",
                             required: true,
                             example: "Av. calle falsa 123"

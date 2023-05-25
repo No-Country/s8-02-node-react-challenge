@@ -1,9 +1,13 @@
 import userSchema from "../database/models/user.js";
+import UserModel from "../database/models/user.js"
 import cardSchema from "../database/models/card.js"
 import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import user from "../database/models/user.js";
 import { faker } from '@faker-js/faker';
+
+
+
 const getAllUser = async (req, res) => {
   try {
     const user = await userSchema.find({});

@@ -57,7 +57,7 @@ app.use(express.urlencoded({ extended: true }));
     )
     res.header(
         'Access-Control-Allow-Methods',
-        'GET, POST, OPTIONS, PUT, DELETE'
+        'GET, POST, OPTIONS, PATCH, DELETE'
     )
     next()
 }); 
@@ -68,7 +68,7 @@ app.use("/docs/api/v1", swaggerUI.serve, swaggerUI.setup(specs));
 app.use("/auth", generalRoutes)
 
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 app.set("port", port);
 
 export default app;

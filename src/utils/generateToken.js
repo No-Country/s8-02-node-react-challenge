@@ -1,22 +1,38 @@
 import jwt from "jsonwebtoken";
 
-
-
-function generateToken(user, exp) {
-  if (user) {
-    console.log(user);
-    
-    let token = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.JWT_SECRET, //confirmamos que es un string lo que va a recibir
-      {
-        expiresIn: exp,
-      }
-    );
-    return token;
+export const generateToken = (_id) => {
+  const expiresIn = 60 * 15;
+  try {
+    const token = jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn });
+    return { token, expiresIn };
+  } catch (error) {
+    console.log(error)
   }
-}
+};
 
-export { generateToken }; 
+// function generateToken(user, exp) {
+//   if (user) {
+//     console.log(user);
+    
+//     let token = jwt.sign(
+//       {
+//         id: user._id,
+//       },
+//       process.env.JWT_SECRET, //confirmamos que es un string lo que va a recibir
+//       {
+//         expiresIn: exp,
+//       }
+//     );
+//     return token;
+//   }
+// }
+
+export const tokenVerificationErrors = {
+  "invalid signature": "La firma del JWT no es valida",
+  "jwt expired": "JWT expirado",
+  "invalid token": "Token no vàlido",
+  "No Bearer": "Utiliza formato Bearer",
+  "jwt malformed": "JWT formato no valido",
+};
+
+// export { generateToken, tokenVerificationErrors }; 

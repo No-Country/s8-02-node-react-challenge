@@ -3,20 +3,35 @@ import { Schema, model } from "mongoose";
 
 const activitySchema = new Schema(
   {
-    type: {
-      type: String,
+    UserAccountId: {
+      type: Schema.Types.ObjectId,
+      ref: "UserModel",
+      require:true
     },
-    id_receiver: {
-        type: String,
+    destinyAccountId: {
+      type: Schema.Types.ObjectId,
+      ref: "UserModel"
     },
     amount: {
       type: Number,
     },
-    date_activity: {
-      type: String,
+
+    description:{
+      type:String
     },
-    id_user: {
-      type: String,
+    type:{
+      type:String
+    },
+    payment:{
+      method:{
+        type:String,
+        enum:["card","balance"],
+        require:true,
+      },
+      cardId:{
+        type: Schema.Types.ObjectId,
+        ref: "UserModel"
+      }
     }
   },
   { timestamps: true, versionKey: false }
