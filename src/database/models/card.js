@@ -16,7 +16,7 @@ const cardSchema = new Schema(
       type: String,
       enum:["mastercard","visa","unknown"],
       require:true,
-      default:"unknown"
+      
     },
     expiration_date: {
       type: String,
@@ -24,7 +24,7 @@ const cardSchema = new Schema(
     },
     user_card: {
       type: String,
-      required: true
+      required: false
     },
     user_number:{
       type:Number,

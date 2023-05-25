@@ -15,11 +15,13 @@ try {
 
 const createCard=async(req,res)=>{
     let {id}=req.params
+
     let {type,
         bank_emisor,
         bank, // marca de tarjeta 
         expiration_date,
         user_name,
+        user_number,
         cvv,
         id_user}=req.body
         
@@ -30,10 +32,11 @@ const createCard=async(req,res)=>{
             bank, 
             expiration_date,
             user_name,
+            user_number,
             cvv,
             id_user:id})
         
-        card.save()
+        await card.save()
        const user= await userSchema.findByIdAndUpdate({_id:id},{ $push: { cards: card._id } },
         { new: true })
        return res.status(200).send({message:"card Create", valid:true})

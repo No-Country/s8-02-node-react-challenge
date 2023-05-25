@@ -111,7 +111,26 @@ const transfer = async (req, res) => {
     }
   };
 
-export {transfer,getActivities} ;
+  const addfounds =async(req,res)=>{
+      const {id}=req.params
+      const {tarjet_number, cvv, balance }=req.body
+      try {
+        if(!tarjet_number || !cvv){
+          return res.status(200).send({message:"es necesaria una targeta", valid: false})
+        }
+        let updateblance= await userSchema.findById({_id:id}).select("balance")
+        
+        const update= await userSchema.findOneAndUpdate({_id:id}, {balance:updateblance.balance + balance},{ new: true } )
+        
+        res.send(update)
+        
+      } catch (error) {
+        res.send({message:"no se pudo ingresar el dinero"})
+        console.log(error);
+      }
+  }
+
+export {transfer,getActivities,addfounds} ;
 
 /* 
 ERROR EXAMPLE, JUST IN CASE
