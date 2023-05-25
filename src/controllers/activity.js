@@ -8,125 +8,160 @@ import createNotification from '../utils/Notification.js';
 //que en vez de usar id receptor que sea cvu o alias
 //
 const transfer = async (req, res) => {
-    let { UserAccountId, amount, description, alias,cvu  } = req.body;
+  try {
+    const { UserAccountId, amount, description, alias, cvu } = req.body;
 
-        const session = await mongoose.startSession();
-        session.startTransaction();
-         
-      try {
+    const validationResult = validateTransferData(alias, cvu, amount);
+    if (validationResult.error) {
+      return res.status(400).json({ error: validationResult.error });
+    }
 
-        //NEEDED VALIDATIONS
-        if (!alias || !cvu)
-        return res
-          .status(400)
-          .json({ error: "Necesitamos un alias o cvu para poder transferir" });
-
-        if (!(amount > 0))
-            return res
-              .status(400)
-              .json({ error: "No se pueden transferir valores negativos" });
-        
-        const query = {
-        $or: [
-          { cvu: cvu },
-          { alias: alias }
-        ]
-      };
-        const receptorUser = await userSchema.findOne(query).session(session);
-
-        if (
-          !mongoose.isValidObjectId(UserAccountId) ||
-          !mongoose.isValidObjectId(receptorUser.id)
-        )
-          return res
-            .status(400)
-            .json({ error: "Los ids proporcionados no son un ObjectID válido" });
-    
-        if (!receptorUser)
-        return res.status(400).json({ error: "El usuario receptor no existe" });
-
-        const emitterUser = await userSchema.findOne({ _id: UserAccountId }).session(session);
-        if (!emitterUser)
-          return res.status(400).json({ error: "El usuario emisor no existe" });
-  
-        /* const receptorUser = await userSchema.findOne({ _id: receptorUser }).session(session); */
-  
-        if (emitterUser.balance < amount)
-          return res.status(400).json({ error: "El usuario no posee suficiente saldo" });
-
-        //CONTROLLER
- 
-        emitterUser.balance -= amount;
-        receptorUser.balance += amount;
-  
-        await receptorUser.save();
-        await emitterUser.save();
-  
-        await session.commitTransaction();
-        session.endSession();
-        
-        const activity = new activitySchema({
-            UserAccountId,
-            destinyAccountId:receptorUser.id,
-            amount,
-            type:"transfer",
-            payment:{
-              method:"balance"
-            }
-        })
-        activity.save()
-
-        // NOTIFICATIONS AND EMAILS RESPONSE
-        
-        await sendMail({ 
-            username:receptorUser.email,
-            email:receptorUser.email
-          },'transfer')
-
-        await createNotification({
-            destinyAccountId:receptorUser.id, 
-            message: `¡Tienes una transferencia de ${receptorUser.email}!`,
-            type: "transfer"
-        });
-
-        return res.status(200).json({ message:"transfer successful" });
-      } catch (error) {
-
-        await session.abortTransaction();
-        session.endSession();
-
-        //RECORD ERROR ON DATABASE
-
-        saveErrorToDatabase(error)
-        return res.status(500).json({ error: "Error al realizar la transferencia" });
-      }
-  };
-
-
-  const getActivities = async (req, res) => {
-    let { id, amount } = req.body;
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
     try {
-      const query = {
-        $or: [
-          { UserAccountId: id },
-          { destinyAccountId: id }
-        ]
-      };
-      const activities = await activitySchema.find(query)
-        .sort({ createdAt: -1 })
-        .limit(amount !== 0 ? amount : -1);
-
-      if (activities.length === 0) {
-        return res.status(200).json({ message: "No se encontraron actividades" });
+      const receptorUser = await findUserByAliasOrCvu(alias, cvu, session);
+      if (!receptorUser) {
+        return res.status(400).json({ error: "El usuario receptor no existe" });
       }
-  
-      return res.status(200).json({ activities });
+
+      const emitterUser = await findUserById(UserAccountId, session);
+      if (!emitterUser) {
+        return res.status(400).json({ error: "El usuario emisor no existe" });
+      }
+
+      if (emitterUser.balance < amount) {
+        return res.status(400).json({ error: "El usuario no posee suficiente saldo" });
+      }
+
+      performTransfer(emitterUser, receptorUser, amount);
+
+      await receptorUser.save();
+      await emitterUser.save();
+
+      await session.commitTransaction();
+      session.endSession();
+
+      let activity = await createActivity(UserAccountId, receptorUser.id, amount);
+      await sendTransferEmail(receptorUser.email);
+      console.log(activity)
+      await createNotification(receptorUser.id, `¡Tienes una transferencia de ${receptorUser.email}!`, "transfer");
+      let response = buildResponseObject("approved", amount, activity._id, receptorUser);
+      verifyTransfer(emitterUser._id, emitterUser.balance) ? 
+      res.status(200).json({ ...response }) : 
+      res.status(200).json({ error: "failed" });
+
     } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+
       saveErrorToDatabase(error);
-      return res.status(500).json({ error: "Error al obtener actividades" });
+
+      return res.status(500).json({ error: "Error al realizar la transferencia" });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: "Error al procesar la solicitud" });
+  }
+};
+
+const validateTransferData = (alias, cvu, amount) => {
+  if (!alias && !cvu) {
+    return { error: "Necesitamos un alias o cvu para poder transferir" };
+  }
+
+  if (!(amount > 0)) {
+    return { error: "No se pueden transferir valores negativos" };
+  }
+
+  return { error: null };
+};
+
+const findUserByAliasOrCvu = async (alias, cvu, session) => {
+  const query = { $or: [{ cvu: cvu }, { alias: alias }] };
+  return await userSchema.findOne(query).session(session);
+};
+
+const findUserById = async (userId, session) => {
+  return await userSchema.findOne({ _id: userId }).session(session);
+};
+
+const performTransfer = (emitterUser, receptorUser, amount) => {
+  emitterUser.balance -= amount;
+  receptorUser.balance += amount;
+};
+
+const createActivity = async (userAccountId, receptorUserId, amount) => {
+  const activity = new activitySchema({
+    UserAccountId: userAccountId,
+    destinyAccountId: receptorUserId,
+    amount:amount,
+    type: "transfer",
+    payment: {
+      method: "balance"
+    }
+  });
+
+  await activity.save();
+  return activity;
+};
+
+const sendTransferEmail = async (email) => {
+  await sendMail({ username: email, email }, 'transfer');
+};
+
+const verifyTransfer = async (userId, userBalance) => {
+  const { balance } = await userSchema.findById(userId, { balance: 1 });
+  return balance === userBalance;
+};
+const buildResponseObject = (status, amount, operationNumber, receptorUser) => {
+  console.log()
+  return {
+    status: status,
+    amount: amount,
+    operationNumber: operationNumber,
+    to:{
+      receptorName: receptorUser.fullname,
+      receptorAlias: receptorUser.alias,
+      receptorCvu: receptorUser.cvu
     }
   };
+};
+ ///// HERE STARTS A NEW ENDPOINT
+
+ const getActivities = async (req, res) => {
+  try {
+    const { id, amount } = req.body;
+
+    const query = createQuery(id);
+    const activities = await findActivities(query, amount);
+
+    if (activities.length === 0) {
+      return res.status(200).json({ message: "No se encontraron actividades" });
+    }
+
+    return res.status(200).json({ activities });
+  } catch (error) {
+    saveErrorToDatabase(error);
+    return res.status(500).json({ error: "Error al obtener actividades" });
+  }
+};
+
+const createQuery = (id) => {
+  return {
+    $or: [
+      { UserAccountId: id },
+      { destinyAccountId: id }
+    ]
+  };
+};
+
+const findActivities = async (query, amount) => {
+  const activitiesQuery = activitySchema.find(query)
+    .sort({ createdAt: -1 })
+    .limit(amount !== 0 ? amount : -1);
+
+  return await activitiesQuery.exec();
+};
 
 export {transfer,getActivities} ;
 

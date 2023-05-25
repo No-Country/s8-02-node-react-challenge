@@ -7,8 +7,7 @@ const notificationSchema = new Schema(
       ref:'UserModel'
     },
     message: {
-      type: String,
-      required: true,
+      type: String
     },
     timestamp: {
       type: Date,
@@ -20,7 +19,6 @@ const notificationSchema = new Schema(
     },
     type: {
       type: String,
-      required: true,
       enum:["transfer" , "profile"]
     }
   },
