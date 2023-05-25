@@ -14,10 +14,10 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
         <Route element={<UserRouteProtected />}>
           <Route path="/home" element={<Home />} />
         </Route>
-       
       </Routes>
     </BrowserRouter>
   );
