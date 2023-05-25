@@ -4,11 +4,10 @@ const notificationSchema = new Schema(
   {
     destinyAccountId: {
       type: Schema.Types.ObjectId,
-      required: true,
+      ref:'UserModel'
     },
     message: {
-      type: String,
-      required: true,
+      type: String
     },
     timestamp: {
       type: Date,
@@ -20,8 +19,7 @@ const notificationSchema = new Schema(
     },
     type: {
       type: String,
-      required: true,
-      enum:["transfer"]
+      enum:["transfer" , "profile"]
     }
   },
   { timestamps: true, versionKey: false }

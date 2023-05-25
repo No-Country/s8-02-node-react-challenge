@@ -5,11 +5,12 @@ const activitySchema = new Schema(
   {
     UserAccountId: {
       type: Schema.Types.ObjectId,
-      ref: "user"
+      ref: "UserModel",
+      require:true
     },
     destinyAccountId: {
       type: Schema.Types.ObjectId,
-      ref: "user"
+      ref: "UserModel"
     },
     amount: {
       type: Number,
@@ -17,6 +18,20 @@ const activitySchema = new Schema(
 
     description:{
       type:String
+    },
+    type:{
+      type:String
+    },
+    payment:{
+      method:{
+        type:String,
+        enum:["card","balance"],
+        require:true,
+      },
+      cardId:{
+        type: Schema.Types.ObjectId,
+        ref: "UserModel"
+      }
     }
   },
   { timestamps: true, versionKey: false }

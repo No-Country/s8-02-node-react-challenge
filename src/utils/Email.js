@@ -3,7 +3,6 @@ import * as nodemailer from 'nodemailer';
 
 
 const sendMail = (user, template,token) => {
-
     let templates = [
       {
         id: "welcome",
