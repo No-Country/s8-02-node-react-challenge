@@ -1,22 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
+import useLocalStorage from "../../hooks/useLocalStorage";
+const { loadState, saveState } = useLocalStorage();
+const persistedState = loadState();
+
 
 const initialState = {
-    email: "Email",
-    dinero: 20000,
-    alias: "alias.wallet.pay",
-    token: "token1234567890",
-    session: false
+    isLoggedIn: false,
+    user: '',
 }
 export const authSlice = createSlice({
     name: "auth",
-    initialState,
+    initialState: persistedState || initialState,
     reducers: {
-        addUser: (state, action) => {
-            const { email } = action.payload;
-            state.session = true;
-        }
+        login(state, action) {
+            state.isLoggedIn = true;
+            state.user = action.payload;
+            saveState(state);
+        },
+        logout(state) {
+            state.isLoggedIn = false;
+            state.user = '';
+            saveState(state);
+        },
     }
 })
 
-export const { addUser } = authSlice.actions
+export const { login, logout } = authSlice.actions
 export default authSlice.reducer

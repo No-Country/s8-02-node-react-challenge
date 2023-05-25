@@ -1,36 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineInfoCircle,
 } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import useLogin from "../../../hooks/useLogin";
 
 const FormLogin = ({ handleClick }) => {
-  const [login, setLogin] = useState({ email: "", password: "" });
-
+  const [dataForm, setDataForm] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
+
+  const { error, isLoading, postData } = useLogin({
+    onSuccess: (data) => {
+      dispatch(login(data));
+      navigate("/home");
+    },
+    onError: (error) => {
+      console.log(error);
+      console.log("Pass o contraseña incorrecto");
+    },
+  });
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setLogin({
-      ...login,
+    setDataForm({
+      ...dataForm,
       [e.target.name]: e.target.value,
     });
   };
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addUser(login));
-    navigate("/home");
+    if (dataForm.email !== "" && dataForm.password !== "") {
+      postData("/auth/user/login", dataForm);
+    }
+    console.log("Complete todos los campos...");
   };
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/home");
+  }, [isLoggedIn]);
 
   return (
     <form
@@ -59,6 +79,7 @@ const FormLogin = ({ handleClick }) => {
               onChange={handleChange}
               placeholder="Correo electrónico"
               name="email"
+              disabled={isLoading}
             />
           </div>
           <div className="relative flex group">
@@ -77,6 +98,7 @@ const FormLogin = ({ handleClick }) => {
                 onChange={handleChange}
                 placeholder="Contraseña"
                 name="password"
+                disabled={isLoading}
               />
               {showPassword ? (
                 <AiOutlineEye
@@ -93,12 +115,14 @@ const FormLogin = ({ handleClick }) => {
           </div>
         </div>
       </div>
+      {isLoading ? <p>Cargando...</p> : null}
       <button
         type="submit"
         className="text-lg font-semibold leading-[22px] text-white w-[328px] h-[48px] bg-[#10224D] rounded-[10px]"
       >
         Iniciar sesión
       </button>
+      {error && <p>Error en la constraseña ...</p>}
       <div className="flex items-center justify-center gap-2 mt-2">
         <p className="text-sm font-semibold leading-[17px]">
           ¿No tienes cuenta?

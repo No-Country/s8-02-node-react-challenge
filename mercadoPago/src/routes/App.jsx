@@ -5,6 +5,8 @@ import Home from "../pages/home";
 import { UserRouteProtected } from "./user/userRouteProtected";
 import LoginPage from "../pages/login-page";
 import RegisterPage from "../pages/register-page";
+import YourMoney from "../pages/your-money";
+import Profile from "../pages/profile/Profile";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
 
         <Route element={<UserRouteProtected />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/money" element={<YourMoney />} />
         </Route>
       </Routes>
     </BrowserRouter>
