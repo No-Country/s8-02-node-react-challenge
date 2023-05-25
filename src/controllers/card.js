@@ -20,8 +20,10 @@ const createCard=async(req,res)=>{
         bank, // marca de tarjeta 
         expiration_date,
         user_name,
+        user_number,
         cvv,
-        id_user}=req.body
+        id_user,
+        user_card}=req.body
         
         try {
         const card= new cardSchema({    
@@ -30,8 +32,10 @@ const createCard=async(req,res)=>{
             bank, 
             expiration_date,
             user_name,
+            user_number,
             cvv,
-            id_user:id})
+            id_user:id,
+            user_card})
         
         card.save()
        const user= await userSchema.findByIdAndUpdate({_id:id},{ $push: { cards: card._id } },
