@@ -4,9 +4,6 @@ import {  deleteUser, getAllUser, getUser, updateUser } from '../controllers/use
 import { userMiddle } from '../middlewares/auth_user.js';
 import { user_middleRegister } from '../middlewares/authUser.js';
 import { requireToken } from '../middlewares/authToken.js';
-import { check } from 'express-validator';
-import { validateFields } from '../middlewares/validateFields.js';
-// import { idUserValidator } from '../middlewares/idValidators.js';
 import { validateCreateUser, validateLoginUser, validateUserByID, validateUserDelete, validateUserPatch } from '../validators/userValidator.js';
 import {validationResultExpress} from '../middlewares/authValidation.js'
 
