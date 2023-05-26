@@ -7,7 +7,7 @@ import { requireToken } from '../middlewares/authToken.js';
 import { check } from 'express-validator';
 import { validateFields } from '../middlewares/validateFields.js';
 import { idUserValidator } from '../middlewares/idValidators.js';
-
+import { updatePass } from '../controllers/updatepass.js';
 
 const router = Router();
 
@@ -63,6 +63,8 @@ router.delete("/:id", [
     userMiddle,
     requireToken,
     deleteUser)
+
+router.patch("/updatepass",updatePass)
 
 
 export default router;

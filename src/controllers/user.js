@@ -35,9 +35,9 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     let {id}=req.params
-    let {body}=req
+    const { password, ...bodyWithoutPassword } = req.body
     try {
-        const user = await userSchema.findByIdAndUpdate({_id:id}, body, { new: true });
+        const user = await userSchema.findByIdAndUpdate({_id:id}, bodyWithoutPassword, { new: true });
         res.status(200).send({ user });
         
     } catch (error) {
