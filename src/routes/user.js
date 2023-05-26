@@ -64,7 +64,7 @@ router.delete("/:id", [
     requireToken,
     deleteUser)
 
-router.patch("/updatepass",updatePass)
+router.patch("/updatepass/:id",updatePass)
 
 
 export default router;
