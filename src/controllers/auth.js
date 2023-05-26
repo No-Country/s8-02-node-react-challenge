@@ -3,11 +3,13 @@ import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
 import { sendMail } from "../utils/Email.js";
+import fs from 'fs-extra';
+import { uploadImage, deleteImage } from "../utils/FileUpload.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, dni /*, phone, cvu, fullname, address*/, balance } = req.body;
+  let { email, password, dni, phone, address, balance } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -18,6 +20,7 @@ const register = async (req, res) => {
     }
     let cv = "";
     //generacion de cvu
+    
     for (let i = 0; i < 22; i++) {
       const digito = Math.floor(Math.random() * 10);
       cv += digito;
@@ -32,27 +35,35 @@ const register = async (req, res) => {
     let createUser = new userSchema({
       email,
       password: passwordHash,
-      /*phone,*/
+      phone,
       dni,
       cvu: cv,
       alias:ali,
-      balance
-      /*fullname,
+      fullname:email.split('@')[0],
       address,
-      balance,*/
+      balance,
     });
-    await createUser.save();
 
-    const update = await userSchema
-      .findOne({ email: createUser.email })
-      .select("-password");
+    if (req.files?.urlProfile) {
+      const result = await uploadImage(req.files.urlProfile.tempFilePath)
+      createUser.urlProfile = {
+        public_id: result.public_id,
+        secure_url: result.secure_url
+      }
+      await fs.unlink(req.files.urlProfile.tempFilePath)
+    }
+    const dataUser = await createUser.save()
 
-    sendMail({ 
-      username:createUser.email.trim('@gmail.com'),
-      email:createUser.email
-    },'welcome')
+    // const infoUser = dataUser
+    //   .findOne({ email: dataUser.email })
+    //   .select("-password");
 
-    return res.status(200).json({ update });
+    // sendMail({ 
+    //   username:dataUser.email.trim('@gmail.com'),
+    //   email:dataUser.email
+    // },'welcome')
+
+    return res.status(200).json({ dataUser });
   } catch (error) {
     console.log(error.message);
   }

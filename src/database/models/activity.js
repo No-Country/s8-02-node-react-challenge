@@ -4,10 +4,13 @@ import { Schema, model } from "mongoose";
 const activitySchema = new Schema(
   {
     UserAccountId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "UserModel",
+      require:true
     },
     destinyAccountId: {
-        type: String,
+      type: Schema.Types.ObjectId,
+      ref: "UserModel"
     },
     amount: {
       type: Number,
@@ -15,6 +18,21 @@ const activitySchema = new Schema(
 
     description:{
       type:String
+    },
+    type:{
+      type:String,
+      enum:["transfer","addfunds"]
+    },
+    payment:{
+      method:{
+        type:String,
+        enum:["card","balance"],
+        require:true,
+      },
+      cardId:{
+        type: Schema.Types.ObjectId,
+        ref: "UserModel"
+      }
     }
   },
   { timestamps: true, versionKey: false }

@@ -21,9 +21,8 @@ const getAllUser = async (req, res) => {
 const getUser = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await userSchema.findOne({_id:id}).populate({
+    const user = await userSchema.findOne({ _id: id }).populate({
       path: 'cards',
-      match: { id_user: id },
       options: { strictPopulate: false }
     });
     res.status(200).send({ user });
