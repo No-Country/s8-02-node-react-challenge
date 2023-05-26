@@ -33,6 +33,9 @@ const cardSchema = new Schema(
       type: Number,
       required: true
     },
+    saved:{
+      type:Boolean
+    },
     id_user: {
       type: Schema.Types.ObjectId,
       required: true

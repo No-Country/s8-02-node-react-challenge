@@ -20,18 +20,19 @@ const activitySchema = new Schema(
       type:String
     },
     type:{
-      type:String
+      type:String,
+      enum:["transfer","addfunds"]
     },
     payment:{
       method:{
         type:String,
-        enum:["card","balance"],
+        enum:["card","balance"], // si la opcion es balance, no necesita cardId, es en efectivo.
         require:true,
       },
       cardId:{
         type: Schema.Types.ObjectId,
         ref: "UserModel"
-      }
+      } 
     }
   },
   { timestamps: true, versionKey: false }

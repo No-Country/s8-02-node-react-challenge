@@ -12,14 +12,14 @@ const addMoney=async(req,res)=>{
         options: { strictPopulate: false }
       });
 
-    
+      console.log(cardNumber,user.cards[0])
     if(balance <= 0){
         return res.status(500).send({message:"El balance no puede ser negativo",valid:false})
     }
     if(!user){
         return res.status(404).send({message:"usuario no registrado",valid:false})
     }
-    
+  
     if(cardNumber!==user.cards[0].user_number||cvv !== user.cards[0].cvv ){
         return res.status(404).send({message:"Los datos de la tarjeta no son correctos",valid:false})
     }
@@ -30,9 +30,10 @@ const addMoney=async(req,res)=>{
         UserAccountId: id,
         destinyAccountId: id,
         amount:balance,
-        type: "Recarga",
+        type: "addfunds",
         payment: {
-          method: "balance"
+          method: "card",
+          cardId
         }
       });
     
