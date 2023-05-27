@@ -7,6 +7,7 @@ import LoginPage from "../pages/login-page";
 import RegisterPage from "../pages/register-page";
 import YourMoney from "../pages/your-money";
 import Profile from "../pages/profile/Profile";
+import Dashboard from "../components/dashboard/Dashboard";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="dashboard" element={<Dashboard/>} />
 
         <Route element={<UserRouteProtected />}>
           <Route path="/home" element={<Home />} />
