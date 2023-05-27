@@ -24,7 +24,7 @@ router.patch("/:id", [ validateUserPatch, validationResultExpress ], userMiddle,
 
 router.delete("/:id", [ validateUserDelete, validationResultExpress ], userMiddle, requireToken ,deleteUser)
 
-router.patch("/updatepass/:id",updatePass)
+router.patch("/updatepass/:id", userMiddle, requireToken, updatePass)
 
 
 export default router;
