@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 
+
 const cardSchema = new Schema(
   {
     type: {
@@ -22,7 +23,7 @@ const cardSchema = new Schema(
     },
     user_card: {
       type: String,
-      required: true
+      required: false
     },
     user_number: {
       type: Number,
@@ -37,6 +38,12 @@ const cardSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "UserModel"
       },
+      /*
+      status:{
+      type: Boolean,
+      required: true
+    }
+    */
     ]
   },
   { timestamps: true, versionKey: false }

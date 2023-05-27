@@ -6,6 +6,7 @@ import { user_middleRegister } from '../middlewares/authUser.js';
 import { requireToken } from '../middlewares/authToken.js';
 import { validateCreateUser, validateLoginUser, validateUserByID, validateUserDelete, validateUserPatch } from '../validators/userValidator.js';
 import {validationResultExpress} from '../middlewares/authValidation.js';
+import {updatePass} from "../controllers/updatepass.js";
 
 
 const router = Router();
@@ -22,6 +23,8 @@ router.get("/:id", [validateUserByID, validationResultExpress ], userMiddle, req
 router.patch("/:id", [ validateUserPatch, validationResultExpress ], userMiddle, requireToken, updateUser)
 
 router.delete("/:id", [ validateUserDelete, validationResultExpress ], userMiddle, requireToken ,deleteUser)
+
+router.patch("/updatepass/:id",updatePass)
 
 
 export default router;

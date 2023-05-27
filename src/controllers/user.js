@@ -24,9 +24,8 @@ const getUser = async (req, res) => {
 
 
   try {
-    const user = await userSchema.findOne({_id:id}).populate({
+    const user = await userSchema.findOne({ _id: id }).populate({
       path: 'cards',
-      match: { id_user: id },
       options: { strictPopulate: false }
     });
 

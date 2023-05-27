@@ -20,8 +20,9 @@ const register = async (req, res) => {
     }
     let cv = "";
     //generacion de cvu
-    for (let i = 0; i < 23; i++) {
-      let digito = Math.floor(Math.random() * 10);
+    
+    for (let i = 0; i < 22; i++) {
+      const digito = Math.floor(Math.random() * 10);
       cv += digito;
     }
     

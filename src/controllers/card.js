@@ -49,7 +49,7 @@ const createCard=async(req,res)=>{
             id_user:id,
             user_card})
         
-        card.save()
+        await card.save()
        const user= await userSchema.findByIdAndUpdate({_id:id},{ $push: { cards: card._id } },
         { new: true });
 

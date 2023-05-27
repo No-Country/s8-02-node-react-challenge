@@ -12,7 +12,8 @@ const addMoney=async(req,res)=>{
         options: { strictPopulate: false }
       });
 
-    
+    const card= user.cards.filter((cards)=> cards.user_number== cardNumber)
+    console.log(card[0]);
     if(balance <= 0){
         return res.status(500).send({message:"El balance no puede ser negativo",valid:false})
     }
@@ -20,7 +21,7 @@ const addMoney=async(req,res)=>{
         return res.status(404).send({message:"usuario no registrado",valid:false})
     }
     
-    if(cardNumber!==user.cards[0].user_number||cvv !== user.cards[0].cvv ){
+    if(cardNumber!==card[0].user_number||cvv !== card[0].cvv ){
         return res.status(404).send({message:"Los datos de la tarjeta no son correctos",valid:false})
     }
 
@@ -32,7 +33,8 @@ const addMoney=async(req,res)=>{
         amount:balance,
         type: "Recharge",
         payment: {
-          method: "balance"
+          method: "card",
+          cardId:card[0]._id,
         }
       });
     
