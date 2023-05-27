@@ -28,20 +28,21 @@ const Dashboard = () => {
   ];
   const [open, setOpen] = useState(false);
   return (
-    <section className="flex gap-6">
+    <section className="flex gap-6 bg-white">
       <div
         className={` min-h-screen  ${
-          open ? "w-64 bg-[#ECEBF6] " : "w-16  "
-        } duration-500 text-black-100 px-4   `}
+          open ? "w-64 bg-[#ECEBF6]   " : "w-16  "
+        } duration-500 text-black-100 px-4 op  `}
       >
-        <div className="py-3 flex justify-end ">
+        <div className="py-3 flex justify-end">
+          
           <HiMenuAlt3
             size={26}
-            className="cursor-pointer  "
+            className="cursor-pointer   "
             onClick={() => setOpen(!open)}
           />
         </div>
-        <div className="  mt-4 flex flex-col gap-1 relative ">
+        <div className="  mt-4 flex flex-col gap-1 relative  ">
           {menus?.map((menu, i) => (
             <Link
               to={menu?.link}
