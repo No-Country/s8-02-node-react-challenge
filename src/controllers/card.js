@@ -43,7 +43,7 @@ const createCard=async(req,res)=>{
             bank_emisor,
             bank, 
             expiration_date,
-            user_name,
+            user_card,
             user_number,
             cvv,
             id_user:id,
