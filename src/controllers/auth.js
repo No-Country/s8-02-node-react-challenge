@@ -9,7 +9,7 @@ import { uploadImage } from "../utils/FileUpload.js";
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, dni, phone, address, balance } = req.body;
+  let { email, password, dni, phone, address, balance, username } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -25,7 +25,6 @@ const register = async (req, res) => {
       cv += digito;
     }
     
-    //cv = cv.replace(/[e+\.]/g, () => Math.floor(Math.random() * 10));
     //Generacion de alias
     const animal = faker.color.human();
     const color = faker.color.human();
@@ -43,6 +42,7 @@ const register = async (req, res) => {
       fullname:email.split('@')[0],
       address,
       balance,
+      username,
     });
 
     if (req.files?.urlProfile) {
@@ -54,10 +54,6 @@ const register = async (req, res) => {
       await fs.unlink(req.files.urlProfile.tempFilePath)
     }
     const dataUser = await createUser.save()
-
-    // const infoUser = dataUser
-    //   .findOne({ email: dataUser.email })
-    //   .select("-password");
 
     sendMail({ 
       username:dataUser.email.replace('@gmail.com', ""),

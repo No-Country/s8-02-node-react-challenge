@@ -1,9 +1,9 @@
-import  UserModel  from '../database/models/user.js'
-import  CardModel  from '../database/models/card.js'
+import  UserSchema  from '../database/models/user.js'
+import  cardSchema  from '../database/models/card.js'
 
 const idUserValidator = async (id) => {
 
-    const user = await UserModel.findById(id);
+    const user = await UserSchema.findById(id);
     if (!user) {
         throw new Error(`The id ${id} doesn´t exist`)
     }
@@ -11,7 +11,7 @@ const idUserValidator = async (id) => {
 };
 
 const idCardValidator = async (id) => {
-    const card = await CardModel.findById(id);
+    const card = await cardSchema.findById(id);
     if (!card) {
         throw new Error(`The id ${id} doesn't exist`)
     }

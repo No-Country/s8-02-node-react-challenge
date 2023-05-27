@@ -1,6 +1,5 @@
 import userSchema from "../database/models/user.js";
 import { deleteImage } from "../utils/FileUpload.js";
-import { generateToken } from "../utils/generateToken.js";
 
 
 const getAllUser = async (req, res) => {
@@ -15,6 +14,15 @@ const getAllUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const { id } = req.params;
+  let token = req.headers;
+
+  if (!id || !token) {
+    return res
+      .status(409)
+      .json({ error: "El USUARIO no existe o el TOKEN no es valido" });
+  };
+
+
   try {
     const user = await userSchema.findOne({_id:id}).populate({
       path: 'cards',
@@ -22,8 +30,7 @@ const getUser = async (req, res) => {
       options: { strictPopulate: false }
     });
 
-    const token = generateToken(user._id);
-    res.status(200).send({ token });
+    res.status(200).json({ user });
   } catch (error) {
     console.log(error.message);
   }
@@ -32,13 +39,21 @@ const getUser = async (req, res) => {
 
 
 const updateUser = async (req, res) => {
-    let {id}=req.params
-    let {body}=req
+  let {id}=req.params;
+  let token = req.headers;
+  let {body}=req;
+
+  if (!id || !token) {
+    return res
+      .status(409)
+      .json({ error: "El USUARIO no existe o el TOKEN no es valido" });
+  };
+
+
     try {
       const user = await userSchema.findByIdAndUpdate({_id:id}, body, { new: true });
       
-      const token = generateToken(user._id);
-      res.status(200).send({ token }); 
+      res.status(200).send({ user }); 
     } catch (error) {
         console.log(error);
         res.status(422).send({message:"failed to update resource", valid:false });       
@@ -47,7 +62,14 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser=async(req,res)=>{
-    let {id}=req.params
+    let {id}=req.params;
+    let token = req.headers;
+
+    if (!id || !token) {
+      return res
+        .status(409)
+        .json({ error: "El USUARIO no existe o el TOKEN no es valido" });
+    };
     try {
       let user= await userSchema.findByIdAndDelete({_id:id})
 
@@ -60,4 +82,4 @@ const deleteUser=async(req,res)=>{
     }
 }
 
-export { updateUser, getAllUser, getUser,deleteUser };
+export { updateUser, getAllUser, getUser, deleteUser };
