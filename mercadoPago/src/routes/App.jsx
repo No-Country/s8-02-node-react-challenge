@@ -7,6 +7,8 @@ import LoginPage from "../pages/login-page";
 import RegisterPage from "../pages/register-page";
 import YourMoney from "../pages/your-money";
 import Profile from "../pages/profile/Profile";
+// import Activity from "../pages/activity/Activity";
+// import Details from "../pages/activity/Details";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/money" element={<YourMoney />} />
+          {/* <Route path="/activity" element={<Activity />} /> */}
+          {/* <Route path="/activity/:id" element={<Details />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
