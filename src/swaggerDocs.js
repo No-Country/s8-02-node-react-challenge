@@ -454,7 +454,7 @@ const options = {
                     }
                 }
             },
-            "auth/user/{id}/password": {
+            "/auth/user/updatepass/{id}": {
                 patch: {
                     security: [
                         {
@@ -490,22 +490,22 @@ const options = {
                         content: {
                             "application/json": {
                                 schema: {
-                                    $ref: "#/components/schemas/user/properties/password"
+                                    $ref: "#/components/schemas/repassword"
                                 }
                             },
                             "multipart/form-data": {
                                 schema: {
-                                    $ref: "#/components/schemas/user/properties/password"
+                                    $ref: "#/components/schemas/repassword"
                                 }
                             },
                             "application/xml": {
                                 schema: {
-                                    $ref: "#/components/schemas/user/properties/password"
+                                    $ref: "#/components/schemas/repassword"
                                 }
                             },
                             "application/x-www-form-urlencoded": {
                                 schema: {
-                                    $ref: "#/components/schemas/user/properties/password"
+                                    $ref: "#/components/schemas/repassword"
                                 }
                             }
                         }
@@ -537,14 +537,7 @@ const options = {
                             }
                         },
                         404: {
-                            description: "user not found",
-                            content: {
-                                "application/json": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user"
-                                    }
-                                }
-                            }
+                            description: "user not found"
                         }
                     }
                 },

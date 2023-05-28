@@ -1,4 +1,5 @@
 import userSchema from "../database/models/user.js";
+import bcrypt from "bcrypt";
 
 const updatePass = async (req, res) => {
   const { id } = req.params
@@ -27,7 +28,7 @@ const updatePass = async (req, res) => {
 
     const userPass = await userSchema.findOneAndUpdate({ _id: id }, { password: passwordHash })
 
-    res.status(200).send({ message: "password actualizado" })
+    res.status(200).send({ message: "password actualizado", userPass })
 
   } catch (error) {
     res.status(500).send({ message: "No se pudo actulaizar el password" })
