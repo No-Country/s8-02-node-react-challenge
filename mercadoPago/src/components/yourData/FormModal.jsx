@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { patchUser } from "../../../services/patchUser";
-import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 export const FormModal = ({ placeholder, type }) => {
@@ -34,11 +33,16 @@ export const FormModal = ({ placeholder, type }) => {
         [type]: data,
       };
 
-      /*  patchUser(userLogin._id, values, token.token)
+      patchUser(
+        userLogin._id,
+        values,
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZiZWI5N2E5YmNjN2FjZmJhNWFjNmEiLCJpYXQiOjE2ODUzMDc3MjMsImV4cCI6MTY4NTMwODYyM30.eA6WKmzp9LmUKh8G-X9tB37ebyMrjyqBuvO7hfdNu-A"
+      )
         .then((resp) => console.log(resp))
-        .catch((err) => console.log(err)); */
+        .catch((err) => console.log(err));
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       {type !== "Contraseña" ? (

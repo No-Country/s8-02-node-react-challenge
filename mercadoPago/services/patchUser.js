@@ -4,9 +4,9 @@ export const patchUser = async (id, data, token) => {
   return baseUrl
     .patch(`/auth/user/${id}`, data, {
       headers: {
-        authorization: token,
+        Authorization: token,
       },
     })
-    .then(({ data }) => data)
+    .then((data) => data)
     .catch((err) => err);
 };
