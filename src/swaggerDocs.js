@@ -12,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: "https://s8-02-node-react-challenge-api.onrender.com",
+                url: process.env.ORIGIN1, /*"https://s8-02-node-react-challenge-api.onrender.com"*/
                 description: 'API Users for the ...'
             }
         ],
@@ -209,108 +209,6 @@ const options = {
                         },
                         404: {
                             description: "user not found"
-                        }
-                    }
-                }
-            },
-            "/auth/user/updatepass/{id}": {
-                patch: {
-                    security: [
-                        {
-                            api_key: [""]
-                        }
-                    ],
-                    tags: [
-                        "User"
-                    ],
-                    summary: "UPDATE Password of the user",
-                    parameters: [
-                        {
-                            in: "path",
-                            name: "id",
-                            description: "The name that needs to be fetched. Use user1 for testing.",
-                            required: true,
-                            schema: {
-                                type: String
-                            }
-                        },
-                        {
-                            name: "Authorization",
-                            in: "header",
-                            description: "Token",
-                            required: true,
-                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
-                        }
-                    ],
-                    requestBody: {
-                        required: true,
-                        description: "Update an existent user in the store",
-                        content: {
-                            "application/json": {
-                                schema: {
-                                    $ref: "#/components/schemas/user/properties/password",
-                                    $ref1: "#/components/schemas/user/properties/password"
-                                }
-                            },
-                            "multipart/form-data": {
-                                schema: {
-                                    $ref: "#/components/schemas/user/properties/password",
-                                    $ref1: "#/components/schemas/user/properties/password"
-                                }
-                            },
-                            "application/xml": {
-                                schema: {
-                                    $ref: "#/components/schemas/user/properties/password",
-                                    $ref1: "#/components/schemas/user/properties/password"
-                                }
-                            },
-                            "application/x-www-form-urlencoded": {
-                                schema: {
-                                    $ref: "#/components/schemas/user/properties/password",
-                                    $ref1: "#/components/schemas/user/properties/password"
-                                }
-                            }
-                        }
-                    },
-                    responses: {
-                        200: {
-                            description: "successful operation",
-                            content: {
-                                "application/json": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password",
-                                        $ref1: "#/components/schemas/user/properties/password"
-                                    }
-                                },
-                                "multipart/form-data": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password",
-                                        $ref1: "#/components/schemas/user/properties/password"
-                                    }
-                                },
-                                "application/xml": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password",
-                                        $ref1: "#/components/schemas/user/properties/password"
-                                    }
-                                },
-                                "application/x-www-form-urlencoded": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password",
-                                        $ref1: "#/components/schemas/user/properties/password"
-                                    }
-                                }
-                            }
-                        },
-                        404: {
-                            description: "user not found",
-                            content: {
-                                "application/json": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user"
-                                    }
-                                }
-                            }
                         }
                     }
                 }
