@@ -7,6 +7,7 @@ import Tarjeta from '../../assets/svg/Tarjeta.svg'
 import Direction from '../../assets/svg/Directions.svg'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
+import copy from '../../utils/copy'
 
 const  Profile = () => {
     const { user } = useSelector((state) => state.auth)
@@ -17,12 +18,9 @@ const  Profile = () => {
     const cvu = user.userLogin.cvu
     const email = user.userLogin.email
 
-    //Copiar al portapapeles
-    const copy = (value) => navigator.clipboard.writeText(value)
-
     return (
         <>
-            <Header dato={'Tus Datos'}/>
+            <Header dato={'Tus Datos'} show={'flex'}/>
             <div className='h-28 flex items-center gap-4 bg-colorButton shadow-insetShadow pl-4 pr-[23px]'>
                 <div>
                     <svg width='64' height='64' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'>
