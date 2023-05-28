@@ -36,6 +36,10 @@ const options = {
             {
                 name: "Add",
                 description: "ADD operation"
+            },
+            {
+                name: "Repassword",
+                description: "UPDATE password"
             }
         ],
         paths: {
@@ -359,101 +363,6 @@ const options = {
                         }
                     }
                 },
-                "auth/user/{id}/password": {
-                    patch: {
-                        security: [
-                            {
-                                api_key: [""]
-                            }
-                        ],
-                        tags: [
-                            "User"
-                        ],
-                        summary: "Update user",
-                        description: "This can only be done by the logged in user.",
-                        parameters: [
-                            {
-                                name: "id",
-                                in: "path",
-                                description: "The id that needs to be update",
-                                required: true,
-                                schema: {
-                                    type: String
-                                }
-                            },
-                            {
-                                name: "Authorization",
-                                in: "header",
-                                description: "Token",
-                                required: true,
-                                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
-                            }
-                        ],
-                        requestBody: {
-                            required: true,
-                            description: "Update an existent user in the store",
-                            content: {
-                                "application/json": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password"
-                                    }
-                                },
-                                "multipart/form-data": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password"
-                                    }
-                                },
-                                "application/xml": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password"
-                                    }
-                                },
-                                "application/x-www-form-urlencoded": {
-                                    schema: {
-                                        $ref: "#/components/schemas/user/properties/password"
-                                    }
-                                }
-                            }
-                        },
-                        responses: {
-                            200: {
-                                description: "successful operation",
-                                content: {
-                                    "application/json": {
-                                        schema: {
-                                            $ref: "#/components/schemas/user"
-                                        }
-                                    },
-                                    "multipart/form-data": {
-                                        schema: {
-                                            $ref: "#/components/schemas/user"
-                                        }
-                                    },
-                                    "application/xml": {
-                                        schema: {
-                                            $ref: "#/components/schemas/user"
-                                        }
-                                    },
-                                    "application/x-www-form-urlencoded": {
-                                        schema: {
-                                            $ref: "#/components/schemas/user"
-                                        }
-                                    }
-                                }
-                            },
-                            404: {
-                                description: "user not found",
-                                content: {
-                                    "application/json": {
-                                        schema: {
-                                            $ref: "#/components/schemas/user"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                },
                 delete: {
                     security: [
                         {
@@ -544,6 +453,101 @@ const options = {
                         }
                     }
                 }
+            },
+            "auth/user/{id}/password": {
+                patch: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "User"
+                    ],
+                    summary: "Update user",
+                    description: "This can only be done by the logged in user.",
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "The id that needs to be update",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        }
+                    ],
+                    requestBody: {
+                        required: true,
+                        description: "Update an existent user in the store",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/user/properties/password"
+                                }
+                            },
+                            "multipart/form-data": {
+                                schema: {
+                                    $ref: "#/components/schemas/user/properties/password"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/user/properties/password"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/user/properties/password"
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                },
+                                "multipart/form-data": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                },
+                                "application/x-www-form-urlencoded": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                }
+                            }
+                        },
+                        404: {
+                            description: "user not found",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
             },
             "/auth/card/{id}": {
                 get: {
@@ -1172,6 +1176,28 @@ const options = {
                     },
                     xml: {
                         name: "order"
+                    }
+                },
+                repassword: {
+                    type: "object",
+                    required: [
+                        "actualPass",
+                        "newPass"
+                    ],
+                    properties: {
+                        actualPass:{
+                            type: String,
+                            required: true,
+                            $ref: "#/components/schemas/user/properties/password"
+                        },
+                        newPass:{
+                            type: String,
+                            required: true,
+                            $ref: "#/components/schemas/user/properties/password"
+                        }
+                    },
+                    xml: {
+                        name: "repassword"
                     }
                 },
                 user: {
