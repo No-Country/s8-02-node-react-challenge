@@ -4,8 +4,8 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 
 import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineWallet, AiOutlineSend } from "react-icons/ai";
-import { FiHelpCircle,FiLogOut  } from "react-icons/fi";
+import { AiOutlineWallet, AiOutlineSend, AiOutlineClose } from "react-icons/ai";
+import { FiHelpCircle, FiLogOut } from "react-icons/fi";
 import { BsLink, BsQrCode } from "react-icons/bs";
 import { MdOutlineReceipt } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
@@ -23,8 +23,8 @@ const Dashboard = () => {
     { name: "Enviar dinero", link: "/", icon: AiOutlineSend },
     { name: "Prestamos", link: "/", icon: GiReceiveMoney, margin: true },
     { name: "Link de pago", link: "/", icon: BsLink },
-    { name: "Generar QR", link: "/", icon: BsQrCode,  },
-    { name: "Salir", link: "/", icon: FiLogOut,  margin: true },
+    { name: "Generar QR", link: "/", icon: BsQrCode },
+    { name: "Salir", link: "/", icon: FiLogOut, margin: true },
   ];
   const [open, setOpen] = useState(false);
   return (
@@ -32,17 +32,29 @@ const Dashboard = () => {
       <div
         className={` min-h-screen  ${
           open ? "w-64 bg-[#ECEBF6]   " : "w-16  "
-        } duration-500 text-black-100 px-4 op  `}
+        } duration-500 text-black-100 px-4 op   `}
       >
-        <div className="py-3 flex justify-end">
-          
-          <HiMenuAlt3
-            size={26}
-            className="cursor-pointer   "
-            onClick={() => setOpen(!open)}
-          />
-        </div>
-        <div className="  mt-4 flex flex-col gap-1 relative  ">
+        <HiMenuAlt3
+          size={26}
+          className={`${open && "hidden"} origin-left `}
+          onClick={() => setOpen(!open)}
+        />
+        
+
+        <h1
+          className={`text-white  mb-4 bg-[#10224D] gap-[8px]  font-medium  text-center cursor-pointer ${
+            !open && "invisible"
+          }`}
+        >
+            <AiOutlineClose
+            size={26} className="float-right"
+            onClick={() => setOpen(!open)}/>
+        
+          WalletPay
+        </h1>
+        
+
+        <div className="  mt-8 flex flex-col gap-1 relative  ">
           {menus?.map((menu, i) => (
             <Link
               to={menu?.link}
