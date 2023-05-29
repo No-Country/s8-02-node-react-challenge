@@ -7,7 +7,7 @@ import { requireToken } from '../middlewares/authToken.js';
 
 const router=Router()
 
-router.get("/:id", userMiddle, requireToken, getCard)
+router.get("/:id/:user_number", userMiddle, requireToken, getCard)
 
 
 router.post("/:id", /*[ validateCardCreate, validationResultExpress ],*/ userMiddle, requireToken, createCard)

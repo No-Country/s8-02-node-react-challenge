@@ -2,8 +2,8 @@ import cardSchema from "../database/models/card.js";
 import userSchema from "../database/models/user.js";
 
 const getCard=async(req,res)=>{
-const {id}=req.params;
-const {user_number}=req.body
+const {id,user_number}=req.params;
+
 const token = req.headers;
 
 if (!id || !token) {
