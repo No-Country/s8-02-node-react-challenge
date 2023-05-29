@@ -18,14 +18,15 @@ const register = async (req, res) => {
         .status(409)
         .json({ error: "El correo electrónico ya está en uso" });
     }
-    let cv = "";
-    //generacion de cvu
-    
-    for (let i = 0; i < 22; i++) {
-      const digito = Math.floor(Math.random() * 10);
-      cv += digito.toString();
-    }
-    const numero = parseInt(cv, 10);
+    let cv = [];
+
+      for (let i = 0; i < 22; i++) {
+        const digito = Math.floor(Math.random() * 10);
+        cv.push(digito);
+        }
+
+    let numero=cv.join("")
+
     //Generacion de alias
     const animal = faker.color.human();
     const color = faker.color.human();

@@ -3,6 +3,7 @@ import userSchema from "../database/models/user.js";
 
 const getCard=async(req,res)=>{
 const {id}=req.params;
+const {user_number}=req.body
 const token = req.headers;
 
 if (!id || !token) {
@@ -13,10 +14,13 @@ if (!id || !token) {
 
 
 try {
-    const user = await userSchema.findById({_id:id});
+    const user = await userSchema.findById({_id:id}).populate({
+        path: 'cards',
+        options: { strictPopulate: false }
+      });;
     if (!user) return false
 
-    const userInfo = user.cards;
+    const userInfo = user.cards.filter(card=>card.user_number==user_number);
     res.status(200).json({userInfo})
 } catch (error) {
     res.status(422).send({message:"User not found", valid:false });        
