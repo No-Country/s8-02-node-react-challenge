@@ -23,9 +23,9 @@ const register = async (req, res) => {
     
     for (let i = 0; i < 22; i++) {
       const digito = Math.floor(Math.random() * 10);
-      cv += digito;
+      cv += digito.toString();
     }
-    
+    const numero = parseInt(cv, 10);
     //Generacion de alias
     const animal = faker.color.human();
     const color = faker.color.human();
@@ -38,7 +38,7 @@ const register = async (req, res) => {
       password: passwordHash,
       phone,
       dni,
-      cvu: cv,
+      cvu: numero,
       alias:ali,
       fullname:email.split('@')[0],
       address,
