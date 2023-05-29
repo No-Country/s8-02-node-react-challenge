@@ -25,12 +25,12 @@ const Dashboard = ({ open, setOpen }) => {
     { name: "Prestamos", link: "/", icon: GiReceiveMoney, margin: true },
     { name: "Link de pago", link: "/", icon: BsLink },
     { name: "Generar QR", link: "/", icon: BsQrCode },
-    { name: "Salir", link: "", icon: FiLogOut, margin: true },
+    // { name: "Salir", link: "", icon: FiLogOut, margin: true },
   ];
   return (
-    <section className="relative flex">
+    <section className="relative flex border- ">
       <div
-        className={`absolute min-h-screen  ${
+        className={`absolute min-h-screen   ${
           open ? "w-[260px] bg-[#ECEBF6]   " : " invisible"
         } duration-500 text-black-100`}
       >
@@ -98,6 +98,10 @@ const Dashboard = ({ open, setOpen }) => {
               </h2>
             </Link>
           ))}
+        </div>
+        <div className="group flex items-center text-base ml-4 mt-6">
+          <FiLogOut size="24" className=""/>
+        <button className="text-center m-4 font-semibold whitespace-pre text-gray-900 ">salir</button>
         </div>
       </div>
     </section>
