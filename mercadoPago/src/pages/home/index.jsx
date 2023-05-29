@@ -22,14 +22,14 @@ const Home = () => {
         <div className="flex-col gap-4 justify-center font-Montserrat bg-[#ECEBF6] pl-[16px] pr-[16px] pt-[16px]">
           <div className="rounded-lg bg-white shadow-cardShadow h-40 mb-[20px]">
             <div className="flex justify-between items-center text-sm pt-[21px] pl-[21px] pr-[21px]">
-              <p>Dinero disponible</p>
+              <p className="font-semibold text-xs">Dinero disponible</p>
               <Link href="#" className="bg-bgButton text-colorButton rounded-md pl-[7px] pr-[7px] text-center text-[12px] font-semibold"> Tu CVU </Link>
             </div>
             <div className="font-semibold flex justify-between -mt-2 pr-[21px] pl-[21px]">
               <div className="pt-[13px] w-full">
                 <div className="flex items-center">
-                  <p className="text-[16px]">{isShow ? "$ ***" : `$ ${monto}`}{" "} 
-                    <span className="text-xs" style={{ display: `${isShow ? "none" : "inline"}` }}>00</span>
+                  <p className="text-[16px]">{isShow ? "$ ***" : `$ ${monto}`}
+                    <span className="text-xs" style={{ display: `${isShow ? "none" : "inline"}` }}> 00</span>
                   </p>
                   {
                     isShow ? (
@@ -59,9 +59,9 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex-col bg-borderHome rounded-t-[10px] rounded-b-xl h-fit shadow-cardShadow">
+          <div className="flex-col bg-borderHome rounded-t-[10px] rounded-b-xl h-fit shadow-cardShadow bg-[#EBEBEB]">
             <div className="bg-white w-full rounded-t-[10px]">
-              <h2 className="p-4 font-semibold">TU ACTIVIDAD</h2>
+              <h2 className="p-4 font-semibold mb-[1px]">TU ACTIVIDAD</h2>
             </div>
             {/*<Empty />*/}
             <Item alias={"Juan XXX"} border={"rounded-none"} />{" "}
