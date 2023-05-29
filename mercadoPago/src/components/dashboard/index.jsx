@@ -25,10 +25,16 @@ const Dashboard = ({ open, setOpen }) => {
     { name: "Prestamos", link: "/", icon: GiReceiveMoney, margin: true },
     { name: "Link de pago", link: "/", icon: BsLink },
     { name: "Generar QR", link: "/", icon: BsQrCode },
-    // { name: "Salir", link: "", icon: FiLogOut, margin: true },
+    { name: "Salir", link: "", icon: FiLogOut, margin: true },
   ];
   return (
     <section className="relative flex border- ">
+      <div
+        onClick={() => setOpen(false)}
+        className={`md:hidden fixed inset-0 max-h-screen  bg-black/50 ${
+          open ? "block" : "hidden"
+        } `}
+      ></div>
       <div
         className={`absolute min-h-screen   ${
           open ? "w-[260px] bg-[#ECEBF6]   " : " invisible"
@@ -80,9 +86,7 @@ const Dashboard = ({ open, setOpen }) => {
               </div>
 
               <h2
-                style={{
-                  transitionDelay: `${i + 2}00ms`,
-                }}
+              
                 className={`whitespace-pre duration-300  ${
                   !open && "opacity-0 translate-x-28 overflow-hidden "
                 }`}
@@ -92,7 +96,7 @@ const Dashboard = ({ open, setOpen }) => {
               <h2
                 className={`${
                   open && "hidden"
-                } absolute left-48 bg-[#10224D] font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
+                } absolute left-48 bg-[#10224D] font-semibold whitespace-pre  text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
               >
                 {menu?.name}
               </h2>
@@ -100,8 +104,10 @@ const Dashboard = ({ open, setOpen }) => {
           ))}
         </div>
         <div className="group flex items-center text-base ml-4 mt-6">
-          <FiLogOut size="24" className=""/>
-        <button className="text-center m-4 font-semibold whitespace-pre text-gray-900 ">salir</button>
+          <FiLogOut size="24" className="" />
+          <button className="text-center m-4 font-semibold whitespace-pre text-gray-900 ">
+            salir
+          </button>
         </div>
       </div>
     </section>
