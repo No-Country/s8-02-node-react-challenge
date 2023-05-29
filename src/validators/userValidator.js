@@ -3,7 +3,6 @@ import { idUserValidator } from "../middlewares/idValidators.js";
 
 
 const validateCreateUser = [
-    check('fullname', 'The name is required').not().isEmpty(),
     check('email', 'The email is required').isEmail(),
     check('password', 'The password must have more than 6 characters').isLength({ min:6 }),
     
