@@ -20,7 +20,7 @@ router.get("/", getAllUser)
 
 router.get("/:id", [validateUserByID, validationResultExpress ], userMiddle, requireToken, getUser)
 
-router.patch("/:id", [ validateUserPatch, validationResultExpress ], userMiddle, requireToken, updateUser)
+router.patch("/:id", userMiddle, requireToken, updateUser)
 
 router.delete("/:id", [ validateUserDelete, validationResultExpress ], userMiddle, requireToken ,deleteUser)
 
