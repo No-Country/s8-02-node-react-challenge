@@ -6,9 +6,7 @@ const validateCreateUser = [
     check('fullname', 'The name is required').not().isEmpty(),
     check('email', 'The email is required').isEmail(),
     check('password', 'The password must have more than 6 characters').isLength({ min:6 }),
-    check('phone', 'The Phone only must be a number').isNumeric(),
-    check('dni', 'The DNI only must be a number').isNumeric(),
-    check('address', 'The Addres is required').not().isEmpty(),
+    
 ];
 
 const validateLoginUser = [
