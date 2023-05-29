@@ -17,9 +17,9 @@ try {
     const user = await userSchema.findById({_id:id}).populate({
         path: 'cards',
         options: { strictPopulate: false }
-      });;
+      });
     if (!user) return false
-
+      console.log(user);
     const userInfo = user.cards.filter(card=>card.user_number==user_number);
     res.status(200).json({userInfo})
 } catch (error) {
