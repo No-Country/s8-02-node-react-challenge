@@ -4,7 +4,7 @@ export const patchUser = async (id, data, token) => {
   return baseUrl
     .patch(`/auth/user/${id}`, data, {
       headers: {
-        Authorization: token,
+        authorization: token,
       },
     })
     .then((data) => data)

@@ -1,20 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import { Modal } from "./Modal";
 import { File } from "./File";
 
 /* /auth/user/updatepass/id */
 
-export const AccountData = ({ data }) => {
-  const [modal, setModal] = useState(false);
-  /* modal = ["correo", "ejemplo@ejemplo.com" ] */
-
-  const handleModal = (val) => {
-    setModal(val || false);
-  };
-
+export const AccountData = ({ data, handleModal }) => {
   return (
-    <div>
+    <>
       <h2 className="text-[#39528D] font-semibold mb-2">Datos de la cuenta</h2>
 
       <hr />
@@ -32,9 +23,6 @@ export const AccountData = ({ data }) => {
           value={"*************"}
         />
       </div>
-      {modal && (
-        <Modal type={modal[0]} modal={modal} handleModal={handleModal} />
-      )}
-    </div>
+    </>
   );
 };

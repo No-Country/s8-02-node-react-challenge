@@ -2,54 +2,39 @@ import { useSelector } from "react-redux";
 import { AccountData } from "../../components/yourData/AccountData";
 import { PersonalDataForm } from "../../components/yourData/PersonalDataForm";
 import { sliceEmail } from "../../helpers/sliceEmail";
-import { useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { Modal } from "../../components/yourData/Modal";
 
 const YourData = () => {
   const { userLogin } = useSelector((state) => state.auth.user);
-  const { alias, email, fullName, dni } = userLogin;
+  const { alias, email, fullname, dni, phone } = userLogin;
   const data = [
-    { usuario: fullName || sliceEmail(email) },
+    { Usuario: fullname || sliceEmail(email) },
     { "Correo electrónico": email },
-    { alias },
+    { Alias: alias },
   ];
-
-  const fetching = async () => {
-    const request = await fetch(
-      "https://api-wallet.onrender.com/auth/user/login",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: "yannokaise@gmail.com",
-          password: "123456789",
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const result = await request.json();
-    return result;
+  const [modal, setModal] = useState(false);
+  /* modal = ["correo", "ejemplo@ejemplo.com" ] */
+  const handleModal = (val) => {
+    setModal(val || false);
   };
-  useEffect(() => {
-    /*  fetching().then((el) => console.log(el)); */
-    axios
-      .post("https://api-wallet.onrender.com/auth/user/login", {
-        email: "yannokaise@gmail.com",
-        password: "123456789",
-      })
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-  }, []);
 
   return (
-    <section className="min-w-[340px] px-4 py-5">
-      <div className="bg-white px-3 py-4 rounded-md shadow-md">
-        <AccountData data={data} />
-      </div>
-      <div className="bg-white px-3 py-4 rounded-md shadow-md mt-5">
-        <PersonalDataForm dni={dni} />
-      </div>
+    <section className="min-w-[340px] px-4 py-5 flex flex-col">
+      <article className="bg-white px-3 py-4 rounded-md shadow-md w-full max-w-[600px]">
+        <AccountData data={data} modal={modal} handleModal={handleModal} />
+      </article>
+      <article className="bg-white px-3 py-4 rounded-md shadow-md mt-5 w-full max-w-[600px]">
+        <PersonalDataForm
+          dni={dni}
+          phone={phone}
+          modal={modal}
+          handleModal={handleModal}
+        />
+      </article>
+      {modal && (
+        <Modal type={modal[0]} modal={modal} handleModal={handleModal} />
+      )}
     </section>
   );
 };

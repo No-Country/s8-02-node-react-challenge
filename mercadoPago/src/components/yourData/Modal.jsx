@@ -14,7 +14,11 @@ export const Modal = ({ modal, handleModal, type }) => {
             <img src={IconClose} alt="icon close" />
           </button>
         </div>
-        <FormModal type={type} placeholder={modal[1]} />
+        <FormModal
+          type={type}
+          placeholder={modal[1]}
+          handleModal={handleModal}
+        />
       </article>
     </div>
   );

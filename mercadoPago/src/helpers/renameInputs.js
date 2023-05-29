@@ -1,16 +1,16 @@
-export const renameInputs = (val) => {
-  switch (val) {
-    case "Correo electrónico":
+export const renameInputs = (val = "") => {
+  switch (val.toLowerCase()) {
+    case "correo electrónico":
       return "email";
-    case "Contraseña":
+    case "contraseña":
       return "password";
-    case "Usuario":
+    case "usuario":
       return "fullname";
-    case "Alias":
+    case "alias":
       return "alias";
-    case "Teléfono":
+    case "agregar teléfono":
       return "phone";
     default:
-      break;
+      return val;
   }
 };
