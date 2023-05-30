@@ -1,11 +1,12 @@
 import { Schema, model } from "mongoose";
 
+
 const cardSchema = new Schema(
   {
     type: {
       type: String,
       required: true,
-      
+      enum: ["credit", "debit"]
     },
     bank_emisor: {
       type: String,
@@ -14,8 +15,7 @@ const cardSchema = new Schema(
     bank: {
       type: String,
       enum: ["mastercard", "visa"],
-      required: true,
-      default: "unknown",
+      required: true
     },
     expiration_date: {
       type: String,
@@ -23,7 +23,7 @@ const cardSchema = new Schema(
     },
     user_card: {
       type: String,
-      required: true
+      required: false
     },
     user_number: {
       type: Number,
@@ -33,13 +33,18 @@ const cardSchema = new Schema(
       type: Number,
       required: true
     },
-    saved:{
-      type:Boolean
-    },
-    id_user: {
-      type: Schema.Types.ObjectId,
+    id_user: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "UserModel"
+      },
+      /*
+      status:{
+      type: Boolean,
       required: true
-    },
+    }
+    */
+    ]
   },
   { timestamps: true, versionKey: false }
 );

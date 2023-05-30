@@ -30,8 +30,8 @@ const sendMail = (user, template,token) => {
       port: 587,
       secure: false,
       auth: {
-        user: process.env.USER,
-        pass: process.env.PASS,
+        user: process.env.USER_EMAIL,
+        pass: process.env.PASS_EMAIL,
       },
       tls: {
         // do not fail on invalid certs

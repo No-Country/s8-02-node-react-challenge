@@ -12,14 +12,8 @@ const options = {
         },
         servers: [
             {
-                url: process.env.ORIGIN1,
+                url: process.env.ORIGIN1, /*"https://s8-02-node-react-challenge-api.onrender.com"*/
                 description: 'API Users for the ...'
-            }
-        ],
-        contact: [
-            {
-                github: "https://github.com/No-Country/s8-02-node-react-challenge",
-                gmail: "mercacopiapagos@gmail.com"
             }
         ],
         tags: [
@@ -34,11 +28,28 @@ const options = {
             {
                 name: "Activity",
                 description: "Operations about activity of the users"
+            },
+            {
+                name: "Qr",
+                description: "QR operation"
+            },
+            {
+                name: "Add",
+                description: "ADD operation"
+            },
+            {
+                name: "Repassword",
+                description: "UPDATE password"
             }
         ],
         paths: {
             "/auth/user/": {
                 get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
                     tags: [
                         "User"
                     ],
@@ -443,6 +454,94 @@ const options = {
                     }
                 }
             },
+            "/auth/user/updatepass/{id}": {
+                patch: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "User"
+                    ],
+                    summary: "Update user",
+                    description: "This can only be done by the logged in user.",
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "The id that needs to be update",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        }
+                    ],
+                    requestBody: {
+                        required: true,
+                        description: "Update an existent user in the store",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/repassword"
+                                }
+                            },
+                            "multipart/form-data": {
+                                schema: {
+                                    $ref: "#/components/schemas/repassword"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/repassword"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/repassword"
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                },
+                                "multipart/form-data": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                },
+                                "application/x-www-form-urlencoded": {
+                                    schema: {
+                                        $ref: "#/components/schemas/user"
+                                    }
+                                }
+                            }
+                        },
+                        404: {
+                            description: "user not found"
+                        }
+                    }
+                },
+            },
             "/auth/card/{id}": {
                 get: {
                     security: [
@@ -463,21 +562,14 @@ const options = {
                             schema: {
                                 type: String
                             }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
                         }
-                        // {
-                        //     // name: "Authorization",
-                        //     // in: "header",
-                        //     // description: "Token",
-                        //     // required: true,
-                        //     // example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
-                        //     in: "path",
-                        //     name: "id",
-                        //     description: "The name that needs to be fetched. Use card for testing.",
-                        //     required: true,
-                        //     schema: {
-                        //         type: String
-                        //     }
-                        // }
                     ],
                     responses: {
                         200: {
@@ -485,12 +577,12 @@ const options = {
                             content: {
                                 "application/json": {
                                     schema: {
-                                        $ref: "#/components/schemas/card"
+                                        $ref: "#/components/schemas/user"
                                     }
                                 },
                                 "application/xml": {
                                     schema: {
-                                        $ref: "#/components/schemas/card"
+                                        $ref: "#/components/schemas/user"
                                     }
                                 }
                             }
@@ -504,10 +596,33 @@ const options = {
                     }
                 },
                 post: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
                     tags: [
                         "Cards"
                     ],
                     summary: "Create card for the user",
+                    parameters: [
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        },
+                        {
+                            name: "id",
+                            in: "path",
+                            description: "USER's ID",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        }
+                    ],
                     description: "Created user card object",
                     operationId: "createCard",
                     requestBody: {
@@ -576,6 +691,13 @@ const options = {
                     summary: "Update  cards of user",
                     description: "This can only be done by the logged in user.",
                     parameters: [
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        },
                         {
                             name: "id",
                             in: "path",
@@ -664,6 +786,13 @@ const options = {
                     operationId: "deleteCard",
                     parameters: [
                         {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        },
+                        {
                             name: "id",
                             in: "path",
                             description: "The id that needs to be deleted",
@@ -673,27 +802,6 @@ const options = {
                             }
                         }
                     ],
-                    requestBody: {
-                        description: "Delete an existent user in the store",
-                        content: {
-                            "application/json": {
-                                schema: {
-                                    $ref: "#/components/schemas/card"
-                                }
-                            },
-                            "application/xml": {
-                                schema: {
-                                    $ref: "#/components/schemas/card"
-                                }
-                            },
-                            "application/x-www-form-urlencoded": {
-                                schema: {
-                                    $ref: "#/components/schemas/card"
-                                }
-                            }
-                        },
-                        required: true
-                    },
                     responses: {
                         200: {
                             description: "successful operation",
@@ -721,6 +829,302 @@ const options = {
                                 "application/json": {
                                     schema: {
                                         $ref: "#/components/schemas/card"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/auth/activity/transfer": {
+                post: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Activity"
+                    ],
+                    summary: "POST transfer",
+                    parameters: [
+                        {
+                            in: "path",
+                            name: "id",
+                            description: "The id that needs to be fetched. Use user1.alias1.pay1 for testing.",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        }
+                    ],
+                    requestBody: {
+                        required: true,
+                        description: "Update an existent user in the store",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/activity"
+                                }
+                            },
+                            "multipart/form-data": {
+                                schema: {
+                                    $ref: "#/components/schemas/activity"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/activity"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/activity"
+                                }
+                            }
+                        }
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                },
+                                "multipart/form-data": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                },
+                                "application/x-www-form-urlencoded": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                }
+                            }
+                        },
+                        404: {
+                            description: "user not found",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/auth/activity/activities": {
+                get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Activity"
+                    ],
+                    summary: "GET activity of the user",
+                    parameters: [
+                        {
+                            in: "path",
+                            name: "id",
+                            description: "The id that needs to be fetched. Use user1.alias1.pay1 for testing.",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: "Successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                }
+                            }
+                        },
+                        405: {
+                            description: "Invalid input"
+                        }
+                    }
+                }
+            },
+            "/auth/qr/{alias}/{mount}": {
+                get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Qr"
+                    ],
+                    summary: "GET amount to pay with QR",
+                    parameters: [
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        },
+                        {
+                            in: "path",
+                            name: "alias",
+                            description: "The alias that needs to be fetched. Use user1.alias1.pay1 for testing.",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "mount",
+                            in: "query",
+                            description: "Amount of money",
+                            required: true,
+                            schema: {
+                                type: "number",
+                                format: "float"
+                            },
+                            example: "1250.36"
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: "Successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/qr"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/qr"
+                                    }
+                                }
+                            }
+                        },
+                        405: {
+                            description: "Invalid input"
+                        }
+                    }
+                }
+            },
+            "/auth/addMoney/{id}": {
+                post: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Add"
+                    ],
+                    summary: "POST transfer",
+                    parameters: [
+                        {
+                            in: "path",
+                            name: "id",
+                            description: "The id that needs to be fetched. Use user1.alias1.pay1 for testing.",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        }
+                    ],
+                    requestBody: {
+                        description: "Delete an existent user in the store",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    $ref: "#/components/schemas/addMoney"
+                                }
+                            },
+                            "multipart/form-data": {
+                                schema: {
+                                    $ref: "#/components/schemas/addMoney"
+                                }
+                            },
+                            "application/xml": {
+                                schema: {
+                                    $ref: "#/components/schemas/addMoney"
+                                }
+                            },
+                            "application/x-www-form-urlencoded": {
+                                schema: {
+                                    $ref: "#/components/schemas/addMoney"
+                                }
+                            }
+                        },
+                        required: true
+                    },
+                    responses: {
+                        200: {
+                            description: "successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/addMoney"
+                                    }
+                                }
+                            }
+                        },
+                        400: {
+                            description: "Invalid username supplied",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/addMoney"
+                                    }
+                                }
+                            }
+                        },
+                        404: {
+                            description: "user not found",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/addMoney"
                                     }
                                 }
                             }
@@ -767,12 +1171,36 @@ const options = {
                         name: "order"
                     }
                 },
+                repassword: {
+                    type: "object",
+                    required: [
+                        "actualPass",
+                        "newPass"
+                    ],
+                    properties: {
+                        actualPass:{
+                            type: String,
+                            required: true,
+                            $ref: "#/components/schemas/user/properties/password"
+                        },
+                        newPass:{
+                            type: String,
+                            required: true,
+                            $ref: "#/components/schemas/user/properties/password"
+                        }
+                    },
+                    xml: {
+                        name: "repassword"
+                    }
+                },
                 user: {
                     type: "object",
                     required: [
-                        "username",
                         "email",
-                        "password"
+                        "password",
+                        "dni",
+                        "fullname",
+                        "username"
                     ],
                     properties: {
                         username: {
@@ -807,7 +1235,7 @@ const options = {
                         },
                         dni: {
                             type: "number",
-                            required: false,
+                            required: true,
                             description: "Dni of the user",
                             example: "00.000.000"
                         },
@@ -818,17 +1246,17 @@ const options = {
                         },
                         phone: {
                             type: "number",
-                            required: true,
+                            required: false,
                             example: "011-0000-0000"
                         },
                         address: {
                             type: "string",
-                            required: true,
+                            required: false,
                             example: "Av. calle falsa 123"
                         },
                         balance: {
                             type: "number",
-                            required: true,
+                            required: false,
                             example: "23.362,215"
                         }
                     },
@@ -839,14 +1267,21 @@ const options = {
                 card: {
                     type: "object",
                     required: [
+                        "type",
                         "bank_emisor",
                         "bank",
                         "expiration_date",
-                        "user_name",
-                        "cvv",
-                        // "id_user"
+                        "user_card",
+                        "user_number",
+                        "cvv"
                     ],
                     properties: {
+                        type: {
+                            type: String,
+                            required: true,
+                            unique: false,
+                            enum: ["credit", "debit"],
+                        },
                         bank_emisor: {
                             type: String,
                             required: true,
@@ -856,6 +1291,7 @@ const options = {
                         bank: {
                             type: String,
                             required: true,
+                            enum: ["mastercard", "visa"],
                             example: "visa"
                         },
                         expiration_date: {
@@ -868,21 +1304,16 @@ const options = {
                             required: true,
                             example: "NOMBRE DE TARJETA"
                         },
-                        number_card: {
+                        user_number: {
                             type: "number",
                             required: true,
-                            example: "NOMBRE DE TARJETA"
+                            example: "NUMERO DE TARJETA"
                         },
                         cvv: {
                             type: "number",
                             required: true,
                             example: "264"
-                        },
-                        // id_user: {
-                        //     type: String,
-                        //     required: true,
-                        //     description: "id"
-                        // },
+                        }
                     },
                     xml: {
                         name: "card"
@@ -892,44 +1323,87 @@ const options = {
                     type: "object",
                     required: [
                         "amount",
-                        "date_activity",
-                        // "id_user"
+                        "description",
+                        "type",
+                        "payment"
                     ],
                     properties: {
-                        bank_emisor: {
-                            type: String,
-                            required: true,
-                            unique: true,
-                            example: "Patagonia"
-                        },
-                        bank: {
-                            type: String,
-                            required: true,
-                            example: "visa"
-                        },
-                        expiration_date: {
-                            type: String,
-                            unique: false,
-                            example: "02/30"
-                        },
-                        user_name: {
-                            type: String,
-                            required: true,
-                            example: "NOMBRE DE TARJETA"
-                        },
-                        cvv: {
+                        amount: {
                             type: "number",
-                            required: true,
-                            example: "264"
+                            example: "1250.36"
                         },
-                        // id_user: {
-                        //     type: String,
-                        //     required: true,
-                        //     description: "id"
-                        // },
+                        description: {
+                            type: String,
+                            required: true,
+                            example: "Esta es la descripcion de tu pago..."
+                        },
+                        type: {
+                            type: String,
+                            enum:["pay","transfer", "Recharge"],
+                            require: true
+                        },
+                        cvu: {
+                            type: String,
+                            require: false,
+                            example: "1234567891234567891234"
+                        },
+                        alias: {
+                            type: String,
+                            require: false,
+                            example: "panza.vino.rock"
+                        },
+                        payment: {
+                            method: {
+                                type: String,
+                                required: true,
+                                enum: ["card", "balance"],
+                                example: "Medio de transferencia"
+                            },
+                            cardId: {
+                                type: String,
+                                required: true,
+                                example: "264"
+                            }
+                        }
                     },
                     xml: {
                         name: "activity"
+                    }
+                },
+                qr: {
+                    type: "object",
+                    required: [
+                        "mount",
+                        "alias"
+                    ],
+                    properties: {
+                        alias: {
+                            $ref: "#/components/schemas/user/properties/alias"
+                        },
+                        mount: {
+                            type: "number",
+                            required: true,
+                            example: "1200"
+                        }
+                    }
+                },
+                addMoney:{
+                    type: "object",
+                    required: [
+                        "user_number",
+                        "cvv",
+                        "balance"
+                    ],
+                    properties: {
+                        user_number: {
+                            $ref: "#/components/schemas/card/properties/user_number"
+                        },
+                        cvv: {
+                            $ref: "#/components/schemas/card/properties/cvv"
+                        },
+                        balance: {
+                            $ref: "#/components/schemas/user/properties/balance"
+                        }
                     }
                 }
             },

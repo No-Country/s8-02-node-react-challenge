@@ -5,8 +5,7 @@ const activitySchema = new Schema(
   {
     UserAccountId: {
       type: Schema.Types.ObjectId,
-      ref: "UserModel",
-      require:true
+      ref: "UserModel"
     },
     destinyAccountId: {
       type: Schema.Types.ObjectId,
@@ -14,20 +13,21 @@ const activitySchema = new Schema(
     },
     amount: {
       type: Number,
+      require: true
     },
-
     description:{
       type:String
     },
     type:{
       type:String,
-      enum:["transfer","addfunds"]
+      enum:["pay","transfer", "Recharge"],
+      require: true
     },
     payment:{
       method:{
         type:String,
-        enum:["card","balance"], // si la opcion es balance, no necesita cardId, es en efectivo.
-        require:true,
+        enum:["card","balance"],
+        require:true
       },
       cardId:{
         type: Schema.Types.ObjectId,

@@ -32,7 +32,8 @@ const userSchema = new Schema(
       unique: true
     },
     fullname: {
-      type: String
+      type: String,
+      required: false
     },
     phone: {
       type: Number

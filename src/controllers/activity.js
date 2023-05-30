@@ -163,7 +163,7 @@ const findActivities = async (query, amount) => {
   return await activitiesQuery.exec();
 };
 
-export {transfer,getActivities} ;
+export {transfer,getActivities};
 
 /* 
 ERROR EXAMPLE, JUST IN CASE
