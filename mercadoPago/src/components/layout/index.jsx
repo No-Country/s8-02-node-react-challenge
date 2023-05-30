@@ -19,6 +19,9 @@ const Layout = ({ children }) => {
       case "/profile":
         setTitle("Tus Datos");
         break;
+      case "/addmoney":
+        setTitle("Ingresar dinero");
+        break;
       default:
         setTitle("");
         break;
