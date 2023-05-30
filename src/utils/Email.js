@@ -27,11 +27,11 @@ const sendMail = (user, template,token) => {
     
     let transport = nodemailer.createTransport({
       host: "smtp.gmail.com", //Servidor del email.
-      port: 587,
+      port: 25,
       secure: false,
       auth: {
-        user: process.env.USER_EMAIL,
-        pass: process.env.PASS_EMAIL,
+        user: process.env.USER,
+        pass: process.env.PASS,
       },
       tls: {
         // do not fail on invalid certs

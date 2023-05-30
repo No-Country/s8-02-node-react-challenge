@@ -5,6 +5,7 @@ const addMoney=async(req,res)=>{
 
     const {id}=req.params
     const {cardNumber, cvv,balance}=req.body
+    console.log(id)
     try{
     const user= await userSchema.findById({_id:id}).populate({
         path: 'cards',
@@ -13,7 +14,7 @@ const addMoney=async(req,res)=>{
       });
 
     const card= user.cards.filter((cards)=> cards.user_number== cardNumber)
-    console.log(card[0]);
+
     if(balance <= 0){
         return res.status(500).send({message:"El balance no puede ser negativo",valid:false})
     }

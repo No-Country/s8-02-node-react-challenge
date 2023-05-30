@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { register, login } from '../controllers/auth.js';
-import {  deleteUser, getAllUser, getUser, updateUser } from '../controllers/user.js';
+import {  deleteUser, getAllUser, getUser, updateUser,checkUser } from '../controllers/user.js';
 import { userMiddle } from '../middlewares/auth_user.js';
 import { user_middleRegister } from '../middlewares/authUser.js';
 import { requireToken } from '../middlewares/authToken.js';
@@ -17,7 +17,7 @@ router.post("/login",[ validateLoginUser, validationResultExpress ], user_middle
 
 
 router.get("/", getAllUser)
-
+router.get('/check', checkUser);
 router.get("/:id", [validateUserByID, validationResultExpress ], userMiddle, requireToken, getUser)
 
 router.patch("/:id", userMiddle, requireToken, updateUser)

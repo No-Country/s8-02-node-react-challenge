@@ -81,4 +81,28 @@ const deleteUser=async(req,res)=>{
     }
 }
 
-export { updateUser, getAllUser, getUser, deleteUser };
+
+const checkUser =  async (req,res) =>{
+  let {cvu,alias} = req.query;
+  let user;
+
+  if(!cvu && !alias) return res.status(200).send({ message: "cvu and alias empty", valid: false });
+
+  try {
+    if (cvu) {
+      user = await userSchema.findOne({ cvu }).select('alias cvu dni fullname');
+    } else {
+      user = await userSchema.findOne({ alias }).select('alias cvu dni fullname');
+    }
+
+    return user
+  ? res.status(200).send({ message: "Completed", valid: true, ...user._doc })
+  : res.status(404).send({ message: "Not found", valid: false });
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+
+export { updateUser, getAllUser, getUser, deleteUser,checkUser };
