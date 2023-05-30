@@ -5,7 +5,7 @@ import { tokenVerificationErrors } from "../utils/generateToken.js";
 export const requireToken = (req, res, next) => {
   // Obtener el token del encabezado de autorización
   const token = req.headers.authorization;
-
+console.log(token)
   // Verificar si el token existe
   if (!token) {
     return res.status(401).json({ message: 'Token no proporcionado' });
@@ -13,8 +13,8 @@ export const requireToken = (req, res, next) => {
 
   try {
     // Verificar y decodificar el token utilizando la clave secreta
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    const decoded = jwt.verify(token.replace(/^Bearer\s+|\s+$/g, ''), process.env.JWT_SECRET);
+   
     // Agregar el payload decodificado al objeto de solicitud para que esté disponible en las siguientes rutas
     req.user = decoded;
 

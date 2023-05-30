@@ -5,6 +5,7 @@ import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcrypt";
 import user from "../database/models/user.js";
 import { faker } from '@faker-js/faker';
+import { create } from "domain";
 
 
 
@@ -35,6 +36,7 @@ const getUser = async (req, res) => {
 
 
 const updateUser = async (req, res) => {
+    console.log(id,body)
     let {id}=req.params
     let {body}=req
     try {
@@ -60,4 +62,25 @@ const deleteUser=async(req,res)=>{
     }
 }
 
-export { updateUser, getAllUser, getUser,deleteUser };
+
+const checkUser =  async (req,res) =>{
+  let {cvv,alias} = req.params;
+  let query = createQuery(cvv,alias)
+  try {
+    let user = await userSchema.find(query) 
+    return res.status(200).send({message:"Completed",valid:true})
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+const createQuery = (cvv,alias) => {
+  return {
+    $or: [
+      { alias:alias },
+      { cvu: cvv }
+    ]
+  };
+};
+export { updateUser, getAllUser, getUser,deleteUser,checkUser };

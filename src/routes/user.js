@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { register, login } from '../controllers/auth.js';
-import {  deleteUser, getAllUser, getUser, updateUser } from '../controllers/user.js';
+import {  deleteUser, getAllUser, getUser, updateUser,checkUser } from '../controllers/user.js';
 import { userMiddle } from '../middlewares/auth_user.js';
 import { user_middleRegister } from '../middlewares/authUser.js';
 import { requireToken } from '../middlewares/authToken.js';
@@ -30,6 +30,7 @@ router.post("/login",[
 
 router.get("/", getAllUser)
 
+router.post('/check/:cvv?/:alias?', checkUser);
 router.get("/:id",[
     check('id', 'It is not a valid mongo id').isMongoId(),
     check('id').custom(idUserValidator),
