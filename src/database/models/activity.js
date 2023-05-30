@@ -31,7 +31,7 @@ const activitySchema = new Schema(
       },
       cardId:{
         type: Schema.Types.ObjectId,
-        ref: "UserModel"
+        ref: "CardModel"
       } 
     }
   },

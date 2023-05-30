@@ -32,7 +32,7 @@ const createCard=async(req,res)=>{
     let {id}=req.params;
     let token = req.header;
     let {type, bank_emisor, bank, expiration_date, user_name, user_number, cvv, user_card } = req.body;
-
+    console.log(type, bank_emisor, bank, expiration_date, user_name, user_number, cvv, user_card)
     if (!id || !token) {
         return res
           .status(409)

@@ -11,7 +11,7 @@ const userSchema = new Schema(
       unique: true
     },
     cvu: {
-      type: Number,
+      type: String,
       unique: true
     },
     email: {

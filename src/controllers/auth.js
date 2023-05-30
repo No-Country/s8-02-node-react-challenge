@@ -25,8 +25,8 @@ const register = async (req, res) => {
         cv.push(digito);
         }
 
-    let numero=cv.join("")
-
+    let numero=cv.join("").slice(0, 22);
+    console.log(cv,numero)
     //Generacion de alias
     const animal = faker.color.human();
     const color = faker.color.human();
@@ -72,7 +72,7 @@ const login = async (req, res) => {
   let { email, password } = req.body;
   try {
     let user = await userSchema.findOne({ email });
-    console.log(user)
+
     if (!user) {
       return res.status(409).json({ error: "Credenciales errores" });
     }

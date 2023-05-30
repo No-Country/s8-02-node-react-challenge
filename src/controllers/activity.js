@@ -44,11 +44,11 @@ const transfer = async (req, res) => {
 
       let activity = await createActivity(UserAccountId, receptorUser.id, amount);
       await sendTransferEmail(receptorUser.email);
-      console.log(activity)
+
       await createNotification(receptorUser.id, `¡Tienes una transferencia de ${receptorUser.email}!`, "transfer");
       let response = buildResponseObject("approved", amount, activity._id, receptorUser);
       verifyTransfer(emitterUser._id, emitterUser.balance) ? 
-      res.status(200).json({ ...response }) : 
+      res.status(200).json({message:'Successful transaction',valid:true, ...response }) : 
       res.status(200).json({ error: "failed" });
 
     } catch (error) {
@@ -66,14 +66,14 @@ const transfer = async (req, res) => {
 
 const validateTransferData = (alias, cvu, amount) => {
   if (!alias && !cvu) {
-    return { error: "Necesitamos un alias o cvu para poder transferir" };
+    return { message: "Necesitamos un alias o cvu para poder transferir",valid:false };
   }
 
   if (!(amount > 0)) {
-    return { error: "No se pueden transferir valores negativos" };
+    return { message: "No se pueden transferir valores negativos",valid:false };
   }
 
-  return { error: null };
+  return { message: null,valid:false };
 };
 
 const findUserByAliasOrCvu = async (alias, cvu, session) => {
@@ -114,7 +114,6 @@ const verifyTransfer = async (userId, userBalance) => {
   return balance === userBalance;
 };
 const buildResponseObject = (status, amount, operationNumber, receptorUser) => {
-  console.log()
   return {
     status: status,
     amount: amount,
@@ -130,19 +129,19 @@ const buildResponseObject = (status, amount, operationNumber, receptorUser) => {
 
  const getActivities = async (req, res) => {
   try {
-    const { id, amount } = req.body;
 
+    const { id, amount } = req.params;
     const query = createQuery(id);
     const activities = await findActivities(query, amount);
 
     if (activities.length === 0) {
-      return res.status(200).json({ message: "No se encontraron actividades" });
+      return res.status(200).json({ message: "No se encontraron actividades",valid:false });
     }
 
     return res.status(200).json({ activities });
   } catch (error) {
     saveErrorToDatabase(error);
-    return res.status(500).json({ error: "Error al obtener actividades" });
+    return res.status(500).json({ error: "Error al obtener actividades",valid:false });
   }
 };
 
@@ -158,12 +157,49 @@ const createQuery = (id) => {
 const findActivities = async (query, amount) => {
   const activitiesQuery = activitySchema.find(query)
     .sort({ createdAt: -1 })
-    .limit(amount !== 0 ? amount : -1);
-
+    .limit(amount !== 0 ? amount : -1)
+    .populate({
+      path: 'destinyAccountId',
+      select: 'fullname email dni alias cvu',
+      options: { strictPopulate: false },
+    })
+    .populate({
+      path: 'payment.cardId',
+      select: '',
+      options: { strictPopulate: false },
+    })
   return await activitiesQuery.exec();
 };
+//
 
-export {transfer,getActivities};
+const recentClients = async (req, res) => {
+  try {
+
+    const { id, amount } = req.params;
+    const query = createQueryClients(id);
+    const activities = await findActivities(query, amount);
+
+    if (activities.length === 0) {
+      return res.status(200).json({ message: "No se encontraron actividades",valid:false });
+    }
+
+    return res.status(200).json({ activities });
+  } catch (error) {
+    saveErrorToDatabase(error);
+    return res.status(500).json({ error: "Error al obtener actividades",valid:false });
+  }
+};
+
+const createQueryClients = (id) => {
+  return {
+    $or: [
+      { UserAccountId: id }
+    ],
+    type:'transfer'
+  };
+};
+
+export {transfer,getActivities,recentClients};
 
 /* 
 ERROR EXAMPLE, JUST IN CASE

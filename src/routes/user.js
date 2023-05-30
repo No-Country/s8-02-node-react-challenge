@@ -17,7 +17,7 @@ router.post("/login",[ validateLoginUser, validationResultExpress ], user_middle
 
 
 router.get("/", getAllUser)
-router.post('/check/:cvv?/:alias?', checkUser);
+router.get('/check', checkUser);
 router.get("/:id", [validateUserByID, validationResultExpress ], userMiddle, requireToken, getUser)
 
 router.patch("/:id", userMiddle, requireToken, updateUser)
