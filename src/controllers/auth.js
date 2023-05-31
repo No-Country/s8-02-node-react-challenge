@@ -9,7 +9,7 @@ import { uploadImage, deleteImage } from "../utils/FileUpload.js";
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, dni, phone, address, balance } = req.body;
+  let { email, password, dni, phone, address, balance , username} = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
