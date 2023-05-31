@@ -135,7 +135,7 @@ const buildResponseObject = (status, amount, operationNumber, receptorUser) => {
     const activities = await findActivities(query, amount);
 
     if (activities.length === 0) {
-      return res.status(200).json({ message: "No se encontraron actividades",valid:false });
+      return res.status(200).json({ message: "No se encontraron actividades",valid:false,activities:[]});
     }
 
     return res.status(200).json({ activities });
