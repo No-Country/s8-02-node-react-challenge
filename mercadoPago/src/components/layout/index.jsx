@@ -19,6 +19,12 @@ const Layout = ({ children }) => {
       case "/profile":
         setTitle("Tus Datos");
         break;
+      case "/addmoney":
+        setTitle("Ingresar dinero");
+        break;
+      case "/cards":
+        setTitle("Tarjetas");
+        break;
       default:
         setTitle("");
         break;
@@ -26,10 +32,10 @@ const Layout = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div className="relative">
+    <div className="relative w-full h-screen">
       <Dashboard open={open} setOpen={setOpen} />
       <Navbar menu={() => setOpen(!open)} dato={title} />
-      <div className="w-full h-screen">{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 };

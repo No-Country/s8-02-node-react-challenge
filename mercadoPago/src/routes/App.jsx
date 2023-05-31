@@ -7,6 +7,9 @@ import LoginPage from "../pages/login-page";
 import RegisterPage from "../pages/register-page";
 import YourMoney from "../pages/your-money";
 import Profile from "../pages/profile/Profile";
+import QrLink from "../pages/qrlink-page";
+import AddMoney from "../pages/addmoney";
+import CardsPage from "../pages/cards-page";
 // import Activity from "../pages/activity/Activity";
 // import Details from "../pages/activity/Details";
 
@@ -22,6 +25,9 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/money" element={<YourMoney />} />
+          <Route path="/addmoney" element={<AddMoney />} />
+          <Route path="/qrlink" element={<QrLink />} />
+          <Route path="/cards" element={<CardsPage />} />
           {/* <Route path="/activity" element={<Activity />} /> */}
           {/* <Route path="/activity/:id" element={<Details />} /> */}
         </Route>
