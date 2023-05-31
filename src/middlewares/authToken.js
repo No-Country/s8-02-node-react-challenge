@@ -14,7 +14,7 @@ export const requireToken = (req, res, next) => {
   try {
     // Verificar y decodificar el token utilizando la clave secreta
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+   
     // Agregar el payload decodificado al objeto de solicitud para que esté disponible en las siguientes rutas
     req.user = decoded;
 

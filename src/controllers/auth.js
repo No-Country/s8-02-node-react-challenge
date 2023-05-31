@@ -18,15 +18,17 @@ const register = async (req, res) => {
         .status(409)
         .json({ error: "El correo electrónico ya está en uso" });
     }
-    let cv = "";
-    //generacion de cvu
-    
-    for (let i = 0; i < 22; i++) {
-      const digito = Math.floor(Math.random() * 10);
-      cv += digito;
-    }
+    let cv = [];
+
+      for (let i = 0; i < 22; i++) {
+        const digito = Math.floor(Math.random() * 10);
+        cv.push(digito);
+        }
+
+    let numero=cv.join("").slice(0, 22);
+    console.log(cv,numero)
     //Generacion de alias
-    const animal = faker.color.human();
+    const animal = faker.animal.bird();
     const color = faker.color.human();
     const company = faker.color.human();
 
@@ -73,7 +75,7 @@ const login = async (req, res) => {
   let { email, password } = req.body;
   try {
     let user = await userSchema.findOne({ email });
-    console.log(user)
+
     if (!user) {
       return res.status(409).json({ error: "Credenciales errores" });
     }
