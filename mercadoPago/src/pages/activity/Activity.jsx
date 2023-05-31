@@ -4,7 +4,7 @@ import Header from "../../components/header/Header"
 
 import axios from 'axios'
 import { useEffect } from "react"
-import example from './Example'
+//import example from './Example'
 import Item from "../../components/activity/Item"
 import { useSelector } from 'react-redux'
 import Layout from "../../components/layout";
@@ -39,7 +39,7 @@ const Activity = () => {
                     </div>
                 )
                         */}
-            <div className='pl-4 pr-4 h-5'>
+            {/*<div className='pl-4 pr-4 h-5'>
                 <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
                     <p className='text-[#39528D] font-semibold'>Hoy</p>
                 </div>
@@ -58,7 +58,7 @@ const Activity = () => {
                 <Lista />
                 <Lista />
                 <Lista />
-            </div>
+                    </div>*/}
         </>
     )
 }
