@@ -26,7 +26,7 @@ const register = async (req, res) => {
         }
 
     let numero=cv.join("")
-    console.log(cv,numero)
+   
     //Generacion de alias
     const animal = faker.animal.bird();
     const color = faker.color.human();
