@@ -4,12 +4,12 @@ import bcrypt from "bcrypt";
 import { faker } from '@faker-js/faker';
 import { sendMail } from "../utils/Email.js";
 import fs from 'fs-extra';
-import { uploadImage } from "../utils/FileUpload.js";
+import { uploadImage, deleteImage } from "../utils/FileUpload.js";
 //Cris altere un poco tu codigo
 const register = async (req, res) => {
   //toque esto
   
-  let { email, password, dni, phone, address, balance, username } = req.body;
+  let { email, password, dni, phone, address, balance } = req.body;
   try {
     let checkEmail = await userSchema.findOne({ email });
 
@@ -28,7 +28,7 @@ const register = async (req, res) => {
     let numero=cv.join("").slice(0, 22);
     console.log(cv,numero)
     //Generacion de alias
-    const animal = faker.color.human();
+    const animal = faker.animal.bird();
     const color = faker.color.human();
     const company = faker.color.human();
 
@@ -39,12 +39,11 @@ const register = async (req, res) => {
       password: passwordHash,
       phone,
       dni,
-      cvu: numero,
+      cvu: cv,
       alias:ali,
       fullname:email.split('@')[0],
       address,
       balance,
-      username,
     });
 
     if (req.files?.urlProfile) {
@@ -57,10 +56,14 @@ const register = async (req, res) => {
     }
     const dataUser = await createUser.save()
 
-    sendMail({ 
-      username:dataUser.email.replace('@gmail.com', ""),
-      email:dataUser.email
-    },'welcome')
+    // const infoUser = dataUser
+    //   .findOne({ email: dataUser.email })
+    //   .select("-password");
+
+    // sendMail({ 
+    //   username:dataUser.email.trim('@gmail.com'),
+    //   email:dataUser.email
+    // },'welcome')
 
     return res.status(200).json({ dataUser });
   } catch (error) {
@@ -82,7 +85,7 @@ const login = async (req, res) => {
     if (!valid) {
       return res.status(409).json({ error: "El password es incorrecto" });
     }
-    const userLogin = await userSchema
+    const update = await userSchema
       .findOne({ email: user.email })
       .select("-password");
 
@@ -91,7 +94,7 @@ const login = async (req, res) => {
     if (!token) {
       return res.status(401).json({ error: "El token no pudo ser generado" });
     }
-    return res.status(200).json({ token, userLogin });
+    return res.status(200).json({ token, update });
   } catch (error) {
     console.log(error);
   }

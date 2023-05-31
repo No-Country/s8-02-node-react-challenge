@@ -5,7 +5,9 @@ import { deleteImage } from "../utils/FileUpload.js";
 const getAllUser = async (req, res) => {
   try {
     const user = await userSchema.find({});
+    console.log(user);
     res.status(200).send({ user });
+    
   } catch (error) {
     console.log(error.message);
   }

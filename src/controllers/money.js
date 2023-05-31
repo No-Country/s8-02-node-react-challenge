@@ -32,7 +32,7 @@ const addMoney=async(req,res)=>{
         UserAccountId: id,
         destinyAccountId: id,
         amount:balance,
-        type: "Recharge",
+        type: "recharge",
         payment: {
           method: "card",
           cardId:card[0]._id,
