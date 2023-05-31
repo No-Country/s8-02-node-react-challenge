@@ -25,7 +25,7 @@ const register = async (req, res) => {
         cv.push(digito);
         }
 
-    let numero=cv.join("").slice(0, 22);
+    let numero=cv.join("")
     console.log(cv,numero)
     //Generacion de alias
     const animal = faker.animal.bird();
@@ -39,7 +39,7 @@ const register = async (req, res) => {
       password: passwordHash,
       phone,
       dni,
-      cvu: cv,
+      cvu: numero,
       alias:ali,
       fullname:email.split('@')[0],
       address,
