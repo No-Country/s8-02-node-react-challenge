@@ -9,7 +9,10 @@ import Layout from "../../components/layout";
 const Home = () => {
   //Dejo Provisorio para mostrar al tl
   const { user } = useSelector((state) => state.auth);
-  const monto = user?.userLogin.balance;
+  console.log(user);
+
+  const monto = user?.userLoginbalance || 0;
+  console.log(monto);
 
   //Mostrar o no la contraseña
   const [isShow, setIsShow] = useState(false);
