@@ -4,25 +4,11 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineInfoCircle,
 } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../features/auth/authSlice";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import useLogin from "../../../hooks/useLogin";
 
-const FormLogin = ({ handleClick }) => {
+const FormLogin = ({ handleClick, onLogin, isLoading, error }) => {
   const [dataForm, setDataForm] = useState({ email: "", password: "" });
-  const dispatch = useDispatch();
-
-  const { error, isLoading, postData } = useLogin({
-    onSuccess: (data) => {
-      dispatch(login(data));
-      navigate("/home");
-    },
-    onError: (error) => {
-      console.log(error);
-      console.log("Pass o contraseña incorrecto");
-    },
-  });
 
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -43,7 +29,7 @@ const FormLogin = ({ handleClick }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (dataForm.email !== "" && dataForm.password !== "") {
-      postData("/auth/user/login", dataForm);
+      onLogin(dataForm);
     }
     console.log("Complete todos los campos...");
   };
@@ -115,14 +101,13 @@ const FormLogin = ({ handleClick }) => {
           </div>
         </div>
       </div>
-      {isLoading ? <p>Cargando...</p> : null}
       <button
         type="submit"
         className="text-lg font-semibold leading-[22px] text-white w-[328px] h-[48px] bg-[#10224D] rounded-[10px]"
       >
         Iniciar sesión
       </button>
-      {error && <p>Error en la constraseña ...</p>}
+      {error && <p className="font-medium text-red-700">{error}</p>}
       <div className="flex items-center justify-center gap-2 mt-2">
         <p className="text-sm font-semibold leading-[17px]">
           ¿No tienes cuenta?

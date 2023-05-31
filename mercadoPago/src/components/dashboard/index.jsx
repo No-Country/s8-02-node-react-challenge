@@ -1,8 +1,5 @@
 import React from "react";
-// import { HiMenuAlt3 } from "react-icons/hi";
-
 import { CgProfile } from "react-icons/cg";
-
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineWallet, AiOutlineSend, AiOutlineClose } from "react-icons/ai";
 import { FiHelpCircle, FiLogOut } from "react-icons/fi";
@@ -10,9 +7,8 @@ import { BsLink, BsQrCode } from "react-icons/bs";
 import { MdOutlineReceipt } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import { Link } from "react-router-dom";
-// import Header from "../header/Header";
-
-// import TopbarDashboard from "./topbar-dashboard";
+import { logout } from "../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const Dashboard = ({ open, setOpen }) => {
   const menus = [
@@ -25,8 +21,13 @@ const Dashboard = ({ open, setOpen }) => {
     { name: "Prestamos", link: "/", icon: GiReceiveMoney, margin: true },
     { name: "Link de pago", link: "/", icon: BsLink },
     { name: "Generar QR", link: "/", icon: BsQrCode },
-    { name: "Salir", link: "", icon: FiLogOut, margin: true },
   ];
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <section className="relative flex border- ">
       <div
@@ -63,7 +64,7 @@ const Dashboard = ({ open, setOpen }) => {
           </div>
           <AiOutlineClose
             size={26}
-            className="text-white"
+            className="text-white cursor-pointer"
             onClick={() => setOpen(!open)}
           />
         </div>
@@ -75,10 +76,10 @@ const Dashboard = ({ open, setOpen }) => {
               key={i}
               className={`  ${
                 menu?.margin && "mt-5  "
-              } group flex items-center text-base hover:text-[#39528D] gap-[12px] font-medium p-2  rounded-md`}
+              } group flex items-center text-base gap-[12px] font-medium p-2  rounded-md`}
             >
               <div
-                className={`whitespace-pre duration-500     ${
+                className={`whitespace-pre duration-500 group-hover:text-[#39528D] ${
                   !open && "opacity-0 translate-x-28 overflow-hidden "
                 }`}
               >

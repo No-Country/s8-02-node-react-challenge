@@ -1,13 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineInfoCircle,
 } from "react-icons/ai";
 import { useState } from "react";
+import useLogin from "../../../hooks/useLogin";
 
 const FormRegister = ({ handleClick }) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
@@ -17,6 +19,24 @@ const FormRegister = ({ handleClick }) => {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleChange = (e) => {
+    setDataForm({
+      ...dataForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (dataForm.password !== confirmPassword) {
+      console.log("Los password son diferente");
+    }
+    postData("/auth/user/register", dataForm);
   };
 
   return (
