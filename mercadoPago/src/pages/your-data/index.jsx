@@ -9,8 +9,10 @@ import { format } from "../../helpers/formatPhoneFunctions";
 import { ThreeDots } from "react-loader-spinner";
 
 const YourData = () => {
-  const { userLogin } = useSelector((state) => state.auth.user);
-  const { alias, email, fullname, dni, phone } = userLogin;
+  const { update } = useSelector((state) => state.auth.user);
+
+  const { alias, email, fullname, dni, phone } = update;
+
   const [loading, setloading] = useState(false);
 
   const data = [

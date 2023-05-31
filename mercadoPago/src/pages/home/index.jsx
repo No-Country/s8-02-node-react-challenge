@@ -11,7 +11,8 @@ const Home = () => {
   const { user } = useSelector((state) => state.auth);
   console.log(user);
 
-  const monto = user?.userLogin.balance;
+  const monto = user?.userLoginbalance || 0;
+  console.log(monto);
 
   //Mostrar o no la contraseña
   const [isShow, setIsShow] = useState(false);

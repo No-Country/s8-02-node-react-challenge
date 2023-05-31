@@ -8,17 +8,19 @@ import { PasswordInputs } from "./PasswordInputs";
 import { transformPhoneNumber } from "../../helpers/formatPhoneFunctions";
 import { AddPhoneModal } from "./AddPhoneForm";
 import { DataContext } from "../../context/DataContext";
+import { baseUrl } from "../../../axios/axiosInstance";
 
 // eslint-disable-next-line react/prop-types
 export const FormModal = ({ placeholder, type, handleModal }) => {
   const { user } = useSelector((state) => state.auth);
+
   const { handleLoading } = useContext(DataContext);
   const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
   const noPassType = type !== "Contraseña";
 
-  const { token, userLogin } = user;
+  const { token, update } = user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,9 +40,29 @@ export const FormModal = ({ placeholder, type, handleModal }) => {
       nueva.value !== confirmar.value
         ? setError("Las contraseñas deben ser iguales")
         : setError(false);
+      data = nueva.value;
+      if (error === false) {
+        //abrimos loading
+        handleLoading(true);
 
-      /* PETICION PARA COMPROBAR ANTIGUA */
-      data = nueva;
+        return patchUser(
+          update._id,
+          {
+            actualPass: actual.value,
+            newPass: data,
+          },
+          token.token,
+          "updatepass"
+        )
+          .then(({ data }) => {
+            dispatch(updateData(data.user));
+            handleModal(false);
+          })
+          .catch((err) =>
+            setError("ERROR. Verifica que el password actual sea correcto.")
+          )
+          .finally((res) => handleLoading(false));
+      }
     }
 
     if (error === false) {
@@ -58,7 +80,7 @@ export const FormModal = ({ placeholder, type, handleModal }) => {
       //abrimos loading
       handleLoading(true);
 
-      patchUser(userLogin._id, values, token.token)
+      patchUser(update._id, values, token.token)
         .then(({ data }) => {
           dispatch(updateData(data.user));
         })
@@ -85,7 +107,7 @@ export const FormModal = ({ placeholder, type, handleModal }) => {
 
       {type != "Agregar teléfono" && (
         <>
-          <div className="text-[#9f3c3c] h-[16px] mb-2 text-sm translate-y-[-5px]">
+          <div className="text-[#9f3c3c] h-min h-[16px] mb-2 text-sm translate-y-[-5px]">
             {error}
           </div>
           <button
