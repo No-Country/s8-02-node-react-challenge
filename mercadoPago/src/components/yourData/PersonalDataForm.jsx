@@ -1,6 +1,13 @@
 /* eslint-disable react/prop-types */
+
+import { useContext } from "react";
+import { ButtonEdit } from "./ButtonEdit";
+import { DataContext } from "../../context/DataContext";
+
 /* eslint-disable no-unused-vars */
-export const PersonalDataForm = ({ dni, phone, modal, handleModal }) => {
+export const PersonalDataForm = ({ dni, handleModal }) => {
+  const { phone } = useContext(DataContext);
+
   return (
     <>
       <h2 className="text-[#39528D] font-semibold mb-3">Datos personales</h2>
@@ -11,7 +18,7 @@ export const PersonalDataForm = ({ dni, phone, modal, handleModal }) => {
           <p className=" w-[90%] font-medium overflow-x-hidden">{dni} </p>
         </div>
       </div>
-      <div className=" mt-3 flex flex-col justify-center w-[90%]">
+      <div className=" mt-3 flex flex-col justify-center w-full">
         <h3 className="capitalize text-[#39528D] font-semibold">Teléfono</h3>
         <div
           className={`flex ${
@@ -19,7 +26,13 @@ export const PersonalDataForm = ({ dni, phone, modal, handleModal }) => {
           } items-center`}
         >
           {phone ? (
-            <p className=" w-[90%] font-medium overflow-x-hidden">{phone}</p>
+            <>
+              <p className=" w-[90%] font-medium overflow-x-hidden">{phone}</p>
+              <ButtonEdit
+                data={["Agregar teléfono", phone]}
+                handleModal={handleModal}
+              />
+            </>
           ) : (
             <button
               onClick={() =>

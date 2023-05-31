@@ -8,5 +8,6 @@ export const patchUser = async (id, data, token) => {
       },
     })
     .then((data) => data)
-    .catch((err) => err);
+    .catch((err) => err)
+    .finally((res) => res);
 };
