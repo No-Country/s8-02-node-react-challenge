@@ -44,6 +44,7 @@ const register = async (req, res) => {
       fullname:email.split('@')[0],
       address,
       balance,
+      username
     });
 
     if (req.files?.urlProfile) {
