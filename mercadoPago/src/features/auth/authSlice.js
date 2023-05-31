@@ -22,7 +22,7 @@ export const authSlice = createSlice({
       saveState(state);
     },
     updateData(state, action) {
-      state.user.userLogin = action.payload;
+      state.user.update = action.payload;
       saveState(state);
       return state;
     },
