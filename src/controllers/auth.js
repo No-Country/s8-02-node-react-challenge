@@ -32,7 +32,7 @@ const register = async (req, res) => {
     const color = faker.color.human();
     const company = faker.color.human();
 
-    const ali= `${animal}.${color}.${company}`
+    const ali= `wallet.${color}.${company}`
     let passwordHash = await bcrypt.hash(password, 8);
     let createUser = new userSchema({
       email,
