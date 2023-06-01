@@ -15,10 +15,7 @@ const Profile = () => {
   const [isView, setIsView] = useState(false);
 
   //Datos que usaré de user
-  const alias = user.userLogin.alias;
-  const cvu = user.userLogin.cvu;
-  const email = user.userLogin.email;
-
+  const { alias, cvu, email } = user.update;
   return (
     <>
       {/* <Header dato={'Tus Datos'} show={'flex'}/> */}
