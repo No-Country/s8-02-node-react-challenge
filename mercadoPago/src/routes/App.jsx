@@ -11,8 +11,8 @@ import YourData from "../pages/your-data";
 import QrLink from "../pages/qrlink-page";
 import AddMoney from "../pages/addmoney";
 import CardsPage from "../pages/cards-page";
-// import Activity from "../pages/activity/Activity";
-// import Details from "../pages/activity/Details";
+ import Activity from "../pages/activity/Activity";
+ import Details from "../pages/activity/Details";
 
 function App() {
   return (
@@ -30,8 +30,8 @@ function App() {
           <Route path="/addmoney" element={<AddMoney />} />
           <Route path="/qrlink" element={<QrLink />} />
           <Route path="/cards" element={<CardsPage />} />
-          {/* <Route path="/activity" element={<Activity />} /> */}
-          {/* <Route path="/activity/:id" element={<Details />} /> */}
+          <Route path="/activity" element={<Activity />} />
+          <Route path="/activity/:id" element={<Details />} />
         </Route>
       </Routes>
     </BrowserRouter>
