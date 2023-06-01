@@ -9,8 +9,10 @@ import createNotification from '../utils/Notification.js';
 //
 const transfer = async (req, res) => {
   try {
+    const { id }  = req.params;
     const { UserAccountId, amount, description, alias, cvu } = req.body;
-
+    console.log(id)
+  
     const validationResult = validateTransferData(alias, cvu, amount);
     if (validationResult.error) {
       return res.status(400).json({ error: validationResult.error });
@@ -176,8 +178,15 @@ const recentClients = async (req, res) => {
   try {
 
     const { id, amount } = req.params;
+    const token = req.headers;
     const query = createQueryClients(id);
     const activities = await findActivities(query, amount);
+
+    if (!token) {
+      return res
+        .status(409)
+        .json({ error: "El TOKEN no es valido" });
+    };
 
     if (activities.length === 0) {
       return res.status(200).json({ message: "No se encontraron actividades",valid:false });

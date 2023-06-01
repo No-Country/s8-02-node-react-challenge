@@ -1404,7 +1404,6 @@ const options = {
                     required: [
                         "amount",
                         "description",
-                        "payment",
                         "UserAccountId"
                     ],
                     properties: {
@@ -1414,7 +1413,7 @@ const options = {
                         },
                         amount: {
                             type: "number",
-                            example: "1250.36"
+                            example: "1250"
                         },
                         description: {
                             type: String,
@@ -1424,7 +1423,7 @@ const options = {
                         type: {
                             type: String,
                             enum:["pay","transfer", "Recharge"],
-                            require: true
+                            require: false
                         },
                         cvu: {
                             type: String,
@@ -1441,13 +1440,13 @@ const options = {
                         payment: {
                             method: {
                                 type: String,
-                                required: true,
+                                required: false,
                                 enum: ["card", "balance"],
                                 example: "Medio de transferencia"
                             },
                             cardId: {
                                 type: String,
-                                required: true,
+                                required: false,
                                 example: "264"
                             }
                         }

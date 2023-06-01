@@ -4,6 +4,7 @@ import ActivityModel from "../database/models/activity.js";
 const addMoney=async(req,res)=>{
 
     const {id}=req.params
+    
     const {cardNumber, cvv,balance}=req.body
     console.log(id)
     try{
