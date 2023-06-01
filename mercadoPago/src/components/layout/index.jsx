@@ -25,6 +25,9 @@ const Layout = ({ children }) => {
       case "/cards":
         setTitle("Tarjetas");
         break;
+      case "/activity":
+        setTitle("Actividades");
+        break;
       default:
         setTitle("");
         break;
@@ -32,7 +35,7 @@ const Layout = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full"> {/**  h-screen*/}
       <Dashboard open={open} setOpen={setOpen} />
       <Navbar menu={() => setOpen(!open)} dato={title} />
       <div className="">{children}</div>
