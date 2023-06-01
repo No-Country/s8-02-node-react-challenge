@@ -42,8 +42,7 @@ const userSchema = new Schema(
       type: String
     },
     balance: {
-      type: Number,
-      float: true
+      type: Number
     },
     cards: [
       {

@@ -12,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: process.env.ORIGIN1, /*"https://s8-02-node-react-challenge-api.onrender.com"*/
+                url: "https://api-wallet.onrender.com",
                 description: 'API Users for the ...'
             }
         ],
@@ -542,7 +542,7 @@ const options = {
                     }
                 },
             },
-            "/auth/card/{id}": {
+            "/auth/card/{id}/{user_number}": {
                 get: {
                     security: [
                         {
@@ -564,6 +564,15 @@ const options = {
                             }
                         },
                         {
+                            in: "path",
+                            name: "user_number",
+                            description: "The name that needs to be fetched. Use user for testing.",
+                            required: true,
+                            schema: {
+                                type: "number"
+                            }
+                        },
+                        {
                             name: "Authorization",
                             in: "header",
                             description: "Token",
@@ -577,12 +586,12 @@ const options = {
                             content: {
                                 "application/json": {
                                     schema: {
-                                        $ref: "#/components/schemas/user"
+                                        $ref: "#/components/schemas/card"
                                     }
                                 },
                                 "application/xml": {
                                     schema: {
-                                        $ref: "#/components/schemas/user"
+                                        $ref: "#/components/schemas/card"
                                     }
                                 }
                             }
@@ -594,7 +603,9 @@ const options = {
                             description: "card not found"
                         }
                     }
-                },
+                }
+            },
+            "/auth/card/{id}": {
                 post: {
                     security: [
                         {
@@ -930,7 +941,7 @@ const options = {
                     }
                 }
             },
-            "/auth/activity/activities": {
+            "/auth/activity/activities/{id}/{amount}": {
                 get: {
                     security: [
                         {
@@ -957,6 +968,75 @@ const options = {
                             description: "Token",
                             required: true,
                             example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        },
+                        {
+                            in: "path",
+                            name: "amount",
+                            description: "Amount of activity.",
+                            required: false,
+                            schema: {
+                                type: "number"
+                            }
+                        }
+                    ],
+                    responses: {
+                        200: {
+                            description: "Successful operation",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                },
+                                "application/xml": {
+                                    schema: {
+                                        $ref: "#/components/schemas/activity"
+                                    }
+                                }
+                            }
+                        },
+                        405: {
+                            description: "Invalid input"
+                        }
+                    }
+                }
+            },
+            "/auth/activity/recent/{id}/{amount}": {
+                get: {
+                    security: [
+                        {
+                            api_key: [""]
+                        }
+                    ],
+                    tags: [
+                        "Activity"
+                    ],
+                    summary: "GET activity of the user",
+                    parameters: [
+                        {
+                            in: "path",
+                            name: "id",
+                            description: "The id that needs to be fetched. Use user1.alias1.pay1 for testing.",
+                            required: true,
+                            schema: {
+                                type: String
+                            }
+                        },
+                        {
+                            name: "Authorization",
+                            in: "header",
+                            description: "Token",
+                            required: true,
+                            example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+                        },
+                        {
+                            in: "path",
+                            name: "amount",
+                            description: "Amount of activity.",
+                            required: false,
+                            schema: {
+                                type: "number"
+                            }
                         }
                     ],
                     responses: {
@@ -1214,7 +1294,7 @@ const options = {
                             example: "Nombre.de.alias"
                         },
                         cvu: {
-                            type: "number",
+                            type: "string",
                             required: false,
                             example: "00000062624512345678"
                         },
@@ -1257,7 +1337,7 @@ const options = {
                         balance: {
                             type: "number",
                             required: false,
-                            example: "23.362,215"
+                            example: "50500"
                         }
                     },
                     xml: {
@@ -1324,10 +1404,14 @@ const options = {
                     required: [
                         "amount",
                         "description",
-                        "type",
-                        "payment"
+                        "payment",
+                        "UserAccountId"
                     ],
                     properties: {
+                        UserAccountId: {
+                            type: String,
+                            example: "638d039e8ce24f8a608e5a37"
+                        },
                         amount: {
                             type: "number",
                             example: "1250.36"
@@ -1345,11 +1429,13 @@ const options = {
                         cvu: {
                             type: String,
                             require: false,
+                            $ref: "#/components/schemas/user/properties/cvu",
                             example: "1234567891234567891234"
                         },
                         alias: {
                             type: String,
                             require: false,
+                            $ref: "#/components/schemas/user/properties/alias",
                             example: "panza.vino.rock"
                         },
                         payment: {
