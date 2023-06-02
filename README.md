@@ -8,8 +8,11 @@ WalletPay es una plataforma que te permite realizar pagos y cobros online median
 
 ### Gestión del Proyecto:
 Slack
+
 Google Meet
+
 Discord
+
 Trello
 
 ### Frontend:
@@ -21,25 +24,33 @@ Axios
 
 ### Backend:
 
-Javascript,
-Jswebtoken,
-Express,
-Node,
-Mongoose,
-Cookie-parser (no)
-Bcrypt (no es necesario colocarlo)
-Cloudinary para el hosteo de imágenes,
-Jest y supertest para los test,
-Nodemailer para el envío de correo,
-Faker-js para la creacion d estos aleatorios ficticios,
-QRcode para la creacion de código QR,
-Cors.
+Javascript
+
+Jswebtoken
+
+Express
+
+Node
+
+Mongoose
+
+Cloudinary para el hosteo de imágenes
+
+Jest y supertest para los test
+
+Nodemailer para el envío de correos
+Faker-js para la creacion d estos aleatorios ficticios
+
+QRcode para la creacion de código QR
+
+Cors
 
 ### Base de datos:
 mongoDB
 
 ### Testing:
 Postman
+
 Excel
 
 ### Diseño UX/UI:
@@ -51,6 +62,7 @@ Swagger
 
 ### 🚀Deploy🚀
 Frontend:
+
 Backend:
 
 ### Miembros del Equipo 🤝
