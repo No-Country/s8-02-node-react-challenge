@@ -74,10 +74,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   let { email, password } = req.body;
   try {
-    let user = await userSchema.findOne({ email }).populate({
-      path: 'cards',
-      options: { strictPopulate: false }
-    });;
+    let user = await userSchema.findOne({ email })
 
     if (!user) {
       return res.status(409).json({ error: "Credenciales errores" });
@@ -89,8 +86,10 @@ const login = async (req, res) => {
       return res.status(409).json({ error: "El password es incorrecto" });
     }
     const update = await userSchema
-      .findOne({ email: user.email })
-      .select("-password");
+      .findOne({ email: user.email }).populate({
+        path: 'cards',
+        options: { strictPopulate: false }
+      }).select("-password");
 
     let token = generateToken(user._id);
 
