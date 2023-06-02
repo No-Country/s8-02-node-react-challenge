@@ -1,56 +1,69 @@
 # S8-02
 
-## WalletPay es una plataforma que te permite realizar pagos y cobros mediante diferentes
-## medios de pago, funcionando como una billetera virtual que permite realizar transacciones de
-## forma completamente digital.
+# WalletPay 
 
-Tecnologías utilizadas: 
+WalletPay es una plataforma que te permite realizar pagos y cobros online mediante diferentes medios de pago, funcionando como una billetera virtual a través de la cual puedes realizar transacciones de forma completamente digital conservando el historial de los mismos.
 
-Gestión del Proyecto:
+## Tecnologías utilizadas 💻🔧 
+
+### Gestión del Proyecto:
 Slack
 Google Meet
 Discord
 Trello
 
-Frontend:
+### Frontend:
+
 React
 Taiwind
 Redux-toolkit
 Axios
 
-Backend:
-javascript
-jswebtoken
-bcrypt
-cookie-parser
-express
-Mongoose
+### Backend:
 
-Base de datos:
+Javascript,
+Jswebtoken,
+Express,
+Node,
+Mongoose,
+Cookie-parser (no)
+Bcrypt (no es necesario colocarlo)
+Cloudinary para el hosteo de imágenes,
+Jest y supertest para los test,
+Nodemailer para el envío de correo,
+Faker-js para la creacion d estos aleatorios ficticios,
+QRcode para la creacion de código QR,
+Cors.
+
+### Base de datos:
 mongoDB
 
-Testing:
+### Testing:
 Postman
 Excel
 
-Diseño UX/UI:
+### Diseño UX/UI:
 Figma
 Illustrator.
 
-Documentación:
+### Documentación:
 Swagger
 
-Deploy:
+### 🚀Deploy🚀
+Frontend:
+Backend:
 
-### Equipo de Desarrollo
+### Miembros del Equipo 🤝
+
+Equipo de Desarrollo:
 
 | Equipo de Backend | Equipo de Frontend |
 | ------------- | ------------- |
 | Miguel Guerrero | Ana Juarez |
 | Cristian Gómez | Leandro Martini |
 | Elias Galeano | Alejandro Wogelme |
-| Luis Velasquez | Fabian Romano|
-| Sergio Calbiño ||
+| Sergio Calbiño| Fabian Romano|
+
 
 ### Equipo de Testing:
 Melisa Ramírez
