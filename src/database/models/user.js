@@ -4,7 +4,6 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: false
     },
     alias: {
       type: String,
