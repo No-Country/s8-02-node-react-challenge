@@ -9,10 +9,14 @@ const CardInputStep1 = ({ dataForm, setDataForm }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setDataForm({
-      ...dataForm,
-      [e.target.name]: e.target.value,
-    });
+    const value = e.target.value;
+    if (value.length <= 16) {
+      setDataForm({
+        ...dataForm,
+        [e.target.name]: e.target.value,
+      });
+    }
+
     const typeCard = dataForm.numbercard.charAt(0);
     if (typeCard == 3) {
       dispatch(

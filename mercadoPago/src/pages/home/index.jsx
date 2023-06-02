@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
 // import Empty from '../../components/activity/Empty'
 import Item from "../../components/activity/Item";
-import Header from "../../components/header/Header";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Layout from "../../components/layout";
 
 const Home = () => {
-  //Dejo Provisorio para mostrar al tl
   const { user } = useSelector((state) => state.auth);
   console.log(user);
 
-  const monto = user?.update.balance || 0;
+  const monto = user?.update.balance;
 
   //Mostrar o no la contraseña
   const [isShow, setIsShow] = useState(false);
