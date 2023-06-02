@@ -2,10 +2,13 @@ import EmptyCardBack from "../empty-card-back";
 
 const CardInputStep4 = ({ dataForm, setDataForm }) => {
   const handleChange = (e) => {
-    setDataForm({
-      ...dataForm,
-      [e.target.name]: e.target.value,
-    });
+    const value = e.target.value;
+    if (value.length <= 3) {
+      setDataForm({
+        ...dataForm,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   return (

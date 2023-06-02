@@ -5,16 +5,32 @@ import Layout from "../../components/layout";
 import OptionsQrStep3 from "../../components/optionsqr/optionsqr-step3";
 import OptionsQrStep4 from "../../components/optionsqr/optionsqr-step4";
 import moment from "moment";
+import useTranfer from "../../hooks/useTranfer";
 
 const QrScanner = () => {
   const [pantallaActual, setPantallaActual] = useState(1);
   const [scannedData, setScannedData] = useState(null);
+  const [error, setError] = useState(null);
+  const {
+    error: loginError,
+    isLoading,
+    postData,
+  } = useTranfer({
+    onSuccess: (data) => {
+      console.log(data);
+      // dispatch(login(data));
+    },
+    onError: (_error) => {
+      setError("Email o Contraseña Incorrecta...");
+    },
+  });
   const currentDateTime = moment().format("DD [de] MMMM YYYY - HH:mm[hs.]");
   const handleNext = () => {
     if (pantallaActual < 4) {
       setPantallaActual(pantallaActual + 1);
     }
   };
+  console.log(error);
   return (
     <Layout>
       <section>

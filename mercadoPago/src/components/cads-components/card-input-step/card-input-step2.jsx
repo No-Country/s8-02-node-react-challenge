@@ -2,10 +2,13 @@ import EmptyCard from "../empty-card";
 
 const CardInputStep2 = ({ dataForm, setDataForm }) => {
   const handleChange = (e) => {
-    setDataForm({
-      ...dataForm,
-      [e.target.name]: e.target.value,
-    });
+    const value = e.target.value;
+    if (value.length <= 15) {
+      setDataForm({
+        ...dataForm,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   return (
