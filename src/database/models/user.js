@@ -4,7 +4,6 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: false
     },
     alias: {
       type: String,
@@ -42,8 +41,7 @@ const userSchema = new Schema(
       type: String
     },
     balance: {
-      type: Number,
-      float: true
+      type: Number
     },
     cards: [
       {

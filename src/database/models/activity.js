@@ -20,14 +20,14 @@ const activitySchema = new Schema(
     },
     type:{
       type:String,
-      enum:["pay","transfer", "Recharge"],
+      enum:["pay","transfer", "recharge"],
       require: true
     },
     payment:{
       method:{
         type:String,
         enum:["card","balance"],
-        require:true
+        require:false
       },
       cardId:{
         type: Schema.Types.ObjectId,
