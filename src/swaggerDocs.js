@@ -1475,12 +1475,12 @@ const options = {
                 addMoney:{
                     type: "object",
                     required: [
-                        "user_number",
+                        "cardNumber",
                         "cvv",
                         "balance"
                     ],
                     properties: {
-                        user_number: {
+                        cardNumber: {
                             $ref: "#/components/schemas/card/properties/user_number"
                         },
                         cvv: {
