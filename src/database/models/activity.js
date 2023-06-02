@@ -20,7 +20,7 @@ const activitySchema = new Schema(
     },
     type:{
       type:String,
-      enum:["pay","transfer", "Recharge"],
+      enum:["pay","transfer", "recharge"],
       require: true
     },
     payment:{
