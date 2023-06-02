@@ -1,8 +1,8 @@
 # S8-02
 
 ## WalletPay es una plataforma que te permite realizar pagos y cobros mediante diferentes
-medios de pago, funcionando como una billetera virtual que permite realizar transacciones de
-forma completamente digital.
+## medios de pago, funcionando como una billetera virtual que permite realizar transacciones de
+## forma completamente digital.
 
 Tecnologías utilizadas: 
 
