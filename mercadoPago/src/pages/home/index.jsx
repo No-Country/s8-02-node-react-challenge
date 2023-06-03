@@ -59,7 +59,7 @@ const Home = () => {
                   Ingresar dinero{" "}
                 </button>
               </Link>
-              <button className="bg-bgButton p-1 rounded-[4px] w-[139px] mt-[10px] h-[24px]">
+              <button className="bg-bgButton p-1 rounded-[4px] w-[139px] mt-[10px] h-[24px]">Transferir Dinero</button>
             </div>
           </div>
 
