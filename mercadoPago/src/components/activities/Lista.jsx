@@ -2,12 +2,13 @@
 import { Link } from 'react-router-dom'
 
 const Lista = ({destinity, monto, id, hour}) => {
+    console.log("ID List: ", id)
     return (
         <>
             <div className='flex-col'>
                 <div className='mb-2'>
                 <div className={`rounded-[10px] h-20 bg-white`}>
-                    <Link to={`/activity/${id}`}>
+                    
                         <div className="flex items-center p-4">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="48" height="48" rx="24" fill="#ECEBF6"/>
@@ -25,7 +26,7 @@ const Lista = ({destinity, monto, id, hour}) => {
                                 </div>
                             </div>
                         </div>
-                    </Link>
+                    
                 </div>
                 </div>
             </div>
