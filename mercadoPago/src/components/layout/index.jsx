@@ -25,8 +25,16 @@ const Layout = ({ children }) => {
       case "/cards":
         setTitle("Tarjetas");
         break;
+<<<<<<< HEAD
       case "/activity":
         setTitle("Actividades");
+=======
+      case "/qrlink":
+        setTitle("Generar Qr");
+        break;
+      case "/qrscanner":
+        setTitle("Escaner Qr");
+>>>>>>> fbb700d7a9a40adf7d8da03be24ac6ffcafc2932
         break;
       default:
         setTitle("");

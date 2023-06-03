@@ -1,32 +1,18 @@
-import CardDebito from "./card-debito";
 import americanexpress from "../../../assets/cards/americanexpress.svg";
 import visa from "../../../assets/cards/visa.svg";
 import mastercard from "../../../assets/cards/mastercard.svg";
 import { useSelector } from "react-redux";
+import AllCardsDebito from "./all-cards-debito";
 
-const AddAllCards = ({ onNext, setDataForm }) => {
+const AllCards = () => {
   const { user } = useSelector((state) => state.auth);
   const { cards } = user?.update;
-
-  const handleClick = (number, cvv, bank) => {
-    setDataForm((prev) => ({
-      ...prev,
-      cardNumber: number,
-      cvv: cvv,
-      bank: bank,
-    }));
-    onNext();
-  };
 
   return (
     <div className="flex flex-col justify-center items-center gap-[16px] mt-6 ">
       {cards?.map((el) => (
-        <div
-          key={el._id}
-          onClick={() => handleClick(el.user_number, el.cvv, el.bank)}
-        >
-          <CardDebito
-            setDataForm={setDataForm}
+        <div key={el._id}>
+          <AllCardsDebito
             number={el.user_number}
             image={visa}
             background1="linear-gradient(90deg, rgba(143,42,240,1) 33%, rgba(173,97,245,1) 66%)"
@@ -49,4 +35,4 @@ const AddAllCards = ({ onNext, setDataForm }) => {
   );
 };
 
-export default AddAllCards;
+export default AllCards;

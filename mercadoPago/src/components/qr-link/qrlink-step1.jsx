@@ -1,17 +1,14 @@
 import { useState } from "react";
 
-const AddMoneyStep2 = ({ onNext, setDataForm }) => {
-  const [data, setData] = useState(0);
+const QrLinkStep1 = ({ onNext, setDataForm }) => {
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(true);
 
   const handleChange = (e) => {
-    setDataForm((prev) => ({ ...prev, balance: Number(e.target.value) }));
-    setData(e.target.value);
-    if (data > 0) {
+    setDataForm(e.target.value);
+    if (e.target.value > 0) {
       setBotonDeshabilitado("");
     }
   };
-
   return (
     <section className="mt-6">
       <form className="flex flex-col items-center">
@@ -43,4 +40,4 @@ const AddMoneyStep2 = ({ onNext, setDataForm }) => {
   );
 };
 
-export default AddMoneyStep2;
+export default QrLinkStep1;
