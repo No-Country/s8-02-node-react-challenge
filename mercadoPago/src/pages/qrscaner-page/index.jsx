@@ -2,36 +2,58 @@ import { useState } from "react";
 import OptionsQrStep1 from "../../components/optionsqr/optionsqr-step1";
 import OptionsQrStep2 from "../../components/optionsqr/optionsqr-step2";
 import Layout from "../../components/layout";
+import OptionsQrStep3 from "../../components/optionsqr/optionsqr-step3";
+import OptionsQrStep4 from "../../components/optionsqr/optionsqr-step4";
+import moment from "moment";
+import useTranfer from "../../hooks/useTranfer";
 
 const QrScanner = () => {
   const [pantallaActual, setPantallaActual] = useState(1);
-
+  const [scannedData, setScannedData] = useState(null);
+  const [error, setError] = useState(null);
+  const {
+    error: loginError,
+    isLoading,
+    postData,
+  } = useTranfer({
+    onSuccess: (data) => {
+      console.log(data);
+      // dispatch(login(data));
+    },
+    onError: (_error) => {
+      setError("Email o Contraseña Incorrecta...");
+    },
+  });
+  const currentDateTime = moment().format("DD [de] MMMM YYYY - HH:mm[hs.]");
   const handleNext = () => {
-    if (pantallaActual < 2) {
+    if (pantallaActual < 4) {
       setPantallaActual(pantallaActual + 1);
     }
   };
+  console.log(error);
   return (
     <Layout>
       <section>
-        {pantallaActual === 1 && <OptionsQrStep1 onNext={handleNext} />}
-        {pantallaActual === 2 && <OptionsQrStep2 onNext={handleNext} />}
+        {pantallaActual === 1 && (
+          <OptionsQrStep1 onNext={handleNext} setScannedData={setScannedData} />
+        )}
+        {pantallaActual === 2 && (
+          <OptionsQrStep2 onNext={handleNext} scannedData={scannedData} />
+        )}
+        {pantallaActual === 3 && (
+          <OptionsQrStep3
+            onNext={handleNext}
+            scannedData={scannedData}
+            currentDateTime={currentDateTime}
+          />
+        )}
+        {pantallaActual === 4 && (
+          <OptionsQrStep4
+            scannedData={scannedData}
+            currentDateTime={currentDateTime}
+          />
+        )}
       </section>
-      {/* <section className="flex flex-col items-center justify-center">
-        <div className="h-[100px] w-[328px] bg-white rounded-[10px] shadow-cardShadow my-4 px-8 flex items-center justify-between">
-          <p className="font-semibold text-lg leading-[22px] text-center">
-            Elige una opcion Scanear o Subir una imagen
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-4">
-          <div className="bg-[#10224D] rounded-[10px] h-[48px] w-[328px] text-white font-semibold text-base leading-5 flex justify-center items-center ">
-            Scanner
-          </div>
-          <div className="bg-[#10224D] rounded-[10px] h-[48px] w-[328px] text-white font-semibold text-base leading-5 flex justify-center items-center ">
-            Upload image
-          </div>
-        </div>
-      </section> */}
     </Layout>
   );
 };

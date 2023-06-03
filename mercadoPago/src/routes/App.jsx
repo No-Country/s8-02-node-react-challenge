@@ -17,8 +17,8 @@ import TopBarTransfer from "../components/tranfer-components/topBarTransfer";
 import { AddAccount } from "../pages/transfer/addAccount";
 
 
-// import Activity from "../pages/activity/Activity";
-// import Details from "../pages/activity/Details";
+import Activity from "../pages/activity/Activity";
+import Details from "../pages/activity/Details";
 
 function App() {
   return (
@@ -38,8 +38,8 @@ function App() {
           <Route path="/addmoney" element={<AddMoney />} />
 
           <Route path="/cards" element={<CardsPage />} />
-          {/* <Route path="/activity" element={<Activity />} /> */}
-          {/* <Route path="/activity/:id" element={<Details />} /> */}
+          <Route path="/activity" element={<Activity />} />
+          <Route path="/activity/:id" element={<Details />} />
           <Route path="/transfer" element= {<TopBarTransfer/>}>
             <Route index element={<Transfer />} />
             <Route
