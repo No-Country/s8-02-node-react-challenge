@@ -25,16 +25,14 @@ const Layout = ({ children }) => {
       case "/cards":
         setTitle("Tarjetas");
         break;
-<<<<<<< HEAD
       case "/activity":
         setTitle("Actividades");
-=======
+        break;
       case "/qrlink":
         setTitle("Generar Qr");
         break;
       case "/qrscanner":
         setTitle("Escaner Qr");
->>>>>>> fbb700d7a9a40adf7d8da03be24ac6ffcafc2932
         break;
       default:
         setTitle("");
@@ -43,7 +41,7 @@ const Layout = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div className="relative w-full"> {/**  h-screen*/}
+    <div className="relative w-full z-10"> {/**  h-screen*/}
       <Dashboard open={open} setOpen={setOpen} />
       <Navbar menu={() => setOpen(!open)} dato={title} />
       <div className="">{children}</div>
