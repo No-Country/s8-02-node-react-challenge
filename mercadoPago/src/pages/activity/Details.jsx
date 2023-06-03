@@ -6,9 +6,20 @@ import copy from '../../utils/copy';
 
 
 const ItemView = ({created, id, money, person, cvu}) => {
+    const menu = localStorage.getItem('menu')
+    console.log("menu", menu)
+
+    const fechaSlice = (f) => {
+        //2023-05-31T06:48:51.876Z
+        return f.slice(0,10)
+    }
+
+    const hourSlice = (h) => {
+        return h.slice(11,-8)
+    }
     return (
         <div className='flex-col justify-center items-center text-center mt-6 ml-[17px] mr-4'>
-            <p className='font-medium leading-[16px] mb-3 text-sm'>Creada el {created}</p>
+            <p className='font-medium leading-[16px] mb-3 text-sm'>Creada el {fechaSlice(created)}, {hourSlice(created)}</p>
             <div className='relative'>
                 <span className='text-[#39528D] font-medium text-sm leading-[16px]'>Operación: {id}</span>
                 <button className='p-0 bg-transparent border-none ml-2 absolute top-0' onClick={() => copy(id)}>
