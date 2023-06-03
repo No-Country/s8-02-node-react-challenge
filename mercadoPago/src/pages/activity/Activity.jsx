@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 //import Item from "../../components/activity/Item"
 import { useSelector } from 'react-redux'
 import Layout from "../../components/layout";
+import Loader from "../../components/loader"
 
 //Vista cuando da error el back en ver las actividades
 const Error = () => {
@@ -35,6 +36,7 @@ const Activity = () => {
     const { user } = useSelector((state) => state.auth);
     const [data, setData] = useState([])
     const [error, setError] = useState('e')
+    const [isLoading, setIsLoading] = useState(true)
     //const { activities } = data
     //const token = user.token.token
     //console.log(user, token)
@@ -48,6 +50,7 @@ const Activity = () => {
   //console.log(activities)
 
    useEffect(() => {
+    setIsLoading(true)
         const instance = axios.create({
             baseURL: 'https://api-wallet.onrender.com',
             headers: {'Authorization': token }
@@ -56,11 +59,13 @@ const Activity = () => {
         instance.get(`/auth/activity/activities/${id}`) //.UserAccountId
         .then(response => {
            // console.log(response.data.activities)
-            console.log(response.data)
+            console.log(response.data.activities)
+            setIsLoading(false)
             setData(response.data.activities)
         }).catch(e => {
             console.log(e)
             setError(e.response.data.error)
+        }).finally(() => {
         })
 
         //if(data.message != 'No se encontraron') setData(data.activities)
@@ -81,6 +86,7 @@ const Activity = () => {
         <>
             <Layout />
             {
+                isLoading ? <Loader/> : (
                 error.length > 1 ? <Error/> : (
                     data.length === 0 ? <Empty/> : (
                         data.map((item, index) => (
@@ -88,12 +94,11 @@ const Activity = () => {
                                 <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
                                     <p className='text-[#39528D] font-semibold'>{fechaSlice(item.updatedAt)}</p>
                                 </div>
-                                <Link to={`/activity/${id}`}>
-                                    <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={data._id} hour={hourSlice(item.updatedAt)} />
-                                </Link>
+                                    <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={item._id} hour={hourSlice(item.updatedAt)} />
                             </div>
                         ))
                     )
+                )
                 )
             }
         </>
