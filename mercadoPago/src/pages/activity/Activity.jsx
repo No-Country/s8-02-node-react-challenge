@@ -1,6 +1,7 @@
 import Empty from "../../components/activities/Empty"
 import Lista from "../../components/activities/Lista"
 import Header from "../../components/header/Header"
+import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 import { useEffect, useState } from "react"
@@ -87,87 +88,14 @@ const Activity = () => {
                                 <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
                                     <p className='text-[#39528D] font-semibold'>{fechaSlice(item.updatedAt)}</p>
                                 </div>
-                                <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={data._id} hour={hourSlice(item.updatedAt)} />
+                                <Link to={`/activity/${id}`}>
+                                    <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={data._id} hour={hourSlice(item.updatedAt)} />
+                                </Link>
                             </div>
                         ))
                     )
                 )
             }
-
-            {/*
-                data.hasOwnProperty('message') ? <p>Hay</p> : <p>No hay</p>
-
-                (
-                            data.map((item, index) => (
-                                <div className='pl-4 pr-4' key={index}>
-                                    <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                                        <p className='text-[#39528D] font-semibold'>{item.updatedAt}</p>
-                                    </div>
-                                    <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={data._id} />
-                                </div>
-                            ))
-                        )
-    */}
-
-
-
-            {/*
-                error.length > 1 ? <Error /> : (
-                    data.message === 'No se encontraron actividades' ? <Empty /> : <p>Listo</p>
-                )
-                */}
-
-{/*
-(
-                        data.activities.map((item, index) => (
-                            <div className='pl-4 pr-4' key={index}>
-                                <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                                    <p className='text-[#39528D] font-semibold'>{item.updatedAt}</p>
-                                </div>
-                                <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={data._id} />
-                            </div>
-                        ))
-                    )
-
-*/}
-
-
-
-
-{/* data.message == 'No' ? <Empty/> : (
-                        data.map((item, index) => (
-                            <div className='pl-4 pr-4' key={index}>
-                                <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                                    <p className='text-[#39528D] font-semibold'>{item.updatedAt}</p>
-                                </div>
-                                <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={data._id} />
-                            </div>
-                            ))
-                        )*/}
-
-
-           {/* <div className='pl-4 pr-4 h-5 mt-auto'>
-                <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                    <p className='text-[#39528D] font-semibold'>{data[0].updatedAt}</p>
-                </div>
-        <Lista destinity={destinity} monto={data[0].amount}/>*/}
-
-
-
-
-                {/*<div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                    <p className='text-[#39528D] font-semibold'>Ayer</p>
-                </div>
-                <Lista />
-                <Lista />
-
-                <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                    <p className='text-[#39528D] font-semibold'>Anteriores</p>
-                </div>
-                <Lista />
-                <Lista />
-                    <Lista />*/}
-                 {/*   </div>*/}
         </>
     )
 }
