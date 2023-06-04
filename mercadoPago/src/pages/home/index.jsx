@@ -14,10 +14,21 @@ const Home = () => {
   //Mostrar o no la contraseña
   const [isShow, setIsShow] = useState(false);
 
+
+  //Separar el monto, la parte entera y decimal
+  function separarEnterosDecimales (num) {
+    let parteEntera = Math.floor(num)
+    let parteDecimal = ((num - parteEntera) * 100).toFixed(0)
+
+    return [parteEntera, parteDecimal]
+  }
+
+  let entero = separarEnterosDecimales(monto)
+  let decimal = separarEnterosDecimales(monto)
+
   return (
     <>
       <Layout>
-        {/* <Header dato={"Inicio"} show={'flex'} /> */}
 
         <div className="flex flex-col gap-4 justify-center font-Montserrat bg-[#ECEBF6] py-[16px] px-4">
           <div className="rounded-lg bg-white shadow-cardShadow h-40 mb-[20px]">
@@ -28,8 +39,8 @@ const Home = () => {
             <div className="font-semibold flex justify-between -mt-2 pr-[21px] pl-[21px]">
               <div className="pt-[13px] w-full">
                 <div className="flex items-center">
-                  <p className="text-[16px]">{isShow ? "$ ***" : `$ ${monto}`}
-                    <span className="text-xs" style={{ display: `${isShow ? "none" : "inline"}` }}> 00</span>
+                  <p className="text-[16px]">{isShow ? "$ ***" : `$ ${entero[0]}`}
+                    <span className="text-xs" style={{ display: `${isShow ? "none" : "inline"}` }}>.{decimal[1]}</span>
                   </p>
                   {
                     isShow ? (

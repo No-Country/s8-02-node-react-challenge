@@ -3,11 +3,13 @@ import Layout from '../../components/layout'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import copy from '../../utils/copy';
+import { useSelector } from 'react-redux'
+import Header from '../../components/header/Header';
 
 
 const ItemView = ({created, id, money, person, cvu}) => {
-    const menu = localStorage.getItem('menu')
-    console.log("menu", menu)
+    /*const menu = localStorage.getItem('menu')
+    console.log("menu", menu)*/
 
     const fechaSlice = (f) => {
         //2023-05-31T06:48:51.876Z
@@ -95,42 +97,37 @@ const ItemView = ({created, id, money, person, cvu}) => {
     )
 }
 
-
-
-
-
 const Details = () => {
     const [data, setData] = useState([])
-    const [error, setError] = useState('e')
-    let _id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
+    const { user } = useSelector((state) => state.auth);
+    //let _id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
+    //let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
 
+    //const token = user.token.token
+    let token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
 
+    console.log("**Details**")
     let { id } = useParams()
+   // console.log("id; ", id)
 
     useEffect(() => {
         const instance = axios.create({
             baseURL: 'https://api-wallet.onrender.com',
-            headers: {'Authorization': token }
+            headers: {'Authorization': token2 }
         });
 
-        instance.get(`/auth/activity/activities/${_id}`) //.UserAccountId
+        instance.get(`/auth/activity/activities/${user.update._id}`) //.UserAccountId
         .then(response => {
-           // console.log(response.data.activities)
-            console.log(response.data)
+            console.log(response.data.activities)
             setData(response.data.activities)
         }).catch(e => {
-            console.log(e)
-            setError(e.response.data.error)
+            console.log(e.response.data.error)
         })
-
-        //if(data.message != 'No se encontraron') setData(data.activities)
-
-       // console.log(data[0].destinyAccountId.alias)
     }, [])
+
     return (
         <>
-            <Layout />
+            <Header dato={'Detalle de Operación'} />
             {
                 data.map((item, index) => (
                    item._id === id ? <ItemView created={item.updatedAt}  id={item._id} money={item.amount}  person={item.destinyAccountId.fullname} cvu={item.destinyAccountId.cvu}  key={index} /> : null
