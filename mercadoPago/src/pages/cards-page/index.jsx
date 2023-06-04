@@ -23,7 +23,7 @@ const CardsPage = () => {
     <section>
       <div className="bg-[#10224D] shadow-cardShadow w-full h-[10vh] flex items-center text-white justify-between pl-6 pr-[26px]">
         <div className="flex items-center gap-6">
-          <Link to="/home">
+          <Link to="/profile">
             <FiArrowLeft className="text-2xl cursor-pointer" />
           </Link>
           <p className="pr-24 font-semibold">Tarjetas</p>
