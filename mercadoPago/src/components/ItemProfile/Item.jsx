@@ -1,6 +1,10 @@
+import { Link } from 'react-router-dom'
+
 const Item = (props) => {
     return (
+        <Link to={props.data}>
         <div className='flex items-center gap-2 mt-10 pl-8 pr-11 mb-12 cursor-pointer'>
+          
             <div>
                 <img src={props.icon} />
             </div>
@@ -16,6 +20,7 @@ const Item = (props) => {
                 </div>
             </div>
         </div>
+            </Link>
     )
 }
 
