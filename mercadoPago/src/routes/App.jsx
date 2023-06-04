@@ -12,10 +12,12 @@ import QrLink from "../pages/qrlink-page";
 import AddMoney from "../pages/addmoney";
 import CardsPage from "../pages/cards-page";
 import QrScanner from "../pages/qrscaner-page";
+import { TransferCheck } from "../pages/transfer/transeferCorroborate";
+
+// import Activity from "../pages/activity/Activity";
+// import Details from "../pages/activity/Details";
 import Activity from "../pages/activity/Activity";
 import Details from "../pages/activity/Details";
-
-
 
 function App() {
   return (
@@ -34,6 +36,11 @@ function App() {
           <Route path="/qrlink" element={<QrLink />} />
           <Route path="/qrscanner" element={<QrScanner />} />
           <Route path="/cards" element={<CardsPage />} />
+          <Route path="/transfer">
+            <Route path="check" element={<TransferCheck />} />
+          </Route>
+          {/* <Route path="/activity" element={<Activity />} /> */}
+          {/* <Route path="/activity/:id" element={<Details />} /> */}
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
         </Route>
