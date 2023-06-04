@@ -12,7 +12,7 @@ import Layout from "../../components/layout";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
-  const [isView, setIsView] = useState(false);
+  const [isView, setIsView] = useState(true);
 
   //Datos que usaré de user
   const { alias, cvu, email } = user.update;
