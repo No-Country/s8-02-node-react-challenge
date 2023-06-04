@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const Transfer = () => {
   return (
     <>
-
       <div className="flex flex-col gap-4 justify-center bg-[#ECEBF6] py-[16px] px-4">
         <div className="rounded-lg bg-white shadow-cardShadow  mb-[20px] h-[152px]">
           <h2 className="font-semibold text-lg ml-4  pt-4 mb-6 ">
@@ -15,15 +13,24 @@ const Transfer = () => {
           <Link to="/transfer/addacoount">
             <div className="flex items-center p-4">
               <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M19.9951 31.6666C19.6002 31.6666 19.2709 31.5336 19.007 31.2674C18.7431 31.0011 18.6111 30.6713 18.6111 30.2778V21.3889H9.72222C9.32872 21.3889 8.99886 21.2553 8.73263 20.9881C8.46644 20.721 8.33334 20.39 8.33334 19.9951C8.33334 19.6002 8.46644 19.2708 8.73263 19.0069C8.99886 18.743 9.32872 18.6111 9.72222 18.6111H18.6111V9.72219C18.6111 9.32869 18.7447 8.99883 19.0118 8.7326C19.279 8.46641 19.61 8.33331 20.0049 8.33331C20.3998 8.33331 20.7292 8.46641 20.9931 8.7326C21.2569 8.99883 21.3889 9.32869 21.3889 9.72219V18.6111H30.2778C30.6713 18.6111 31.0012 18.7447 31.2674 19.0118C31.5336 19.279 31.6667 19.61 31.6667 20.0049C31.6667 20.3997 31.5336 20.7291 31.2674 20.993C31.0012 21.2569 30.6713 21.3889 30.2778 21.3889H21.3889V30.2778C21.3889 30.6713 21.2553 31.0011 20.9882 31.2674C20.721 31.5336 20.39 31.6666 19.9951 31.6666Z"
-                  fill="black"
+                  d="M23.9953 35.6667C23.6004 35.6667 23.271 35.5336 23.0071 35.2674C22.7432 35.0012 22.6113 34.6713 22.6113 34.2778V25.3889H13.7224C13.3289 25.3889 12.999 25.2553 12.7328 24.9882C12.4666 24.721 12.3335 24.39 12.3335 23.9951C12.3335 23.6002 12.4666 23.2709 12.7328 23.007C12.999 22.7431 13.3289 22.6111 13.7224 22.6111H22.6113V13.7222C22.6113 13.3287 22.7449 12.9989 23.012 12.7326C23.2791 12.4664 23.6101 12.3333 24.005 12.3333C24.3999 12.3333 24.7293 12.4664 24.9932 12.7326C25.2571 12.9989 25.389 13.3287 25.389 13.7222V22.6111H34.278C34.6715 22.6111 35.0013 22.7447 35.2675 23.0118C35.5337 23.279 35.6668 23.61 35.6668 24.0049C35.6668 24.3998 35.5337 24.7292 35.2675 24.9931C35.0013 25.2569 34.6715 25.3889 34.278 25.3889H25.389V34.2778C25.389 34.6713 25.2555 35.0012 24.9883 35.2674C24.7212 35.5336 24.3902 35.6667 23.9953 35.6667Z"
+                  fill="#39528D"
+                />
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="47"
+                  height="47"
+                  rx="23.5"
+                  stroke="#333333"
+                  stroke-opacity="0.1"
                 />
               </svg>
               <div className="flex w-full justify-between">
@@ -57,7 +64,6 @@ const Transfer = () => {
             <hr className=" m-auto border-[#33333366]  " />
             <div className="flex justify-center mt-[56px]">
               <svg
-                className=" "
                 width="116"
                 height="120"
                 viewBox="0 0 116 120"
@@ -69,7 +75,7 @@ const Transfer = () => {
                   height="120"
                   rx="10"
                   fill="#AACCFF"
-                  fillOpacity="0.2"
+                  fill-opacity="0.2"
                 />
                 <rect
                   x="1"
@@ -78,8 +84,137 @@ const Transfer = () => {
                   height="118"
                   rx="9"
                   stroke="#696969"
-                  strokeOpacity="0.2"
-                  strokeWidth="2"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
+                />
+                <rect
+                  x="7"
+                  y="10"
+                  width="102"
+                  height="30"
+                  rx="10"
+                  fill="white"
+                />
+                <rect
+                  x="8"
+                  y="11"
+                  width="100"
+                  height="28"
+                  rx="9"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="22"
+                  cy="23"
+                  r="6"
+                  fill="#696969"
+                  fill-opacity="0.2"
+                />
+                <line
+                  x1="36"
+                  y1="19"
+                  x2="84"
+                  y2="19"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="4"
+                />
+                <line
+                  x1="36"
+                  y1="28"
+                  x2="57"
+                  y2="28"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
+                />
+                <rect
+                  x="7"
+                  y="48"
+                  width="98"
+                  height="28"
+                  rx="10"
+                  fill="white"
+                />
+                <rect
+                  x="8"
+                  y="49"
+                  width="96"
+                  height="26"
+                  rx="9"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="23"
+                  cy="61"
+                  r="6"
+                  fill="#696969"
+                  fill-opacity="0.2"
+                />
+                <line
+                  x1="37"
+                  y1="57"
+                  x2="85"
+                  y2="57"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="4"
+                />
+                <line
+                  x1="37"
+                  y1="66"
+                  x2="58"
+                  y2="66"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
+                />
+                <rect
+                  x="7"
+                  y="84"
+                  width="92"
+                  height="26"
+                  rx="10"
+                  fill="white"
+                />
+                <rect
+                  x="8"
+                  y="85"
+                  width="90"
+                  height="24"
+                  rx="9"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="22"
+                  cy="96"
+                  r="6"
+                  fill="#696969"
+                  fill-opacity="0.2"
+                />
+                <line
+                  x1="35"
+                  y1="93"
+                  x2="83"
+                  y2="93"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="4"
+                />
+                <line
+                  x1="35"
+                  y1="102"
+                  x2="56"
+                  y2="102"
+                  stroke="#696969"
+                  stroke-opacity="0.2"
+                  stroke-width="2"
                 />
               </svg>
             </div>
