@@ -14,6 +14,7 @@ import CardsPage from "../pages/cards-page";
 import QrScanner from "../pages/qrscaner-page";
 import Activity from "../pages/activity/Activity";
 import Details from "../pages/activity/Details";
+import Help from "../pages/help/Help";
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/cards" element={<CardsPage />} />
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
+          <Route path="/help" element={<Help />} />
         </Route>
       </Routes>
     </BrowserRouter>
