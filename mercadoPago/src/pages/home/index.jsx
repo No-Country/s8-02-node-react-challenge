@@ -117,8 +117,8 @@ const id = user.update._id
             <div className="flex gap-2 items-center justify-center font-semibold  text-colorButton text-[12px] pl-[21px] pr-[21px]">
               {/*border-t-2 border-borderHome */}
               <Link to="/addmoney">
-                <button className="bg-bgButton p-1 rounded-[4px] mt-[10px] w-[139px] h-[24px] flex justify-center items-center cursor-pointer">
-                  Ingresar dinero{" "}
+                <button className="bg-bgButton p-1 rounded-[4px] mt-[10px] w-[139px] h-[24px] flex justify-center items-center cursor-pointer" onClick={() => navigate('/addmoney')}>
+                  Ingresar dinero
                 </button>
               </Link>
               <button className="bg-bgButton p-1 rounded-[4px] w-[139px] mt-[10px] h-[24px]">Transferir Dinero</button>
