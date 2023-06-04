@@ -25,6 +25,12 @@ const Layout = ({ children }) => {
       case "/cards":
         setTitle("Tarjetas");
         break;
+        case "/transfer":
+        setTitle("Transferencia");
+        break;
+        case "/transfer/addaccount":
+          setTitle("Transferencia");
+          break;
       case "/activity":
         setTitle("Actividades");
         break;

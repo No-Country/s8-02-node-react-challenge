@@ -16,7 +16,6 @@ import Transfer from "../pages/transfer";
 import TopBarTransfer from "../components/tranfer-components/topBarTransfer";
 import { AddAccount } from "../pages/transfer/addAccount";
 
-
 import Activity from "../pages/activity/Activity";
 import Details from "../pages/activity/Details";
 
@@ -40,14 +39,9 @@ function App() {
           <Route path="/cards" element={<CardsPage />} />
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
-          <Route path="/transfer" element= {<TopBarTransfer/>}>
+          <Route path="/transfer">
             <Route index element={<Transfer />} />
-            <Route
-              path="/transfer/addacoount"
-              element={ <AddAccount/>
-              
-              }
-            />
+            <Route path="/transfer/addaccount" element={<AddAccount />} />
 
             {/* <Route path="check" element={<TransferCheck />} /> */}
             <Route
@@ -58,7 +52,6 @@ function App() {
                   <Link
                     className=" bg-slate-400 p-2"
                     to="/transfer/preconfirmation"
-              
                   >
                     CONFIRMAR MONTO
                   </Link>
