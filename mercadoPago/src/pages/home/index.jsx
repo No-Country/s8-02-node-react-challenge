@@ -5,12 +5,14 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
   console.log(user);
 
   const monto = user?.update.balance;
+  const navigate = useNavigate()
 
   //Mostrar o no la contraseña
   const [isShow, setIsShow] = useState(false);
@@ -159,8 +161,8 @@ const id = user.update._id
                 />
               </svg>
             </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[14px] font-semibold">Agregá tus tarjetas</p>
+            <div className="flex justify-between w-full cursor-pointer">
+              <p className="text-[14px] font-semibold" onClick={() => navigate('/cards')}>Agregá tus tarjetas</p>
               <div className="">
                 <svg
                   width="14"
