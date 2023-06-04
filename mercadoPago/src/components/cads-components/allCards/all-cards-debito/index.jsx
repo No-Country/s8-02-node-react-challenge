@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { FiChevronRight } from "react-icons/fi";
 
-const CardDebito = ({ background1, image, number }) => {
+const AllCardsDebito = ({ background1, image, number }) => {
   const ultimosCuatro = String(number).slice(-4);
   return (
     <div
@@ -19,4 +18,4 @@ const CardDebito = ({ background1, image, number }) => {
   );
 };
 
-export default CardDebito;
+export default AllCardsDebito;

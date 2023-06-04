@@ -1,5 +1,3 @@
-import { BsWhatsapp } from "react-icons/bs";
-import { RiMessengerLine } from "react-icons/ri";
 import { TbDownload } from "react-icons/tb";
 import { MdContentCopy } from "react-icons/md";
 import { useSelector } from "react-redux";
@@ -27,17 +25,15 @@ const QrLinkStep2 = ({ onNext, dataForm }) => {
   return (
     <section className="flex flex-col items-center justify-center">
       <div className="w-[328px] h-[328px] bg-white shadow-cardShadow rounded-[10px] mt-6 flex justify-center items-center">
-        <div ref={printRef} className="h-[264px] w-[264px]">
+        <div
+          ref={printRef}
+          className="h-[264px] w-[264px] flex justify-center items-center"
+        >
           {isLoading ? (
             <p>Cargando imagen</p>
           ) : (
             // <a href={data?.url} download>
-            <img
-              ref={printRef}
-              className="w-full h-full"
-              src={data?.url}
-              alt=""
-            />
+            <img className="w-full h-full" src={data?.url} alt="" />
           )}
         </div>
       </div>

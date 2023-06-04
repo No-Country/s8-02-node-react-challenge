@@ -16,6 +16,8 @@ import { TransferCheck } from "../pages/transfer/transeferCorroborate";
 
 // import Activity from "../pages/activity/Activity";
 // import Details from "../pages/activity/Details";
+import Activity from "../pages/activity/Activity";
+import Details from "../pages/activity/Details";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           </Route>
           {/* <Route path="/activity" element={<Activity />} /> */}
           {/* <Route path="/activity/:id" element={<Details />} /> */}
+          <Route path="/activity" element={<Activity />} />
+          <Route path="/activity/:id" element={<Details />} />
         </Route>
       </Routes>
     </BrowserRouter>
