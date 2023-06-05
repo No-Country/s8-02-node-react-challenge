@@ -58,6 +58,7 @@ export const TransferCheck = () => {
                 <Link
                   className="text-white p-2 bg-[#10224D] w-full rounded-lg"
                   to="/transfer/amount"
+                  state={dataUser}
                 >
                   Sí, continuar
                 </Link>
