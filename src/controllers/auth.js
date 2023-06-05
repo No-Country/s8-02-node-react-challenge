@@ -40,10 +40,10 @@ const register = async (req, res) => {
       phone,
       dni,
       cvu: numero,
-      alias:ali,
+      alias:ali.replace(/\s+/g, ""),
       fullname:email.split('@')[0],
       address,
-      balance,
+      balance:0,
     });
 
     if (req.files?.urlProfile) {

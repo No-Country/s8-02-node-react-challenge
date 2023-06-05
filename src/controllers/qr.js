@@ -17,7 +17,7 @@ const sendQr=async (req,res)=>{
         return res.status(400).send({message:"No se encontro al usuario"})
     }
     
-    let data={user,mount}
+    let data={mount, user:user.username, alias:user.alias, cvu:user.cvu, fullname:user.fullname}
     QRCode.toDataURL(JSON.stringify(data),{toSJISFunc:toSJIS, width:200},(err,url)=>{
         res.status(200).send({url})
     })
