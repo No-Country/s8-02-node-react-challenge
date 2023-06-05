@@ -29,10 +29,8 @@ const OptionsQrStep1 = ({ onNext, setScannedData }) => {
         Escanear código QR
       </p>
       {camera ? (
-        <div className="w-[328px] h-[328px] rounded-[10px] shadow-cardShadow bg-white/40 flex justify-center items-center">
-          <div className="w-[300px] h-[300px] flex justify-center items-center">
-            <Scanner setScannedData={setScannedData} onNext={onNext} />
-          </div>
+        <div className="w-[328px] h-auto p-4 rounded-[10px] shadow-cardShadow bg-white/40 flex justify-center items-center">
+          <Scanner setScannedData={setScannedData} onNext={onNext} />
         </div>
       ) : (
         <img src={qrscreen} alt="" />
