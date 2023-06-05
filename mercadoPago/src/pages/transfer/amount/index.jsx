@@ -21,11 +21,12 @@ export const Amount = () => {
       const data = state;
       data.amount = inputAmount;
 
-      navigate("/transfer/preconfirm", {
+      navigate("/transfer/preview", {
         state: data,
       });
     }
   };
+  const condition = inputAmount > 0 && inputAmount <= balance;
 
   useEffect(() => {
     let width = Number(inputAmount.length) + "ch";
@@ -36,12 +37,19 @@ export const Amount = () => {
     <section className="flex min-w-[340px] flex-col items-center min-h-screen">
       <form
         onSubmit={handleSubmit}
-        className="p-4 w-full h-full flex flex-col max-w-[450px]"
+        className="p-4 w-full h-full flex flex-col max-w-[400px]"
       >
         <div className="bg-white py-5 px-4 text-center font-semibold rounded-[10px]">
-          <h1 className="  text-lg">¿Cuanto querés transferir?</h1>
+          <h1 className="pb-5  text-lg">¿Cuanto querés transferir?</h1>
+          <hr />
           <div className="w-full flex justify-center items-center">
-            <span>$</span>
+            <span
+              className={`${
+                condition ? "text-black " : "text-[#33333366] "
+              } text-2xl`}
+            >
+              $
+            </span>
             <input
               ref={inputRef}
               type="text"
@@ -64,7 +72,12 @@ export const Amount = () => {
         </div>
         <button
           type="submit"
-          className=" bg-[#10224D] p-2 text-white mt-3 rounded-[10px]"
+          className={`${
+            condition
+              ? "bg-[#10224D] text-white "
+              : "bg-[#3333331A] text-[#33333366]"
+          } p-2  mt-3 rounded-[10px]`}
+          disabled={inputAmount > 0 && inputAmount <= balance ? false : true}
         >
           Continuar
         </button>
