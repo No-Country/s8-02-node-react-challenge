@@ -81,7 +81,7 @@ const CardsStep2 = ({ dataForm, setDataForm }) => {
           className="h-[48px] w-[160px] bg-[#AACCFF] text-[#10224D] font-semibold text-sm leading-[17px] rounded-[10px]"
         >
           Siguiente
-        </button>
+        </button> 
       </div>
       <ThreeDots
         height="60"
