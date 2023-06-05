@@ -23,6 +23,7 @@ import { TransferCheck } from "../pages/transfer/transeferCorroborate";
 import { Amount } from "../pages/transfer/amount";
 
 import Help from "../pages/help/Help";
+import { Preview } from "../pages/transfer/preview";
 
 function App() {
   return (
@@ -43,8 +44,28 @@ function App() {
 
           <Route path="/cards" element={<CardsPage />} />
           <Route path="/transfer">
+            <Route
+              index
+              element={
+                <div>
+                  <Link
+                    to={"/transfer/check"}
+                    state={{
+                      data: {
+                        type: "cvu",
+                        value: "7061945328174173996956",
+                      },
+                    }}
+                  >
+                    CVU
+                  </Link>
+                </div>
+              }
+            />
+
             <Route path="check" element={<TransferCheck />} />
             <Route path="amount" element={<Amount />} />
+            <Route path="preview" element={<Preview />} />
           </Route>
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
