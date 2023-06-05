@@ -1,7 +1,8 @@
 import { AiOutlineClockCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
-const OptionsQrStep2 = ({ onNext, scannedData }) => {
+const OptionsQrStep2 = ({ onNext, scannedData, isLoading }) => {
   const { user, mount } = scannedData;
   const { fullname, cvu } = user;
   return (
@@ -44,6 +45,20 @@ const OptionsQrStep2 = ({ onNext, scannedData }) => {
           <AiOutlineInfoCircle className="w-6 h-6 text-gray-500" />
         </div>
       </div>
+      {isLoading ? (
+        <ThreeDots
+          height="60"
+          width="80"
+          radius="9"
+          color="#4fa94d"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={isLoading}
+        />
+      ) : (
+        ""
+      )}
       <div className="flex flex-col items-center justify-center gap-2">
         <div
           onClick={onNext}

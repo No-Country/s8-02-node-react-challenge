@@ -5,6 +5,8 @@ import useQr from "../../hooks/useQr";
 import { useRef } from "react";
 import { handleImageFromElement } from "../../utils/downloadImage/downloadImage";
 
+import { ThreeDots } from "react-loader-spinner";
+
 const QrLinkStep2 = ({ onNext, dataForm }) => {
   const { user } = useSelector((state) => state.auth);
   const { alias, fullname } = user.update;
@@ -30,7 +32,16 @@ const QrLinkStep2 = ({ onNext, dataForm }) => {
           className="h-[264px] w-[264px] flex justify-center items-center"
         >
           {isLoading ? (
-            <p>Cargando imagen</p>
+            <ThreeDots
+              height="60"
+              width="80"
+              radius="9"
+              color="#4fa94d"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={isLoading}
+            />
           ) : (
             // <a href={data?.url} download>
             <img className="w-full h-full" src={data?.url} alt="" />

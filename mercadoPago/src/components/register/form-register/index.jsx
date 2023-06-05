@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import { useState } from "react";
 import useLogin from "../../../hooks/useLogin";
+import { ThreeDots } from "react-loader-spinner";
 
 const FormRegister = ({ handleClick }) => {
   const navigate = useNavigate();
@@ -178,6 +179,20 @@ const FormRegister = ({ handleClick }) => {
           </div>
         </div>
       </div>
+      {isLoading ? (
+        <ThreeDots
+          height="60"
+          width="80"
+          radius="9"
+          color="#4fa94d"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={isLoading}
+        />
+      ) : (
+        ""
+      )}
       <button
         type="submit"
         className="text-lg font-semibold leading-[22px] text-white w-[328px] h-[48px] bg-[#10224D] rounded-[10px]"

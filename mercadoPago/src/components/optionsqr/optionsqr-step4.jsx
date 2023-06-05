@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { handleImageFromElement } from "../../utils/downloadImage/downloadImage";
 import { useSelector } from "react-redux";
 
-const OptionsQrStep4 = ({ scannedData, currentDateTime }) => {
+const OptionsQrStep4 = ({ scannedData, currentDateTime, dataTranfer }) => {
   const { user, mount } = scannedData;
   const { fullname, cvu } = user;
   const { update } = useSelector((state) => state.auth.user);
@@ -73,7 +73,9 @@ const OptionsQrStep4 = ({ scannedData, currentDateTime }) => {
           <p className="font-medium text-xs leading-[15px] text-[#ADADAD]">
             Código de transferencia
           </p>
-          <p className="font-medium text-xs leading-[15px]">000000</p>
+          <p className="font-medium text-xs leading-[15px]">
+            {dataTranfer.operationNumber}
+          </p>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-2 my-4">
