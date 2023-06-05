@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import useTranfer from "../../hooks/useTranfer";
 import { useSelector } from "react-redux";
 
+import { ThreeDots } from "react-loader-spinner";
+
 const CardsStep2 = ({ dataForm, setDataForm }) => {
   const [inputActual, setInputActual] = useState(1);
   const { update } = useSelector((state) => state.auth.user);
@@ -81,6 +83,16 @@ const CardsStep2 = ({ dataForm, setDataForm }) => {
           Siguiente
         </button> 
       </div>
+      <ThreeDots
+        height="60"
+        width="80"
+        radius="9"
+        color="#4fa94d"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={isLoading}
+      />
     </section>
   );
 };

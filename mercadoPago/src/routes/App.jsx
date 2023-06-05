@@ -18,6 +18,11 @@ import { AddAccount } from "../pages/transfer/addAccount";
 
 import Activity from "../pages/activity/Activity";
 import Details from "../pages/activity/Details";
+import QrScanner from "../pages/qrscaner-page";
+import { TransferCheck } from "../pages/transfer/transeferCorroborate";
+import { Amount } from "../pages/transfer/amount";
+
+import Help from "../pages/help/Help";
 
 function App() {
   return (
@@ -37,50 +42,20 @@ function App() {
           <Route path="/addmoney" element={<AddMoney />} />
 
           <Route path="/cards" element={<CardsPage />} />
+          <Route path="/transfer">
+            <Route path="check" element={<TransferCheck />} />
+            <Route path="amount" element={<Amount />} />
+          </Route>
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
           <Route path="/transfer">
             <Route index element={<Transfer />} />
-            <Route path="/transfer/addaccount" element={<AddAccount />} />
-
-            {/* <Route path="check" element={<TransferCheck />} /> */}
-            <Route
-              path="amount"
-              element={
-                <div>
-                  <h1>Comprobante</h1>
-                  <Link
-                    className=" bg-slate-400 p-2"
-                    to="/transfer/preconfirmation"
-                  >
-                    CONFIRMAR MONTO
-                  </Link>
-                </div>
-              }
-            />
-            <Route
-              path="preconfirmation"
-              element={
-                <div>
-                  <h1>pre confirmation</h1>
-                  <Link className=" bg-slate-400 p-2" to="/transfer/voucher">
-                    Confirmar transferencia
-                  </Link>
-                </div>
-              }
-            />
-            <Route
-              path="voucher"
-              element={
-                <div>
-                  <h1>Comprobante</h1>
-                  <button className=" bg-slate-400 p-2">
-                    Descargar comprobante
-                  </button>
-                </div>
-              }
-            />
+            <Route path="addaccount" element={<AddAccount />} />
+            <Route path="check" element={<TransferCheck />} />
+            <Route path="amount" element={<Amount />} />
+            {/*   <Route path="preview" element={<Preview />} /> */}
           </Route>
+          <Route path="/help" element={<Help />} />
         </Route>
       </Routes>
     </BrowserRouter>

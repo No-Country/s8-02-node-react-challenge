@@ -43,34 +43,37 @@ const Activity = () => {
     //https://api-wallet.onrender.com/auth/activity/activities/6476b55528cb97aaebb79bd0/2
    // let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZiZWI5N2E5YmNjN2FjZmJhNWFjNmEiLCJpYXQiOjE2ODUzMjk0MjksImV4cCI6MTc3MTcyOTQyOX0.4tdGCwWTiDaCegrZHmVYq1e9MpTVJdlHJNLlFcPAqoY"
 
-   let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
-   let id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
+   let token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
+   //let id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
   // let destinity = data[0].destinyAccountId.alias
 
   //console.log(activities)
+
+  const token = user.token.token
+  const id = user.update._id
+  console.log("token:", token)
+  console.log("id: ",id)
+  console.log(`/auth/activity/activities/${id}`)
 
    useEffect(() => {
     setIsLoading(true)
         const instance = axios.create({
             baseURL: 'https://api-wallet.onrender.com',
-            headers: {'Authorization': token }
+            headers: {'Authorization': token2 }
         });
 
         instance.get(`/auth/activity/activities/${id}`) //.UserAccountId
         .then(response => {
-           // console.log(response.data.activities)
             console.log(response.data.activities)
             setIsLoading(false)
             setData(response.data.activities)
         }).catch(e => {
-            console.log(e)
+            console.log("ERROR: ", e.response.data.error)
+            setIsLoading(false)
             setError(e.response.data.error)
         }).finally(() => {
         })
 
-        //if(data.message != 'No se encontraron') setData(data.activities)
-
-       // console.log(data[0].destinyAccountId.alias)
     }, [])
 
     const fechaSlice = (f) => {
@@ -82,6 +85,56 @@ const Activity = () => {
         return h.slice(11,-8)
     }
 
+    const getDays = (d, m, a) => {
+        let nuevo = a + '-' + m + '-' + d
+        return nuevo
+    }
+
+    const aux = () => {
+        let now = new Date();
+        return now
+    }
+
+    console.log("Año", aux().getFullYear())
+    console.log("mes", aux().getMonth())
+    console.log("dia", aux().getDate())
+
+    let fechaDeHoy, fechaDB, decir = 'Hoy'
+
+    const obtenerDetalle = (fecha) => {
+        console.log("Fecha BD: ", fecha)
+
+        let sacar = fechaSlice(fecha)
+       //console.log("SACAR: ", sacar.split('-'))
+        let sacar2 = sacar.split('-')
+
+        let ano = sacar2[0]
+        let mes = sacar2[1]
+        let dia = sacar2[2]
+
+        console.log("Fecha 1: ",getDays(dia, mes, ano))
+        //! Data Base
+        fechaDB = getDays(dia, mes, ano)
+        //console.log("AUX -> ", aux().toLocaleDateString('en-US'))
+        let diaDeHoy = aux().toLocaleDateString('en-ES')
+        //console.log("SACAR DIA HOY: ", diaDeHoy.split('/'))
+        let separateHoy = diaDeHoy.split('/')
+
+        let ano2 = separateHoy[2]
+        let mes2 =  separateHoy[1].length > 1 ? separateHoy[1] : 0 + separateHoy[1]
+        let dia2 =  separateHoy[0].length > 1 ? separateHoy[0] : 0 + separateHoy[0]
+
+        
+
+        if(dia < dia2) decir = 'Anteriores'
+        
+
+        //console.log("Boleano: ", separateHoy[1].length)
+        console.log("Fecha 2 ->",getDays(dia2, mes2, ano2))
+        //!
+        fechaDeHoy = getDays(dia2, mes2, ano2)
+    }
+
     return (
         <>
             <Layout />
@@ -91,10 +144,27 @@ const Activity = () => {
                     data.length === 0 ? <Empty/> : (
                         data.map((item, index) => (
                             <div className='pl-4 pr-4' key={index}>
-                                <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
-                                    <p className='text-[#39528D] font-semibold'>{fechaSlice(item.updatedAt)}</p>
+                                {
+                                   /* getDays('2023','05','02') === '2023-06-04' ?
+                                    <p className='text-[#39528D] font-semibold'>Hoy</p> :*/
+                                    obtenerDetalle(item.updatedAt)
+                                }
+                                
+                               <div className='mt-4 border-[#39528D] border-b-2 mb-2'>
+                                {
+                                   /* getDays('2023','05','02') === '2023-06-04' ?
+                                    <p className='text-[#39528D] font-semibold'>Hoy</p> :*/
+                                    fechaDB === fechaDeHoy ? (
+                                    <p className='text-[#39528D] font-semibold'>{decir}</p>) : (<p className='text-[#39528D] font-semibold'>{fechaDB}</p>)
+                                }
+                               {/* <p className='text-[#39528D] font-semibold'>{fechaSlice(item.updatedAt)}</p>*/}
                                 </div>
-                                    <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={item._id} hour={hourSlice(item.updatedAt)} />
+                                {/*
+                                    decir === 'Anteriores' ? (
+                                        <Lista  destinity={item.destinyAccountId.alias} monto={item.amount} id={item._id} hour={hourSlice(item.updatedAt)} />
+                                    ) : 0
+                                    */}
+                                   <Lista destinity={item.destinyAccountId.alias} monto={item.amount} id={item._id} hour={hourSlice(item.updatedAt)} />
                             </div>
                         ))
                     )
