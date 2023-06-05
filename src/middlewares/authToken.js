@@ -21,31 +21,8 @@ export const requireToken = (req, res, next) => {
     // Continuar con la siguiente función de middleware
     next();
   } catch (error) {
-    console.log(error.message);
         return res
             .status(401)
             .send({ error: tokenVerificationErrors[error.message] });
   }
 };
-
-// export default verifyTokenMiddleware;
-
-/*export const requireToken = (req, res, next) => {
-    try {
-        let token = req.headers.authorization;
-
-        if (!token) throw new Error("No Bearer");
-
-        token = token.split(" ")[1];
-        const { id } = jwt.verify(token, process.env.JWT_SECRET);
-
-        req.uid = id;
-
-        next();
-    } catch (error) {
-        console.log(error.message);
-        return res
-            .status(401)
-            .send({ error: tokenVerificationErrors[error.message] });
-    }
-};*/

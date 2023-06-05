@@ -10,7 +10,6 @@ export const userMiddle = async (req, res, next) => {
       req.user = users.email;
       next();
     } catch (error) {
-      console.error('Error al obtener el usuario:', error);
-      res.status(500).json({ message: 'Error del servidor' });
+      res.status(500).json({ message: 'Error del servidor' + error });
     }
 };

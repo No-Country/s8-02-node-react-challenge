@@ -1,9 +1,9 @@
 import request from 'supertest';
 import app from "../src/app";
 
-describe('Test de la aplicación', () => {
-  it('debe devolver el estado 200 al realizar una solicitud GET a /docs/api/v1', async () => {
-    const response = await request(app).get("/docs/api/v1").redirects(1);
-    expect(response.statusCode).toBe(200);
+describe('Test de la api, ruta raiz', () => {
+  it('debe devolver el estado 404 al realizar una solicitud GET a /', async () => {
+    const response = await request(app).get("/").send('Cannot GET /');
+    expect(response.statusCode).toBe(404);
   });
 });

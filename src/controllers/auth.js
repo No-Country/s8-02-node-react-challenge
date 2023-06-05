@@ -67,7 +67,7 @@ const register = async (req, res) => {
 
     return res.status(200).json({ dataUser });
   } catch (error) {
-    console.log(error.message);
+    res.status(400).send(error.message);
   }
 };
 
@@ -96,7 +96,7 @@ const login = async (req, res) => {
     }
     return res.status(200).json({ token, update });
   } catch (error) {
-    console.log(error);
+    res.status(400).send(error.message);
   }
 };
 export { register, login };

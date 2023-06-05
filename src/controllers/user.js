@@ -9,7 +9,7 @@ const getAllUser = async (req, res) => {
     res.status(200).send({ user });
     
   } catch (error) {
-    console.log(error.message);
+    res.status(400).send(error.message);
   }
 };
 
@@ -33,7 +33,7 @@ const getUser = async (req, res) => {
 
     res.status(200).json({ user });
   } catch (error) {
-    console.log(error.message);
+    res.status(400).send(error.message);
   }
 };
 
@@ -56,7 +56,6 @@ const updateUser = async (req, res) => {
       
       res.status(200).send({ user }); 
     } catch (error) {
-        console.log(error);
         res.status(422).send({message:"failed to update resource", valid:false });       
     }
 
@@ -78,7 +77,6 @@ const deleteUser=async(req,res)=>{
         
       res.status(200).send({message:"User deleted",valid:true});
     } catch (error) {
-        console.log(error.message);
         res.status(500).send({message:"could not delete the resource",valid:false});
     }
 }
