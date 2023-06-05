@@ -1,7 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Layout from "../../../components/layout";
+import { useNavigate } from "react-router-dom";
 
 export const AddAccount = () => {
+  const [val, setval] = useState("");
+  const navigate = useNavigate();
+
+  const isNumeric = (n) => !isNaN(n);
+
+  const handleClick = () => {
+    if (val.length > 0) {
+      let typeVal = isNumeric(val) ? "cvu" : "alias";
+
+      navigate("/check", {
+        state: {
+          data: {
+            type: typeVal,
+            value: val,
+          },
+        },
+      });
+    }
+  };
+
   return (
     <>
       <Layout>
@@ -24,12 +45,15 @@ export const AddAccount = () => {
                   type="text"
                   placeholder="Ingresá el CBU, CVU o alias"
                   className="p-2 my-4   border-[#33333366] border rounded-lg w-full "
+                  onChange={(e) => setval(e.target.value)}
+                  value={val}
                 />
               </div>
             </div>
           </div>
           <div className="flex justify-center">
             <button
+              onClick={handleClick}
               type="submit"
               className=" disabled:bg-[#DAD9E3] disabled:text-[#97969C] w-[328px] font-semibold  bg-[#10224D] text-white p-2 rounded-lg"
             >
