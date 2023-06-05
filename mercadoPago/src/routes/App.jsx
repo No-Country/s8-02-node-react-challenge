@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ErrorPage from "../pages/error";
 import LandingPage from "../pages/landing-page";
 import Home from "../pages/home";
@@ -18,6 +18,7 @@ import { Amount } from "../pages/transfer/amount";
 import Activity from "../pages/activity/Activity";
 import Details from "../pages/activity/Details";
 import Help from "../pages/help/Help";
+import { Preview } from "../pages/transfer/preview";
 
 function App() {
   return (
@@ -37,8 +38,28 @@ function App() {
           <Route path="/qrscanner" element={<QrScanner />} />
           <Route path="/cards" element={<CardsPage />} />
           <Route path="/transfer">
+            <Route
+              index
+              element={
+                <div>
+                  <Link
+                    to={"/transfer/check"}
+                    state={{
+                      data: {
+                        type: "cvu",
+                        value: "7061945328174173996956",
+                      },
+                    }}
+                  >
+                    CVU
+                  </Link>
+                </div>
+              }
+            />
+
             <Route path="check" element={<TransferCheck />} />
             <Route path="amount" element={<Amount />} />
+            <Route path="preview" element={<Preview />} />
           </Route>
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
