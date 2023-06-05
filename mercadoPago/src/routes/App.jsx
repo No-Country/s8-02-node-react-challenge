@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorPage from "../pages/error";
 import LandingPage from "../pages/landing-page";
 import Home from "../pages/home";
@@ -41,32 +41,7 @@ function App() {
           <Route path="/money" element={<YourMoney />} />
           <Route path="/data" element={<YourData />} />
           <Route path="/addmoney" element={<AddMoney />} />
-
           <Route path="/cards" element={<CardsPage />} />
-          <Route path="/transfer">
-            <Route
-              index
-              element={
-                <div>
-                  <Link
-                    to={"/transfer/check"}
-                    state={{
-                      data: {
-                        type: "cvu",
-                        value: "7061945328174173996956",
-                      },
-                    }}
-                  >
-                    CVU
-                  </Link>
-                </div>
-              }
-            />
-
-            <Route path="check" element={<TransferCheck />} />
-            <Route path="amount" element={<Amount />} />
-            <Route path="preview" element={<Preview />} />
-          </Route>
           <Route path="/activity" element={<Activity />} />
           <Route path="/activity/:id" element={<Details />} />
           <Route path="/transfer">
@@ -74,7 +49,7 @@ function App() {
             <Route path="addaccount" element={<AddAccount />} />
             <Route path="check" element={<TransferCheck />} />
             <Route path="amount" element={<Amount />} />
-            {/*   <Route path="preview" element={<Preview />} /> */}
+            <Route path="preview" element={<Preview />} />
           </Route>
           <Route path="/help" element={<Help />} />
         </Route>

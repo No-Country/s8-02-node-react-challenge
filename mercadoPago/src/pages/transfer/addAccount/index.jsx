@@ -12,7 +12,7 @@ export const AddAccount = () => {
     if (val.length > 0) {
       let typeVal = isNumeric(val) ? "cvu" : "alias";
 
-      navigate("/check", {
+      navigate("/transfer/check", {
         state: {
           data: {
             type: typeVal,

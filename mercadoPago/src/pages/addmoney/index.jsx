@@ -4,7 +4,7 @@ import Layout from "../../components/layout";
 import AddMoneyStep2 from "../../components/add-money/add-money-step2";
 import AddMoneyStep3 from "../../components/add-money/add-money-step3";
 import AddMoneyStep4 from "../../components/add-money/add-money-step4";
-// import moment from "moment";
+import moment from "moment";
 
 const AddMoney = () => {
   const [pantallaActual, setPantallaActual] = useState(1);
