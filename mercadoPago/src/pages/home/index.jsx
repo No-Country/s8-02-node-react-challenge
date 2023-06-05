@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-// import Empty from '../../components/activity/Empty'
+import Empty from '../../components/activity/Empty'
 import Item from "../../components/activity/Item";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../../components/layout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
   console.log(user);
 
   const monto = user?.update.balance;
+  const navigate = useNavigate()
 
   //Mostrar o no la contraseña
   const [isShow, setIsShow] = useState(false);
@@ -25,6 +28,54 @@ const Home = () => {
 
   let entero = separarEnterosDecimales(monto)
   let decimal = separarEnterosDecimales(monto)
+
+  const [data, setData] = useState([])
+  const [error, setError] = useState('e')
+  const [isLoading, setIsLoading] = useState(true)
+  //const { activities } = data
+  //const token = user.token.token
+  //console.log(user, token)
+  //https://api-wallet.onrender.com/auth/activity/activities/6476b55528cb97aaebb79bd0/2
+ // let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZiZWI5N2E5YmNjN2FjZmJhNWFjNmEiLCJpYXQiOjE2ODUzMjk0MjksImV4cCI6MTc3MTcyOTQyOX0.4tdGCwWTiDaCegrZHmVYq1e9MpTVJdlHJNLlFcPAqoY"
+
+ let token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
+ //let id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
+// let destinity = data[0].destinyAccountId.alias
+
+//console.log(activities)
+
+const token = user.token.token
+const id = user.update._id
+
+ useEffect(() => {
+  setIsLoading(true)
+      const instance = axios.create({
+          baseURL: 'https://api-wallet.onrender.com',
+          headers: {'Authorization': token2 }
+      });
+
+      instance.get(`/auth/activity/activities/${id}`) //.UserAccountId
+      .then(response => {
+          console.log(response.data.activities)
+          setIsLoading(false)
+          setData(response.data.activities)
+      }).catch(e => {
+          console.log("ERROR: ", e.response.data.error)
+          setIsLoading(false)
+          setError(e.response.data.error)
+      }).finally(() => {
+      })
+
+  }, [])
+
+  let tam = data.length
+  let dataView = data[--tam]
+
+  console.log(data[--tam])
+
+  const hourSlice = () => {
+    return dataView?.updatedAt.slice(11,-8)
+  }
 
   return (
     <>
@@ -66,8 +117,8 @@ const Home = () => {
             <div className="flex gap-2 items-center justify-center font-semibold  text-colorButton text-[12px] pl-[21px] pr-[21px]">
               {/*border-t-2 border-borderHome */}
               <Link to="/addmoney">
-                <button className="bg-bgButton p-1 rounded-[4px] mt-[10px] w-[139px] h-[24px] flex justify-center items-center cursor-pointer">
-                  Ingresar dinero{" "}
+                <button className="bg-bgButton p-1 rounded-[4px] mt-[10px] w-[139px] h-[24px] flex justify-center items-center cursor-pointer" onClick={() => navigate('/addmoney')}>
+                  Ingresar dinero
                 </button>
               </Link>
               <button className="bg-bgButton p-1 rounded-[4px] w-[139px] mt-[10px] h-[24px]">Transferir Dinero</button>
@@ -78,8 +129,11 @@ const Home = () => {
             <div className="bg-white w-full rounded-t-[10px]">
               <h2 className="p-4 font-semibold mb-[1px]">TU ACTIVIDAD</h2>
             </div>
+            {
+              data.length < 0 ? <Empty /> : <Item alias={dataView?.destinyAccountId.alias} monto={dataView?.amount} hora={hourSlice()}  id={dataView?._id} border={"rounded-none"} />
+            }
             {/*<Empty />*/}
-            <Item alias={"Juan XXX"} border={"rounded-none"} />{" "}
+            {/*<Item alias={"Juan XXX"} border={"rounded-none"} />*/}
             {/* Componente de la actividad del usuario */}
             <div className="flex justify-between items-center pt-4 pb-4 pl-4 pr-[29.25px] bg-white mt-[0.5px] cursor-pointer rounded-b-xl">
               <Link to={"/activity"} className="font-[600] text-[#39528D]">Ver toda tu actividad</Link>
@@ -107,8 +161,8 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[14px] font-semibold">Agregá tus tarjetas</p>
+            <div className="flex justify-between w-full cursor-pointer">
+              <p className="text-[14px] font-semibold" onClick={() => navigate('/cards')}>Agregá tus tarjetas</p>
               <div className="">
                 <svg
                   width="14"
