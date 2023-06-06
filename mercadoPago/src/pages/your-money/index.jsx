@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import { useEffect, useState } from "react";
 import optionsIcon from "../../assets/bullets.svg";
-import arrow from "../../assets/arrow.svg";
 
 import { Options } from "../../components/money/Options";
 import { Link } from "react-router-dom";
@@ -10,6 +9,7 @@ import { ActivityCard } from "../../components/money/ActivityCard";
 import { NoActivities } from "../../components/money/NoActivities";
 import { useSelector } from "react-redux";
 import Layout from "../../components/layout";
+import { CgProfile } from "react-icons/cg";
 
 const YourMoney = () => {
   // eslint-disable-next-line no-unused-vars
@@ -67,7 +67,7 @@ const YourMoney = () => {
               >
                 Ver toda tu actividad
                 <span>
-                  <img src={arrow} alt="arrow" />
+                  <CgProfile />
                 </span>
               </Link>
             </div>

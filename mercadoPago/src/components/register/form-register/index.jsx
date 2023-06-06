@@ -54,8 +54,11 @@ const FormRegister = ({ handleClick }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(dataForm.password !== confirmPassword);
+
     if (dataForm.password !== confirmPassword) {
       console.log("Los password son diferente");
+      return;
     }
     postData("/auth/user/register", dataForm);
   };

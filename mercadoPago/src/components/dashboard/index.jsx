@@ -20,7 +20,7 @@ const Dashboard = ({ open, setOpen }) => {
     { name: "Ayuda", link: "/help", icon: FiHelpCircle },
     { name: "Tu dinero", link: "/money", icon: AiOutlineWallet, margin: true },
     { name: "Actividad", link: "/activity", icon: MdOutlineReceipt },
-    { name: "Enviar dinero", link: "/", icon: AiOutlineSend },
+    { name: "Enviar dinero", link: "/transfer", icon: AiOutlineSend },
     { name: "Prestamos", link: "/", icon: GiReceiveMoney, margin: true },
     { name: "Generar QR", link: "/qrlink", icon: BsQrCode },
     { name: "Escanear QR", link: "/qrscanner", icon: MdOutlineQrCodeScanner },
