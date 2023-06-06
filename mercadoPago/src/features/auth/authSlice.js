@@ -29,12 +29,22 @@ export const authSlice = createSlice({
       return state;
     },
     updateAmount(state, action) {
-      const rest = Number(state.user.update.balance - action.payload);
-      state.user.update.balance = rest;
+      const { operation, valor } = action.payload;
+
+      if (operation === "resta") {
+        const rest = Number(state.user.update.balance - valor);
+        state.user.update.balance = rest;
+        saveState(state);
+        return state;
+      } else {
+        const suma = Number(state.user.update.balance + valor);
+        state.user.update.balance = suma;
+        saveState(state);
+        return state;
+      }
 
       /*  state.user.update.balance = Number(state.user.balance - action.payload);
       saveState(state); */
-      return state;
     },
   },
 });

@@ -2,9 +2,15 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { IoMdCard } from "react-icons/io";
 import { BsCheck } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateAmount } from "../../features/auth/authSlice";
 
 const AddMoneyStep4 = ({ dataForm, currentDateTime }) => {
   const { balance, cardNumber, bank } = dataForm;
+
+  const dispatch = useDispatch();
+  dispatch(updateAmount({ operation: "suma", valor: balance }));
+
   const ultimosCuatro = String(cardNumber).slice(-4);
   return (
     <section className="flex flex-col items-center">

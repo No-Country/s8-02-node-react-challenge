@@ -32,7 +32,6 @@ function App() {
         <Route index element={<LandingPage />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/qrlink" element={<QrLink />} />
 
         <Route path="/register" element={<RegisterPage />} />
         <Route element={<UserRouteProtected />}>
@@ -52,6 +51,8 @@ function App() {
             <Route path="preview" element={<Preview />} />
           </Route>
           <Route path="/help" element={<Help />} />
+          <Route path="/qrlink" element={<QrLink />} />
+          <Route path="/qrscanner" element={<QrScanner />} />
         </Route>
       </Routes>
     </BrowserRouter>

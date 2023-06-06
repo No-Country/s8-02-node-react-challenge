@@ -18,7 +18,7 @@ export const Preview = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const { amount, fullname, cvu, _id, alias } = state;
+  const { amount, fullname, cvu, alias } = state;
 
   const handleSubmit = () => {
     setloading(true);
@@ -26,7 +26,7 @@ export const Preview = () => {
       .post(
         "/auth/activity/transfer",
         {
-          UserAccountId: _id,
+          UserAccountId: user.update._id,
           amount: Number(amount),
           description: "Varios",
           type: "pay",
