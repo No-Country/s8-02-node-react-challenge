@@ -19,6 +19,8 @@ export const authSlice = createSlice({
     logout(state) {
       state.isLoggedIn = false;
       state.user = "";
+      localStorage.removeItem("authState");
+
       saveState(state);
     },
     updateData(state, action) {
@@ -27,8 +29,11 @@ export const authSlice = createSlice({
       return state;
     },
     updateAmount(state, action) {
-      state.user.balance = Number(state.user.balance - action.payload);
-      saveState(state);
+      const rest = Number(state.user.update.balance - action.payload);
+      state.user.update.balance = rest;
+
+      /*  state.user.update.balance = Number(state.user.balance - action.payload);
+      saveState(state); */
       return state;
     },
   },
