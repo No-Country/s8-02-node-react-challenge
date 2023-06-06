@@ -24,6 +24,7 @@ import { Amount } from "../pages/transfer/amount";
 
 import Help from "../pages/help/Help";
 import { Preview } from "../pages/transfer/preview";
+import { Confirm } from "../pages/transfer/confirmation";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
             <Route path="check" element={<TransferCheck />} />
             <Route path="amount" element={<Amount />} />
             <Route path="preview" element={<Preview />} />
+            <Route path="confirm" element={<Confirm />} />
           </Route>
           <Route path="/help" element={<Help />} />
           <Route path="/qrlink" element={<QrLink />} />
