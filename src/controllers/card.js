@@ -55,7 +55,7 @@ const createCard=async(req,res)=>{
         await card.save()
        const user= await userSchema.findByIdAndUpdate({_id:id},{ $push: { cards: card._id } },
         { new: true });
-        const update=await userSchema.findById({_id:id}).populate({
+        const update=await userSchema.findById({_id:id}).select("-password").populate({
             path: 'cards',
             options: { strictPopulate: false }
           });
