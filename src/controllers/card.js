@@ -55,11 +55,11 @@ const createCard=async(req,res)=>{
         await card.save()
        const user= await userSchema.findByIdAndUpdate({_id:id},{ $push: { cards: card._id } },
         { new: true });
-        const user2=await userSchema.findById({_id:id}).populate({
+        const update=await userSchema.findById({_id:id}).populate({
             path: 'cards',
             options: { strictPopulate: false }
           });
-        return res.status(200).send({message:"card Create", user2});
+        return res.status(200).send({message:"card Create", update});
     } catch (error) {
         console.log(error.message);
         res.status(422).send({message:"failed to create resource", valid:false });        
