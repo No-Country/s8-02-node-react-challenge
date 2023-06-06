@@ -25,12 +25,21 @@ const Layout = ({ children }) => {
       case "/cards":
         setTitle("Tarjetas");
         break;
-        case "/transfer":
+      case "/transfer":
         setTitle("Transferencia");
         break;
-        case "/transfer/addaccount":
-          setTitle("Transferencia");
-          break;
+      case "/transfer/check":
+        setTitle("Transferencia");
+        break;
+      case "/transfer/amount":
+        setTitle("Transferencia");
+        break;
+      case "/transfer/preview":
+        setTitle("Transferencia");
+        break;
+      case "/transfer/addaccount":
+        setTitle("Transferencia");
+        break;
       case "/activity":
         setTitle("Actividades");
         break;
@@ -47,7 +56,9 @@ const Layout = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div className="relative w-full z-10"> {/**  h-screen*/}
+    <div className="relative w-full z-10">
+      {" "}
+      {/**  h-screen*/}
       <Dashboard open={open} setOpen={setOpen} />
       <Navbar menu={() => setOpen(!open)} dato={title} />
       <div className="">{children}</div>
