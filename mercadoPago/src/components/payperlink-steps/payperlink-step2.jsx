@@ -25,7 +25,7 @@ const PayPerLinkStep2 = ({ onNext, currentDateTime, dataLink, data }) => {
             </span>
           </div>
           <p className="text-white font-bold text-2xl leading-[29px] mx-4 text-center">
-            Ya ingresamos tu dinero
+            Ya Transferimos tu dinero
           </p>
         </div>
         <div className="h-[80px] bg-white flex items-center justify-start gap-6 pl-8">
