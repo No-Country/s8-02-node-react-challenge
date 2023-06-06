@@ -16,6 +16,9 @@ const Layout = ({ children }) => {
       case "/money":
         setTitle("Tu Dinero");
         break;
+      case "/data":
+        setTitle("Tus datos");
+        break;
       case "/profile":
         setTitle("Tus Datos");
         break;
