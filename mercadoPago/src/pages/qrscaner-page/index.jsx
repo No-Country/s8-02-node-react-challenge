@@ -25,7 +25,7 @@ const QrScanner = () => {
       setDataTranfer(data);
     },
     onError: (_error) => {
-      setError("Email o Contraseña Incorrecta...");
+      setError("Error en la operación...");
     },
   });
   const currentDateTime = moment().format("DD [de] MMMM YYYY - HH:mm[hs.]");
