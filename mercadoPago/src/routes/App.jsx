@@ -25,6 +25,7 @@ import { Amount } from "../pages/transfer/amount";
 import Help from "../pages/help/Help";
 import { Preview } from "../pages/transfer/preview";
 import { Confirm } from "../pages/transfer/confirmation";
+import PayPerLink from "../pages/pay-per-link";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/qrlink" element={<QrLink />} />
           <Route path="/qrscanner" element={<QrScanner />} />
+          <Route path="/payperlink/:id/:mount" element={<PayPerLink />} />
         </Route>
       </Routes>
     </BrowserRouter>
