@@ -41,7 +41,10 @@ export const Preview = () => {
         }
       )
       .then(({ data }) => {
-        dispatch(updateAmount(amount));
+        dispatch(updateAmount({ operation: "resta", value: amount }));
+        navigate("/transfer/confirm", {
+          state: { value: amount, receptor: fullname },
+        });
         /* FALTA DIRECCIONAR A LA VISTA DE CONFIRMACION */
       })
       .catch((err) => console.log(err))

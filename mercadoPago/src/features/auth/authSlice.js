@@ -29,15 +29,15 @@ export const authSlice = createSlice({
       return state;
     },
     updateAmount(state, action) {
-      const { operation, valor } = action.payload;
+      const { operation, value } = action.payload;
 
       if (operation === "resta") {
-        const rest = Number(state.user.update.balance - valor);
+        const rest = Number(state.user.update.balance) - Number(value);
         state.user.update.balance = rest;
         saveState(state);
         return state;
-      } else {
-        const suma = Number(state.user.update.balance + valor);
+      } else if (operation === "suma") {
+        const suma = Number(state.user.update.balance) + Number(value);
         state.user.update.balance = suma;
         saveState(state);
         return state;
