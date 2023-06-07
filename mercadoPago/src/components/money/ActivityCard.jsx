@@ -1,22 +1,41 @@
 /* eslint-disable react/prop-types */
 
-export const ActivityCard = ({ img, type, remitter, amount, time }) => {
+import { useNavigate } from "react-router-dom";
+import IconProfile from "../../../public/profileTransferIcon.svg";
+
+export const ActivityCard = ({
+  type,
+  destinyAccountId,
+  amount,
+  updatedAt,
+  _id,
+}) => {
+  const navigate = useNavigate();
+
+  const newType = type === "recharge" ? "Recarga" : "Transferencia recibida";
+  const { alias } = destinyAccountId;
+  const hourSlice = (h) => h.slice(11, -8);
+
+  /*   <Link to={`/activity/${id}`}> */
   return (
     <>
-      <div className="flex justify-between items-center my-2">
+      <div
+        onClick={() => navigate(`/activity/${_id}`)}
+        className="flex justify-between items-center my-2 cursor-pointer"
+      >
         <div className="flex items-center">
-          <img src={img} alt="profile" />
+          <img src={IconProfile} alt="profile" />
           <p className="ml-2">
-            {type}
+            {newType}
             <br />
-            <span className="text-[#33333366]">de {remitter}</span>
+            <span className="text-[#33333366]">de {alias}</span>
           </p>
         </div>
         <div className="flex flex-col">
           <p className="text-[#008744] font-semibold">
             $<span className="ml-1">{amount}</span>
           </p>
-          <span className="text-[#33333366]">{time}</span>
+          <span className="text-[#33333366]">{hourSlice(updatedAt)}</span>
         </div>
       </div>
       <hr />
