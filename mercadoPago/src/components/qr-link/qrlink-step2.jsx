@@ -12,7 +12,7 @@ const QrLinkStep2 = ({ onNext, dataForm }) => {
   const { alias, fullname, _id } = user.update;
   const { data, isLoading, error } = useQr(`/auth/qr/${alias}/${dataForm}`);
   const printRef = useRef(null);
-  const url = `https://walletpay.netlify.app/${_id}/${dataForm}`;
+  const url = `https://walletpay.netlify.app/payperlink/${_id}/${dataForm}`;
   const handlePrintQRCode = (download = true) => {
     if (printRef.current) {
       handleImageFromElement(
