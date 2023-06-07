@@ -50,7 +50,7 @@ Cloudinary para el hosteo de imágenes
 Jest y supertest para los test
 
 Nodemailer para el envío de correos
-Faker-js para la creacion d estos aleatorios ficticios
+Faker-js para la creacion datos aleatorios ficticios
 
 QRcode para la creacion de código QR
 
