@@ -20,7 +20,7 @@ const Profile = () => {
     <>
       {/* <Header dato={'Tus Datos'} show={'flex'}/> */}
       <Layout>
-        <div className="h-28 flex items-center gap-4 bg-colorButton shadow-insetShadow pl-4 pr-[23px]">
+        <div className="h-28 flex items-center gap-4 bg-colorButton shadow-insetShadow pl-4 pr-[23px] lg:pl-[450px]">
           <div>
             <svg
               width="64"
