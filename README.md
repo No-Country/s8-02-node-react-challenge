@@ -21,6 +21,17 @@ React
 Taiwind
 Redux-toolkit
 Axios
+Qr-scanner
+React-icons
+React-loader-spinner
+React-redux
+moment
+html2canvas
+zxing/library
+Sweetalert2
+Vite
+
+
 
 ### Backend:
 
@@ -58,12 +69,11 @@ Figma
 Illustrator.
 
 ### Documentación:
-Swagger
+Swagger: https://api-wallet.onrender.com/docs/api/v1
 
 ### 🚀Deploy🚀
-Frontend:
-
-Backend:
+Frontend: https://walletpay.netlify.app/
+Backend: https://api-wallet.onrender.com
 
 ### Miembros del Equipo 🤝
 
@@ -73,7 +83,7 @@ Equipo de Desarrollo:
 | ------------- | ------------- |
 | Miguel Guerrero | Ana Juarez |
 | Cristian Gómez | Leandro Martini |
-| Elias Galeano | Alejandro Wogelme |
+| Elias Galeano | Alejandro Wogelman |
 | Sergio Calbiño| Fabian Romano|
 
 
@@ -83,5 +93,5 @@ Melisa Ramírez
 ### Equipo de Diseñado UX/UI:
 Juan Ignacio Gyldenfeldt
 
-### PM:
+### Project Manager:
 Maria Fernanda Garcia
