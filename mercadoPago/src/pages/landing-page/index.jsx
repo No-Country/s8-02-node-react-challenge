@@ -24,11 +24,10 @@ const LandingPage = () => {
           <source srcSet={headerLarge} media="(min-width: 500px)" />
           <img
             srcSet={headerSmall}
-            className="w-full max-h-[500px] "
+            className="w-full max-h-[550px] object-cover"
             alt="Full Logo"
           />
         </picture>
-        ;{/*    <img src={headerSmall} alt="img" className="w-full" /> */}
         <h1>
           <p className="text-[#6F0B19] font-bold text-[28px] px-4 text-center leading-[34.14px]	mt-2">
             DE AHORA EN ADELANTE, HACÉS MÁS CON TU DINERO
