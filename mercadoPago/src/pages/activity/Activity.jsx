@@ -1,12 +1,7 @@
 import Empty from "../../components/activities/Empty";
 import Lista from "../../components/activities/Lista";
-import Header from "../../components/header/Header";
-import { Link } from "react-router-dom";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
-//import example from './Example'
-//import Item from "../../components/activity/Item"
 import { useSelector } from "react-redux";
 import Layout from "../../components/layout";
 import Loader from "../../components/loader";
@@ -67,24 +62,11 @@ const Activity = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState("e");
   const [isLoading, setIsLoading] = useState(true);
-  //const { activities } = data
-  //const token = user.token.token
-  //console.log(user, token)
-  //https://api-wallet.onrender.com/auth/activity/activities/6476b55528cb97aaebb79bd0/2
-  // let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDZiZWI5N2E5YmNjN2FjZmJhNWFjNmEiLCJpYXQiOjE2ODUzMjk0MjksImV4cCI6MTc3MTcyOTQyOX0.4tdGCwWTiDaCegrZHmVYq1e9MpTVJdlHJNLlFcPAqoY"
-
-  let token2 =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8";
-  //let id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
-  // let destinity = data[0].destinyAccountId.alias
-
-  //console.log(activities)
+  //Token provicional
+  //let token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8";
 
   const token = user.token.token;
   const id = user.update._id;
-  console.log("token:", token);
-  console.log("id: ", id);
-  console.log(`/auth/activity/activities/${id}`);
 
   useEffect(() => {
     setIsLoading(true);
@@ -96,26 +78,17 @@ const Activity = () => {
     instance
       .get(`/auth/activity/activities/${id}`) //.UserAccountId
       .then((response) => {
-        console.log(response.data.activities);
         setIsLoading(false);
         setData(response.data.activities);
       })
       .catch((e) => {
-        console.log("ERROR: ", e.response.data.error);
         setIsLoading(false);
         setError(e.response.data.error);
       })
-      .finally(() => {});
   }, []);
 
-  const fechaSlice = (f) => {
-    //2023-05-31T06:48:51.876Z
-    return f.slice(0, 10);
-  };
-
-  const hourSlice = (h) => {
-    return h.slice(11, -8);
-  };
+  const fechaSlice = (f) => f.slice(0, 10)
+  const hourSlice = (h) => h.slice(11, -8)
 
   const getDays = (d, m, a) => {
     let nuevo = a + "-" + m + "-" + d;
@@ -127,16 +100,10 @@ const Activity = () => {
     return now;
   };
 
-  console.log("Año", aux().getFullYear());
-  console.log("mes", aux().getMonth());
-  console.log("dia", aux().getDate());
-
-  let fechaDeHoy,
-    fechaDB,
-    decir = "Hoy";
+  let fechaDeHoy, fechaDB, decir = "Hoy";
 
   const obtenerDetalle = (fecha) => {
-    console.log("Fecha BD: ", fecha);
+    //console.log("Fecha BD: ", fecha);
 
     let sacar = fechaSlice(fecha);
     //console.log("SACAR: ", sacar.split('-'))
@@ -146,7 +113,7 @@ const Activity = () => {
     let mes = sacar2[1];
     let dia = sacar2[2];
 
-    console.log("Fecha 1: ", getDays(dia, mes, ano));
+    //console.log("Fecha 1: ", getDays(dia, mes, ano));
     //! Data Base
     fechaDB = getDays(dia, mes, ano);
     //console.log("AUX -> ", aux().toLocaleDateString('en-US'))
@@ -160,7 +127,6 @@ const Activity = () => {
 
     if (dia < dia2) decir = "Anteriores";
 
-    //console.log("Boleano: ", separateHoy[1].length)
     console.log("Fecha 2 ->", getDays(dia2, mes2, ano2));
     //!
     fechaDeHoy = getDays(dia2, mes2, ano2);
@@ -177,30 +143,18 @@ const Activity = () => {
         <Empty />
       ) : (
         data.map((item, index) => (
-          <div className="pl-4 pr-4" key={index}>
-            {
-              /* getDays('2023','05','02') === '2023-06-04' ?
-                                    <p className='text-[#39528D] font-semibold'>Hoy</p> :*/
-              obtenerDetalle(item.updatedAt)
-            }
+          <div className="pl-4 pr-4 max-w-[700px] m-auto" key={index}>
+            { obtenerDetalle(item.updatedAt) }
 
             <div className="mt-4 border-[#39528D] border-b-2 mb-2">
               {
-                /* getDays('2023','05','02') === '2023-06-04' ?
-                                    <p className='text-[#39528D] font-semibold'>Hoy</p> :*/
                 fechaDB === fechaDeHoy ? (
                   <p className="text-[#39528D] font-semibold">{decir}</p>
                 ) : (
                   <p className="text-[#39528D] font-semibold">{fechaDB}</p>
                 )
               }
-              {/* <p className='text-[#39528D] font-semibold'>{fechaSlice(item.updatedAt)}</p>*/}
             </div>
-            {/*
-                                    decir === 'Anteriores' ? (
-                                        <Lista  destinity={item.destinyAccountId.alias} monto={item.amount} id={item._id} hour={hourSlice(item.updatedAt)} />
-                                    ) : 0
-                                    */}
             <Lista
               destinity={item.destinyAccountId.alias}
               monto={item.amount}
@@ -212,6 +166,6 @@ const Activity = () => {
       )}
     </>
   );
-};
+}
 
 export default Activity;

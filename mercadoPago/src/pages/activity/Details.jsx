@@ -8,19 +8,12 @@ import Header from '../../components/header/Header';
 
 
 const ItemView = ({created, id, money, person, cvu}) => {
-    /*const menu = localStorage.getItem('menu')
-    console.log("menu", menu)*/
+    const fechaSlice = (f) => f.slice(0,10)
 
-    const fechaSlice = (f) => {
-        //2023-05-31T06:48:51.876Z
-        return f.slice(0,10)
-    }
-
-    const hourSlice = (h) => {
-        return h.slice(11,-8)
-    }
+    const hourSlice = (h) => h.slice(11,-8)
+    
     return (
-        <div className='flex-col justify-center items-center text-center mt-6 ml-[17px] mr-4'>
+        <div className='flex-col justify-center items-center text-center mt-6 ml-[17px] mr-4 max-w-[700px] lg:m-auto lg:mt-6'>
             <p className='font-medium leading-[16px] mb-3 text-sm'>Creada el {fechaSlice(created)}, {hourSlice(created)}</p>
             <div className='relative'>
                 <span className='text-[#39528D] font-medium text-sm leading-[16px]'>Operación: {id}</span>
@@ -90,9 +83,6 @@ const ItemView = ({created, id, money, person, cvu}) => {
                     <p className='font-semibold text-base leading-[19.5px] text-start'>Mi dinero aún no se acreditó</p>
                 </div>
             </div>
-
-
-
         </div>
     )
 }
@@ -100,28 +90,21 @@ const ItemView = ({created, id, money, person, cvu}) => {
 const Details = () => {
     const [data, setData] = useState([])
     const { user } = useSelector((state) => state.auth);
-    //let _id = '6476b55528cb97aaebb79bd0' //'6477bb3b054a03b034bb5652' '6476b55528cb97aaebb79bd0'
-    //let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
+    //Token provicional
+    //let token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
 
-    //const token = user.token.token
-    let token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc2YjU1YzI4Y2I5N2FhZWJiNzliZDMiLCJpYXQiOjE2ODU1NjQwNDMsImV4cCI6MTc3MTk2NDA0M30.fMWtq__N1sSKJlqJWdfp2TCi_j7evok6be2CGPDaWp8"
-
-    console.log("**Details**")
-    let { id } = useParams()
-   // console.log("id; ", id)
+    const { id } = useParams()
+    const token = user.token.token;
 
     useEffect(() => {
         const instance = axios.create({
             baseURL: 'https://api-wallet.onrender.com',
-            headers: {'Authorization': token2 }
+            headers: {'Authorization': token }
         });
 
         instance.get(`/auth/activity/activities/${user.update._id}`) //.UserAccountId
         .then(response => {
-            console.log(response.data.activities)
             setData(response.data.activities)
-        }).catch(e => {
-            console.log(e.response.data.error)
         })
     }, [])
 

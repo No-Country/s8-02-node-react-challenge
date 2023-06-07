@@ -5,7 +5,7 @@ const Transfer = () => {
   return (
     <>
       <Layout>
-        <div className="flex flex-col gap-4 justify-center bg-[#ECEBF6] py-[16px] px-4">
+        <div className="flex flex-col gap-4 justify-center bg-[#ECEBF6] py-[16px] px-4 max-w-[700px]  m-auto">
           <div className="rounded-lg bg-white shadow-cardShadow  mb-[20px] h-[152px]">
             <h2 className="font-semibold text-lg ml-4  pt-4 mb-6 ">
               Elegí a qué cuenta transferir

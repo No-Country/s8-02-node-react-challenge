@@ -1,6 +1,6 @@
 const Empty = () => {
     return (
-        <div className='flex-col gap-8 items-center justify-center content-center mt-[66px]'>
+        <div className='flex-col gap-8 items-center justify-center content-center mt-[66px] max-w-[700px]  m-auto'>
             <svg className='m-auto' width='145' height='121' viewBox='0 0 145 121' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M14.9421 40.6551C34.4379 15.6558 44.9426 51.6559 99.4426 13.6558C113.423 3.90814 160.443 38.6548 130.442 79.6551C108.138 110.137 28.938 126.156 9.43719 85.6558C3.80975 73.9685 4.72108 53.7613 14.9421 40.6551Z' fill='#AACCFF' />
                 <path d='M28.5 69V31C28.5 28.6667 29.9 24 35.5 24C41.1 24 42.5 28.6667 42.5 31V61C42.5 64.2 44.8333 65 46 65H57V27C57 21.3333 61.3 10 74.5 10C87.7 10 91.3333 21.3333 91.5 27V84.5H99C101 84.5 101.5 82.1667 101.5 81V60C101.5 58 102.9 54 108.5 54C114.1 54 115.5 58 115.5 60V87C115.5 94.2 109.89 96 107.085 96H91.5V120H56.5V76.5H37C30.2 76.5 28.5 71.5 28.5 69Z' fill='white' stroke='#696969' />

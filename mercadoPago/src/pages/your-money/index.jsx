@@ -9,7 +9,7 @@ import { ActivityCard } from "../../components/money/ActivityCard";
 import { NoActivities } from "../../components/money/NoActivities";
 import { useSelector } from "react-redux";
 import Layout from "../../components/layout";
-import { CgProfile } from "react-icons/cg";
+import { AiOutlineRight } from "react-icons/ai";
 
 const YourMoney = () => {
   // eslint-disable-next-line no-unused-vars
@@ -67,7 +67,7 @@ const YourMoney = () => {
               >
                 Ver toda tu actividad
                 <span>
-                  <CgProfile />
+                  <AiOutlineRight />
                 </span>
               </Link>
             </div>

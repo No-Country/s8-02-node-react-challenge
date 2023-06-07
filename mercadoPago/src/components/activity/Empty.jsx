@@ -2,7 +2,7 @@
 
 const Empty = () => {
     return (
-        <div className='bg-white mt-[1px]  font-[500] h-[244px] flex-col flex items-center justify-center'>
+        <div className='bg-white mt-[1px]  font-[500] h-[244px] flex-col flex items-center justify-center max-w-[700px] m-auto'>
             <div className=''>
                 <div className='relative flex justify-center pt-2'>
                     <div>
