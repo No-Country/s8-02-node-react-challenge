@@ -7,7 +7,7 @@ const Help = () => {
     <>
       <Header dato={"Ayuda"} />
 
-      <div className="flex-col items-center justify-center ">
+      <div className="flex-col items-center justify-center max-w-[700px] m-auto">
         <h2 className="font-semibold text-center text-xl  mt-10">
           ¿En que podemos ayudarte?
         </h2>

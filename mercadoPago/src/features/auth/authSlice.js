@@ -42,9 +42,6 @@ export const authSlice = createSlice({
         saveState(state);
         return state;
       }
-
-      /*  state.user.update.balance = Number(state.user.balance - action.payload);
-      saveState(state); */
     },
   },
 });

@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import headerSmall from "../../assets/hero-section.png";
+import headerLarge from "../../assets/chanchoGrande.png";
+
 import brand from "../../assets/brand.svg";
 
 import { Card } from "../../components/landing/Card";
 import { cardsData } from "./cardsData";
 
-
 const LandingPage = () => {
   return (
-   
     <div className="container mx-auto min-w-[340px] max-w-[1440px]">
-   
       <header className="max-auto">
         <nav className="flex justify-between px-3 items-center py-1">
           <img src={brand} alt="brand" />
@@ -21,7 +20,15 @@ const LandingPage = () => {
             Ingresá
           </Link>
         </nav>
-        <img src={headerSmall} alt="img" className="w-full" />
+        <picture>
+          <source srcSet={headerLarge} media="(min-width: 500px)" />
+          <img
+            srcSet={headerSmall}
+            className="w-full max-h-[500px] "
+            alt="Full Logo"
+          />
+        </picture>
+        ;{/*    <img src={headerSmall} alt="img" className="w-full" /> */}
         <h1>
           <p className="text-[#6F0B19] font-bold text-[28px] px-4 text-center leading-[34.14px]	mt-2">
             DE AHORA EN ADELANTE, HACÉS MÁS CON TU DINERO

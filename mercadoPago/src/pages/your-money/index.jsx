@@ -32,7 +32,7 @@ const YourMoney = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto min-w-[340px] max-w-[1440px] px-4 py-1">
+      <div className="container mx-auto min-w-[340px] max-w-[800px] px-4 py-1">
         <div className="flex flex-col p-3 pb-2 my-3 text-sm rounded-lg shadow-md bg-slate-50 ps-4">
           <div className="flex items-center justify-between mb-2">
             <div>

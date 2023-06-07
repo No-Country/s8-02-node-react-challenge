@@ -5,15 +5,17 @@ import CardInputStep3 from "./card-input-step/card-input-step3";
 import CardInputStep4 from "./card-input-step/card-input-step4";
 import { useNavigate } from "react-router-dom";
 import useTranfer from "../../hooks/useTranfer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ThreeDots } from "react-loader-spinner";
+import { updateData } from "../../features/auth/authSlice";
 
 const CardsStep2 = ({ dataForm, setDataForm }) => {
   const [inputActual, setInputActual] = useState(1);
   const { update } = useSelector((state) => state.auth.user);
   const { _id } = update;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     error: loginError,
     isLoading,
@@ -21,6 +23,8 @@ const CardsStep2 = ({ dataForm, setDataForm }) => {
   } = useTranfer({
     onSuccess: (data) => {
       console.log(data);
+      const { update } = data;
+      dispatch(updateData(update));
       navigate("/home");
     },
     onError: (_error) => {
@@ -81,7 +85,7 @@ const CardsStep2 = ({ dataForm, setDataForm }) => {
           className="h-[48px] w-[160px] bg-[#AACCFF] text-[#10224D] font-semibold text-sm leading-[17px] rounded-[10px]"
         >
           Siguiente
-        </button> 
+        </button>
       </div>
       <ThreeDots
         height="60"

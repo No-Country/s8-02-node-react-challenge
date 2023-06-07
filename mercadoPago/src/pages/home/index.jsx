@@ -81,7 +81,7 @@ const Home = () => {
   return (
     <>
       <Layout>
-        <div className="flex flex-col gap-4 justify-center font-Montserrat bg-[#ECEBF6] py-[16px] px-4">
+        <div className="flex flex-col gap-4 justify-center font-Montserrat bg-[#ECEBF6] py-[16px] px-4 max-w-[700px]  m-auto">
           <div className="rounded-lg bg-white shadow-cardShadow h-40 mb-[20px]">
             <div className="flex justify-between items-center text-sm pt-[21px] pl-[21px] pr-[21px]">
               <p className="font-semibold text-xs">Dinero disponible</p>
@@ -179,7 +179,7 @@ const Home = () => {
             <div className="bg-white w-full rounded-t-[10px]">
               <h2 className="p-4 font-semibold mb-[1px]">TU ACTIVIDAD</h2>
             </div>
-            {data.length < 0 ? (
+            {data.length < 1 ? (
               <Empty />
             ) : (
               <Item
@@ -193,10 +193,13 @@ const Home = () => {
             {/*<Empty />*/}
             {/*<Item alias={"Juan XXX"} border={"rounded-none"} />*/}
             {/* Componente de la actividad del usuario */}
-            <div className="flex justify-between items-center pt-4 pb-4 pl-4 pr-[29.25px] bg-white mt-[0.5px] cursor-pointer rounded-b-xl">
-              <Link to={"/activity"} className="font-[600] text-[#39528D]">
+            <div
+              onClick={() => navigate("/activity")}
+              className="flex justify-between items-center pt-4 pb-4 pl-4 pr-[29.25px] bg-white mt-[0.5px] cursor-pointer rounded-b-xl"
+            >
+              <button className="font-[600] text-[#39528D]">
                 Ver toda tu actividad
-              </Link>
+              </button>
               {/* text-[#33333366]*/}
               <svg
                 width="14"
@@ -230,13 +233,11 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <div className="flex justify-between w-full cursor-pointer">
-              <p
-                className="text-[14px] font-semibold"
-                onClick={() => navigate("/cards")}
-              >
-                Agregá tus tarjetas
-              </p>
+            <div
+              onClick={() => navigate("/cards")}
+              className="flex justify-between w-full cursor-pointer"
+            >
+              <p className="text-[14px] font-semibold">Agregá tus tarjetas</p>
               <div className="">
                 <svg
                   width="14"

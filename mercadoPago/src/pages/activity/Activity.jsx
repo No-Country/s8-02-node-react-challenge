@@ -173,7 +173,7 @@ const Activity = () => {
         <Loader />
       ) : error.length > 1 ? (
         <Error />
-      ) : data.length === 0 ? (
+      ) : data.length < 1 ? (
         <Empty />
       ) : (
         data.map((item, index) => (
