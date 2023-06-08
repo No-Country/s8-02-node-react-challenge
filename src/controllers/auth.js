@@ -40,10 +40,10 @@ const register = async (req, res) => {
       phone,
       dni,
       cvu: numero,
-      alias:ali,
+      alias:ali.replace(/\s+/g, ""),
       fullname:email.split('@')[0],
       address,
-      balance,
+      balance:0,
     });
 
     if (req.files?.urlProfile) {
@@ -67,14 +67,14 @@ const register = async (req, res) => {
 
     return res.status(200).json({ dataUser });
   } catch (error) {
-    console.log(error.message);
+    res.status(400).send(error.message);
   }
 };
 
 const login = async (req, res) => {
   let { email, password } = req.body;
   try {
-    let user = await userSchema.findOne({ email });
+    let user = await userSchema.findOne({ email })
 
     if (!user) {
       return res.status(409).json({ error: "Credenciales errores" });
@@ -86,8 +86,10 @@ const login = async (req, res) => {
       return res.status(409).json({ error: "El password es incorrecto" });
     }
     const update = await userSchema
-      .findOne({ email: user.email })
-      .select("-password");
+      .findOne({ email: user.email }).populate({
+        path: 'cards',
+        options: { strictPopulate: false }
+      }).select("-password");
 
     let token = generateToken(user._id);
 
@@ -96,7 +98,7 @@ const login = async (req, res) => {
     }
     return res.status(200).json({ token, update });
   } catch (error) {
-    console.log(error);
+    res.status(400).send(error.message);
   }
 };
 export { register, login };

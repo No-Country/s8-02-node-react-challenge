@@ -12,13 +12,13 @@ const sendQr=async (req,res)=>{
       };
 
       
-    const user=await userSchema.findOne({alias:alias})
-    if (!user){
+    const user1=await userSchema.findOne({alias:alias})
+    if (!user1){
         return res.status(400).send({message:"No se encontro al usuario"})
     }
     
-    let data={user,mount}
-    QRCode.toDataURL(JSON.stringify(data),{toSJISFunc:toSJIS, width:200},(err,url)=>{
+    let user={user:user1.username, alias:user1.alias, cvu:user1.cvu, fullname:user1.fullname}
+    QRCode.toDataURL(JSON.stringify({user,mount}),{toSJISFunc:toSJIS, width:200},(err,url)=>{
         res.status(200).send({url})
     })
 

@@ -16,7 +16,7 @@ const app = express();
 
 // Config whitelist
 const whiteList = [process.env.ORIGIN1]
-console.log(whiteList);
+// console.log(whiteList);
 
 // Cors
 app.use(
